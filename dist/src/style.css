@@ -1,3 +1,20 @@
 body {
   background-color: #F0F0F0;
-  padding-top: 65px; }
+  padding-top: 65px;
+  position: relative;
+  font-family: 'Roboto', sans-serif; }
+
+#navLogo {
+  width: 10em;
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em; }
+
+.blah {
+  height: 700px;
+  border: 1px solid red; }
+
+#siteHeader {
+  font-weight: 700;
+  text-align: center;
+  font-size: 5em; }

@@ -9,9 +9,10 @@
 	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<link rel="stylesheet" href="/src/style.css" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700i" rel="stylesheet">
 </head>
 
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="50"">
 
     <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container">
@@ -20,7 +21,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">I MESH YOU</a>
+               <a href="#" class="navbar-left mainLogo" id="navLogo"><img src="/gotenna-logo-blue.svg"></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -30,13 +31,13 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">About</a>
+                        <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#portfolio">Kickstarter</a>
+                        <a class="page-scroll" href="#kickstarter">Kickstarter</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">Become a Mesh!</a>
+                        <a class="page-scroll" href="#mesh">Become a Mesh!</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
@@ -47,10 +48,20 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+    <section id="about">
+    	<div class="blah">
+    		<h1 id="siteHeader"> I Mesh You </h1>
+    	</div>
+    </section>
+
+    <section id="kickstarter"><div class="blah"> Kickstarter</div></section>
+    <section id="mesh"><div class="blah"> Mesher </div></section>
+    <section id="contact"><div class="blah"> Contact </div></section>
+
 	<div id="root"></div>
 
-	<script src="/src/bundle.js" type="text/javascript"></script>
 
+	<script src="/src/bundle.js" type="text/javascript"></script>
 </body>
 
 </html>
