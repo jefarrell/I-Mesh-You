@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-
+	<link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
 	<!-- Custom Styles -->
 	<link rel="stylesheet" href="/src/style.css" />
 
@@ -70,7 +70,11 @@
     	</div>
     </section>
     <section id="kickstarter"><div class="content"> Kickstarter</div></section>
-    <section id="mesh"><div class="content"> Mesher </div></section>
+    <section id="mesh">
+    	<div class="row content">
+    		<div id="root"></div>
+    	</div>
+    </section>
     <section id="contact"><div class="content"> Contact </div></section>
 
 	<div id="root"></div>

@@ -1,14 +1,13 @@
 import React from 'react';
 import {render} from 'react-dom';
 import Ball from './newComp.jsx';
-
+import Map from './Map.jsx';
 
 const App = React.createClass({
 	render() {
 		return (
 			<div>
-				<p> React App </p>
-				<Ball  />
+				<Map  />
 			</div>
 		);
 	}
