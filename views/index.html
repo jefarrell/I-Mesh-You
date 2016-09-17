@@ -5,15 +5,21 @@
 	<meta charset = "UTF-8">
 	<title> I MESH YOU </title>
 
+	<!-- Bower Components -->
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+	<!-- Custom Styles -->
 	<link rel="stylesheet" href="/src/style.css" />
+
+	<!-- Google Fonts (Temporary for now) -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700i" rel="stylesheet">
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50"">
 
+	<!-- Main Navigation Bar -->
     <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -24,7 +30,7 @@
                <a href="#" class="navbar-left mainLogo" id="navLogo"><img src="/gotenna-logo-blue.svg"></a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- Nav Links to Collapse -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden">
@@ -48,15 +54,24 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+
+    <!-- About Section -->
     <section id="about">
-    	<div class="blah">
-    		<h1 id="siteHeader"> I Mesh You </h1>
+    	<div id="box">
+    	    <div id="imgCont"></div>
+			<div id="overlay"></div>
+	    	<div class="row content">
+	    		<div class="col-md-1"></div>
+	    		<div class="col-md-10">
+	    			<h1 id="siteHeader"> I Mesh You </h1>
+	    		</div>
+	    		<div class="col-md-1"></div>
+    		</div>
     	</div>
     </section>
-
-    <section id="kickstarter"><div class="blah"> Kickstarter</div></section>
-    <section id="mesh"><div class="blah"> Mesher </div></section>
-    <section id="contact"><div class="blah"> Contact </div></section>
+    <section id="kickstarter"><div class="content"> Kickstarter</div></section>
+    <section id="mesh"><div class="content"> Mesher </div></section>
+    <section id="contact"><div class="content"> Contact </div></section>
 
 	<div id="root"></div>
 

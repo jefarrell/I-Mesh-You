@@ -4,6 +4,7 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var babelify = require('babelify');
 var sass = require('gulp-sass');
+var glob = require('glob');
 
 var path = {
 	HTML: 'views/index.html',
@@ -17,7 +18,10 @@ var path = {
 };
 
 gulp.task('js', function(){
-    browserify(path.ENTRY_POINT)
+	var js_files = glob.sync('./public/javascripts/src/*.js');
+	var file_arr = [js_files, path.ENTRY_POINT]
+
+    browserify({entries: [file_arr] })
         .transform(babelify, {presets: ['es2015', 'react']})
         .bundle()
         .pipe(source(path.OUT))
@@ -39,39 +43,3 @@ gulp.task('watch', function() {
 
 
 gulp.task('default', ['js', 'styles', 'watch']);
-
-
-
-
-
-
-// gulp.task('copy', function(){
-//   gulp.src(path.HTML)
-//     .pipe(gulp.dest(path.DEST));
-// });
-
-// gulp.task('watch', function() {
-// 	gulp.watch([path.HTML, path.ENTRY_POINT],  ['copy']);
-
-// 	var watcher = watchify(browserify({
-// 		entries: [path.ENTRY_POINT],
-// 		debug: true,
-// 		cache: {}, packageCache: {}, fullPaths: true
-// 	}).transform(babelify, {presets: ['es2015', 'react']}));
-
-// 	return watcher.on('update', function() {
-// 		watcher.bundle()
-// 			.pipe(source(path.OUT))
-// 			.pipe(gulp.dest(path.DEST_SRC))
-// 			console.log(" ~ Gulp updated ~ ");
-// 	})
-// 	.bundle().on('error', function(err) {
-// 		console.log(err.message);
-// 	})
-// 	.pipe(source(path.OUT))
-// 	.pipe(gulp.dest(path.DEST_SRC));
-// });
-
-// gulp.task('default', ['watch'], function() {
-// 	console.log(" ~~ Gulp completed ~~ ");
-// });
