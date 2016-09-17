@@ -20783,9 +20783,9 @@ var App = _react2.default.createClass({
 			_react2.default.createElement(
 				'p',
 				null,
-				'YEAH FUCK YOU!  '
+				' React App '
 			),
-			_react2.default.createElement(_newComp2.default, { width: 700, height: 100 })
+			_react2.default.createElement(_newComp2.default, null)
 		);
 	}
 });
@@ -20815,29 +20815,14 @@ var Ball = _react2.default.createClass({
 
 	handleClick: function handleClick(event) {
 		var newDiam = this.state.diameter + 1;
-		console.log(newDiam);
 		this.setState({ diameter: newDiam });
-		// console.log("width: " + width);
 	},
 
 	render: function render() {
 		return _react2.default.createElement(
 			'div',
 			null,
-			_react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'button',
-					{ onClick: this.handleClick },
-					' Like Me'
-				)
-			),
-			_react2.default.createElement(
-				'svg',
-				{ width: this.props.width, height: this.props.height, className: 'circ' },
-				_react2.default.createElement('circle', { cx: 50, cy: 50, r: this.state.diameter, fill: 'red' })
-			)
+			' React Component'
 		);
 	}
 });

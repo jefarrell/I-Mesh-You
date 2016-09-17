@@ -7,8 +7,8 @@ const App = React.createClass({
 	render() {
 		return (
 			<div>
-				<p>YEAH FUCK YOU!  </p>
-				<Ball width={700} height={100} />
+				<p> React App </p>
+				<Ball  />
 			</div>
 		);
 	}

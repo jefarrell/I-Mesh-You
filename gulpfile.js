@@ -3,9 +3,11 @@ var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var babelify = require('babelify');
+var sass = require('gulp-sass');
 
 var path = {
 	HTML: 'views/index.html',
+	SASS: './public/sass/style.scss',
 	MINIFIED_OUT: 'build.min.js',
 	OUT: 'bundle.js',
 	DEST: 'dist',
@@ -22,14 +24,21 @@ gulp.task('js', function(){
         .pipe(gulp.dest(path.DEST_SRC));
 });
 
+gulp.task('styles', function() {
+    gulp.src(path.SASS)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(path.DEST_SRC))
+});
 
 gulp.task('watch', function() {
-	gulp.watch("public/javascripts/src/**/*.jsx", ["js"]);
+	gulp.watch('public/javascripts/src/**/*.jsx', ['js']);
+	gulp.watch(path.SASS,['styles']);
 	console.log(" ~ Gulp updated ~ ");
 })
 
 
-gulp.task('default', ['js', 'watch']);
+
+gulp.task('default', ['js', 'styles', 'watch']);
 
 
 
