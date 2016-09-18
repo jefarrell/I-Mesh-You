@@ -1,7 +1,7 @@
 
 
 
-exports.index = function(req, res) {
+exports.index = (req, res) => {
 	
 	res.sendFile('index.html', {'root':'views'});
 

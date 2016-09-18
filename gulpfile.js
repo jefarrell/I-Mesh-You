@@ -17,7 +17,7 @@ var path = {
 	ENTRY_POINT: './public/javascripts/src/app.jsx'
 };
 
-gulp.task('js', function(){
+gulp.task('js', function() {
 	var js_files = glob.sync('./public/javascripts/src/*.js');
 	var file_arr = [js_files, path.ENTRY_POINT]
 
