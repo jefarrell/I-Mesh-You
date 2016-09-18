@@ -29929,6 +29929,48 @@ module.exports = validateDOMNesting;
 module.exports = require('./lib/React');
 
 },{"./lib/React":55}],173:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Button = _react2.default.createClass({
+	displayName: "Button",
+
+	getInitialState: function getInitialState() {
+		return {
+			clicked: false
+		};
+	},
+
+	handleClick: function handleClick() {
+		this.setState({ clicked: true });
+		console.log(" checking in from button ");
+	},
+
+	render: function render() {
+		return _react2.default.createElement(
+			"div",
+			null,
+			_react2.default.createElement(
+				"button",
+				{ type: "button", onClick: this.handleClick },
+				" Add Your Mesh! "
+			)
+		);
+	}
+});
+
+exports.default = Button;
+
+},{"react":172}],174:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -29939,11 +29981,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Button = require('./Button.jsx');
+
+var _Button2 = _interopRequireDefault(_Button);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ReactDOM = require('react-dom');
 var L = require('leaflet');
-//require('leaflet/dist/leaflet.css');
 
 var config = {};
 
@@ -30012,6 +30057,7 @@ var Map = _react2.default.createClass({
 		return _react2.default.createElement(
 			'div',
 			{ id: 'mapUI' },
+			_react2.default.createElement(_Button2.default, null),
 			_react2.default.createElement('div', { id: 'map' })
 		);
 	}
@@ -30020,7 +30066,7 @@ var Map = _react2.default.createClass({
 
 exports.default = Map;
 
-},{"leaflet":26,"react":172,"react-dom":29}],174:[function(require,module,exports){
+},{"./Button.jsx":173,"leaflet":26,"react":172,"react-dom":29}],175:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -30052,7 +30098,7 @@ var App = _react2.default.createClass({
 
 (0, _reactDom.render)(_react2.default.createElement(App, null), document.getElementById('root'));
 
-},{"./Map.jsx":173,"./newComp.jsx":175,"react":172,"react-dom":29}],175:[function(require,module,exports){
+},{"./Map.jsx":174,"./newComp.jsx":176,"react":172,"react-dom":29}],176:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30089,7 +30135,7 @@ var Ball = _react2.default.createClass({
 
 exports.default = Ball;
 
-},{"react":172}],176:[function(require,module,exports){
+},{"react":172}],177:[function(require,module,exports){
 'use strict';
 
 console.log(' checking in from script');
@@ -30102,4 +30148,4 @@ console.log(' checking in from script');
 //     scrollBy(0, -offset);
 // });
 
-},{}]},{},[176,174]);
+},{}]},{},[177,175]);

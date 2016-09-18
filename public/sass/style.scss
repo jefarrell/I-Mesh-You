@@ -105,9 +105,13 @@ body {
 	width: 100%;
 }
 
-// #mapUI {
-// 	height:100%;
-// 	width:100%;
-// }
+#mapUI {
+	button {
+		position: absolute;
+		z-index: 100;
+		right: 1em;
+		margin-top: 1em;
+	}
+}
 
 

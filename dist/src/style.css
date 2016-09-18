@@ -80,3 +80,9 @@ body {
 #map {
   height: 700px;
   width: 100%; }
+
+#mapUI button {
+  position: absolute;
+  z-index: 100;
+  right: 1em;
+  margin-top: 1em; }

@@ -1,7 +1,8 @@
 import React from 'react';
-var ReactDOM = require('react-dom');
-var L = require('leaflet');
-//require('leaflet/dist/leaflet.css');
+import Button from './Button.jsx'
+
+const ReactDOM = require('react-dom');
+const L = require('leaflet');
 
 var config = {};
 
@@ -77,6 +78,7 @@ const Map = React.createClass({
 	render: function() {
 		return (
 			<div id="mapUI">
+				<Button />
 				<div id="map"></div>
 			</div>
 		);
