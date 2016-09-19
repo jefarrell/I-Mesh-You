@@ -20,6 +20,7 @@ const Popup = React.createClass({
     },
 
     hideModal: function(){
+        this.setState({type:'info', message:''})
         this.refs.modal.hide();
     },
 
@@ -29,7 +30,6 @@ const Popup = React.createClass({
     },
 
     submitData: function() {
-        // validate KON first
         
         const formData = {
             KON: ReactDOM.findDOMNode(this.refs.KON).value,
@@ -39,20 +39,26 @@ const Popup = React.createClass({
             loc2: ReactDOM.findDOMNode(this.refs.loc2).value,
             loc3: ReactDOM.findDOMNode(this.refs.loc3).value
        };
+
        var self = this;
-        $.ajax({
-            url: "/addData",
-            type: "POST",
-            data: JSON.stringify(formData),
-            contentType: "application/json",
-            success: function(msg) {
-                self.setState({type:'success', message:'Thanks for Submitting!'})
-            },
-            error: function(err) {
-                self.setState({type: 'danger', message: 'Something went wrong - please double check info'})
-            }
-            
-        });
+       
+       // Validate Order number here!
+       if (formData.KON === "hello") {
+           this.setState({type: 'danger', message: 'Invalid Order Number!'})
+       } else {
+            $.ajax({
+                url: "/addData",
+                type: "POST",
+                data: JSON.stringify(formData),
+                contentType: "application/json",
+                success: function(msg) {
+                    self.setState({type:'success', message:'Thanks for Submitting!'})
+                },
+                error: function(err) {
+                    self.setState({type: 'danger', message: 'Something went wrong - please double check Information'})
+                }
+            });
+        }
     },
 
     callback: function(event){
@@ -130,7 +136,7 @@ const Popup = React.createClass({
                         </div>                                                
                     </form>
                     <button onClick={this.submitData} className={"btn btn-warning"} id={"saveBtn"}>Save Information!</button>
-                    <button onClick={this.hideModal} className={"btn btn-secondary"} id={"cancelBtn"}>Cancel</button>
+                    <button onClick={this.hideModal} className={"btn btn-secondary"} id={"cancelBtn"}>Close</button>
                 </Modal>
             </div>
         );

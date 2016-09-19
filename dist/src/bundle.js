@@ -30619,6 +30619,7 @@ var Popup = _react2.default.createClass({
     },
 
     hideModal: function hideModal() {
+        this.setState({ type: 'info', message: '' });
         this.refs.modal.hide();
     },
 
@@ -30628,7 +30629,6 @@ var Popup = _react2.default.createClass({
     },
 
     submitData: function submitData() {
-        // validate KON first
 
         var formData = {
             KON: _reactDom2.default.findDOMNode(this.refs.KON).value,
@@ -30638,20 +30638,26 @@ var Popup = _react2.default.createClass({
             loc2: _reactDom2.default.findDOMNode(this.refs.loc2).value,
             loc3: _reactDom2.default.findDOMNode(this.refs.loc3).value
         };
-        var self = this;
-        $.ajax({
-            url: "/addData",
-            type: "POST",
-            data: JSON.stringify(formData),
-            contentType: "application/json",
-            success: function success(msg) {
-                self.setState({ type: 'success', message: 'Thanks for Submitting!' });
-            },
-            error: function error(err) {
-                self.setState({ type: 'danger', message: 'Something went wrong - please double check info' });
-            }
 
-        });
+        var self = this;
+
+        // Validate Order number here!
+        if (formData.KON === "hello") {
+            this.setState({ type: 'danger', message: 'Invalid Order Number!' });
+        } else {
+            $.ajax({
+                url: "/addData",
+                type: "POST",
+                data: JSON.stringify(formData),
+                contentType: "application/json",
+                success: function success(msg) {
+                    self.setState({ type: 'success', message: 'Thanks for Submitting!' });
+                },
+                error: function error(err) {
+                    self.setState({ type: 'danger', message: 'Something went wrong - please double check Information' });
+                }
+            });
+        }
     },
 
     callback: function callback(event) {
@@ -30766,7 +30772,7 @@ var Popup = _react2.default.createClass({
                 _react2.default.createElement(
                     'button',
                     { onClick: this.hideModal, className: "btn btn-secondary", id: "cancelBtn" },
-                    'Cancel'
+                    'Close'
                 )
             )
         );
