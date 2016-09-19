@@ -7,4 +7,3 @@ console.log(' checking in from script');
 //     $($(this).attr('href'))[0].scrollIntoView();
 //     scrollBy(0, -offset);
 // });
-

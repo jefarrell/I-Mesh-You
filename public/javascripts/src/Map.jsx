@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './Button.jsx'
+import Popup from './Popup.jsx'
 
 const ReactDOM = require('react-dom');
 const L = require('leaflet');
@@ -78,7 +78,7 @@ const Map = React.createClass({
 	render: function() {
 		return (
 			<div id="mapUI">
-				<Button />
+				<Popup />
 				<div id="map"></div>
 			</div>
 		);
