@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -20,6 +21,7 @@ db.once('open', () => {
 	});	
 });
 
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/dist/')));
 app.use(express.static(path.join(__dirname, '/public/assets')));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
@@ -31,4 +33,4 @@ const routes = require('./routes/index');
 
 app.get('/', routes.index);
 app.get('/test', routes.test);
-
+app.post('/addData', routes.addData);

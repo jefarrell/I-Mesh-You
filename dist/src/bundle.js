@@ -30509,9 +30509,9 @@ var config = {};
 config.params = {
 	center: [40.655769, -73.938503],
 	zoomControl: false,
-	zoom: 13,
+	zoom: 3,
 	maxZoom: 19,
-	minZoom: 11,
+	minZoom: 3,
 	scrollwheel: false,
 	scrollWheelZoom: false,
 	legends: true,
@@ -30560,7 +30560,7 @@ var Map = _react2.default.createClass({
 		if (this.map) return;
 
 		this.map = L.map(id, config.params);
-		L.control.zoom({ position: "bottomleft" }).addTo(this.map);
+		L.control.zoom({ position: "topleft" }).addTo(this.map);
 		L.control.scale({ position: "bottomleft" }).addTo(this.map);
 
 		var tileLayer = L.tileLayer(config.tileLayer.uri, config.tileLayer.params).addTo(this.map);
@@ -30591,6 +30591,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Modal = require('boron/DropModal');
@@ -30605,7 +30609,8 @@ var Popup = _react2.default.createClass({
 
     getInitialState: function getInitialState() {
         return {
-            test: null
+            type: 'info',
+            message: ''
         };
     },
 
@@ -30617,8 +30622,39 @@ var Popup = _react2.default.createClass({
         this.refs.modal.hide();
     },
 
+    handleSubmit: function handleSubmit(e) {
+        e.preventDefault();
+        this.setState({ type: 'info', message: 'Sending..' }, this.submitData);
+    },
+
     submitData: function submitData() {
-        console.log("submitting");
+        // validate KON first
+
+        var formData = {
+            KON: _reactDom2.default.findDOMNode(this.refs.KON).value,
+            name: _reactDom2.default.findDOMNode(this.refs.name).value,
+            twitter: _reactDom2.default.findDOMNode(this.refs.twitter).value,
+            loc1: _reactDom2.default.findDOMNode(this.refs.loc1).value,
+            loc2: _reactDom2.default.findDOMNode(this.refs.loc2).value,
+            loc3: _reactDom2.default.findDOMNode(this.refs.loc3).value
+        };
+
+        $.ajax({
+            url: "/addData",
+            type: "POST",
+            data: JSON.stringify(formData),
+            contentType: "application/json",
+            success: function success(msg) {
+                alert('success!');
+            },
+            error: function error(err) {
+                alert(err.responseText);
+            }
+
+        });
+        // $.get('/addData', function(res){
+        //     console.log("back here ", res);
+        // })
     },
 
     callback: function callback(event) {
@@ -30648,6 +30684,7 @@ var Popup = _react2.default.createClass({
                             { className: "col-md-4" },
                             _react2.default.createElement('input', {
                                 type: 'text',
+                                ref: 'KON',
                                 className: "form-control",
                                 placeholder: "KickStarter Order # (a3kf2l2FDW)" })
                         ),
@@ -30656,6 +30693,7 @@ var Popup = _react2.default.createClass({
                             { className: "col-md-4" },
                             _react2.default.createElement('input', {
                                 type: 'text',
+                                ref: 'name',
                                 className: "form-control",
                                 placeholder: "Name (Jane Doe)" })
                         ),
@@ -30664,6 +30702,7 @@ var Popup = _react2.default.createClass({
                             { className: "col-md-4" },
                             _react2.default.createElement('input', {
                                 type: 'text',
+                                ref: 'twitter',
                                 className: "form-control",
                                 placeholder: "Twitter (JaneDoe23)" })
                         )
@@ -30678,6 +30717,7 @@ var Popup = _react2.default.createClass({
                         ),
                         _react2.default.createElement('input', {
                             type: 'text',
+                            ref: 'loc1',
                             className: "form-control",
                             placeholder: "ex: 81 willoughby Street, Brooklyn, NY" })
                     ),
@@ -30691,6 +30731,7 @@ var Popup = _react2.default.createClass({
                         ),
                         _react2.default.createElement('input', {
                             type: 'text',
+                            ref: 'loc2',
                             className: "form-control",
                             placeholder: "ex: 29 champs elysée paris" })
                     ),
@@ -30704,6 +30745,7 @@ var Popup = _react2.default.createClass({
                         ),
                         _react2.default.createElement('input', {
                             type: 'text',
+                            ref: 'loc3',
                             className: "form-control",
                             placeholder: "ex: Hay St & Barrack St, Perth WA 6000, Australia" })
                     )
@@ -30725,7 +30767,7 @@ var Popup = _react2.default.createClass({
 
 exports.default = Popup;
 
-},{"boron/DropModal":1,"react":181}],184:[function(require,module,exports){
+},{"boron/DropModal":1,"react":181,"react-dom":38}],184:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -30733,10 +30775,6 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
-
-var _newComp = require('./newComp.jsx');
-
-var _newComp2 = _interopRequireDefault(_newComp);
 
 var _Map = require('./Map.jsx');
 
@@ -30757,44 +30795,7 @@ var App = _react2.default.createClass({
 
 (0, _reactDom.render)(_react2.default.createElement(App, null), document.getElementById('root'));
 
-},{"./Map.jsx":182,"./newComp.jsx":185,"react":181,"react-dom":38}],185:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Ball = _react2.default.createClass({
-	displayName: 'Ball',
-
-
-	getInitialState: function getInitialState() {
-		return { diameter: 5 };
-	},
-
-	handleClick: function handleClick(event) {
-		var newDiam = this.state.diameter + 1;
-		this.setState({ diameter: newDiam });
-	},
-
-	render: function render() {
-		return _react2.default.createElement(
-			'div',
-			null,
-			' React Component'
-		);
-	}
-});
-
-exports.default = Ball;
-
-},{"react":181}],186:[function(require,module,exports){
+},{"./Map.jsx":182,"react":181,"react-dom":38}],185:[function(require,module,exports){
 'use strict';
 
 console.log(' checking in from script');
@@ -30807,4 +30808,4 @@ console.log(' checking in from script');
 //     scrollBy(0, -offset);
 // });
 
-},{}]},{},[186,184]);
+},{}]},{},[185,184]);

@@ -1,4 +1,5 @@
 $primary-orange: #FF8500;
+$primary-blue: #4A90E2;
 $map-height: 700px;
 
 body {
@@ -82,7 +83,7 @@ body {
 }
 
 .holder {
-	height: 500px;
+	min-height: 400px;
 	h2 {
 		text-align: center;
 		padding: 1em;
@@ -95,13 +96,26 @@ body {
 	font-size: 5em;
 }
 
-
-
 #mesh {
 	height: $map-height;
 	padding: 0;
+
 	#meshCont {
 		padding: 0;
+	}
+}
+
+#mapHeader {
+	padding: 2em;
+	background-color: $primary-blue;
+	border-top: 2px solid $primary-blue;
+	border-bottom: 2px solid $primary-blue;
+	text-align: center;
+
+	span {
+		color: white;
+		font-size: 2em;
+		vertical-align: middle;
 	}
 }
 
@@ -114,27 +128,32 @@ body {
 	button {
 		position: absolute;
 		z-index: 100;
-		right: 2em;
 		margin-top: 2em;
 	}
 
 	.btn-lg {
-		background-color: #4A90E2;
-		border: 2px solid #4A90E2;
+		right: 2em;
+		background-color: $primary-blue;
+		border: 2px solid $primary-blue;
 		color: #FFF;
 	}
 
 	.btn-lg:hover {
 		background-color: #FFF;
-		border: 2px solid #4A90E2;
-		color: #4A90E2;
+		border: 2px solid $primary-blue;
+		color: $primary-blue;
 	}
 }
 
 #saveBtn {
 	right: 0;
 	background-color: $primary-orange;
-	border-color: $primary-orange;
+	border: 2px solid $primary-orange;
+}
+
+#saveBtn:hover {
+	background-color: #b35c00;
+	border:2px solid #b35c00;
 }
 
 #cancelBtn {
@@ -158,10 +177,27 @@ body {
 
 }
 
+.form-group.required .control-label:before{
+	content: "*";
+	color: red;
+	position: absolute;
+	margin-left: -15px;
+}
+
 #contact {
 	sidebar {
 		padding: 1em;
 		float: right;
-		background-color: #F0F0F0;
+		// background-color: #F0F0F0;
+	}
+
+	i {
+		color: $primary-blue;
+		font-size: large;
+		padding: 0 1em 0 1em;
+	}
+
+	small {
+		text-align: center;
 	}
 }

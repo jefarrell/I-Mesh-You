@@ -10,9 +10,9 @@ var config = {};
 config.params = {
 	center: [40.655769,-73.938503],
 	zoomControl: false,
-	zoom: 13,
+	zoom: 3,
 	maxZoom: 19,
-	minZoom: 11,
+	minZoom: 3,
 	scrollwheel: false,
 	scrollWheelZoom: false,
 	legends: true,
@@ -68,7 +68,7 @@ const Map = React.createClass({
 		if (this.map) return;
 		
 		this.map = L.map(id, config.params);
-	    L.control.zoom({ position: "bottomleft"}).addTo(this.map);
+	    L.control.zoom({ position: "topleft"}).addTo(this.map);
 	    L.control.scale({ position: "bottomleft"}).addTo(this.map);
 
 	    var tileLayer = L.tileLayer(config.tileLayer.uri, config.tileLayer.params).addTo(this.map);

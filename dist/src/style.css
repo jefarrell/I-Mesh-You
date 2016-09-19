@@ -65,7 +65,7 @@ body {
   z-index: 10; }
 
 .holder {
-  height: 500px; }
+  min-height: 400px; }
   .holder h2 {
     text-align: center;
     padding: 1em; }
@@ -81,6 +81,17 @@ body {
   #mesh #meshCont {
     padding: 0; }
 
+#mapHeader {
+  padding: 2em;
+  background-color: #4A90E2;
+  border-top: 2px solid #4A90E2;
+  border-bottom: 2px solid #4A90E2;
+  text-align: center; }
+  #mapHeader span {
+    color: white;
+    font-size: 2em;
+    vertical-align: middle; }
+
 #map {
   height: 700px;
   width: 100%; }
@@ -88,10 +99,10 @@ body {
 #mapUI button {
   position: absolute;
   z-index: 100;
-  right: 2em;
   margin-top: 2em; }
 
 #mapUI .btn-lg {
+  right: 2em;
   background-color: #4A90E2;
   border: 2px solid #4A90E2;
   color: #FFF; }
@@ -104,7 +115,11 @@ body {
 #saveBtn {
   right: 0;
   background-color: #FF8500;
-  border-color: #FF8500; }
+  border: 2px solid #FF8500; }
+
+#saveBtn:hover {
+  background-color: #b35c00;
+  border: 2px solid #b35c00; }
 
 #cancelBtn {
   left: 0; }
@@ -119,7 +134,20 @@ body {
   .form-inline .form-group label {
     padding-right: 0.75em; }
 
+.form-group.required .control-label:before {
+  content: "*";
+  color: red;
+  position: absolute;
+  margin-left: -15px; }
+
 #contact sidebar {
   padding: 1em;
-  float: right;
-  background-color: #F0F0F0; }
+  float: right; }
+
+#contact i {
+  color: #4A90E2;
+  font-size: large;
+  padding: 0 1em 0 1em; }
+
+#contact small {
+  text-align: center; }
