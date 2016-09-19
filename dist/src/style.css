@@ -1,5 +1,5 @@
 body {
-  background-color: #F0F0F0;
+  background-color: #FFF;
   padding-top: 50px;
   position: relative;
   font-family: 'Roboto', sans-serif; }
@@ -10,6 +10,7 @@ body {
   top: 0.5em; }
 
 .navbar {
+  background-color: #FFF;
   -webkit-box-shadow: 0 2px 10px -4px #404040;
   -moz-box-shadow: 0 2px 10px -4px #404040;
   box-shadow: 0 2px 10px -4px #404040; }
@@ -45,11 +46,11 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   position: absolute;
-  -webkit-filter: blur(2px);
-  -moz-filter: blur(2px);
-  -o-filter: blur(2px);
-  -ms-filter: blur(2px);
-  filter: blur(2px); }
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px); }
 
 #overlay {
   position: absolute;
@@ -65,6 +66,9 @@ body {
 
 .holder {
   height: 500px; }
+  .holder h2 {
+    text-align: center;
+    padding: 1em; }
 
 #siteHeader {
   font-weight: 700;
@@ -84,8 +88,38 @@ body {
 #mapUI button {
   position: absolute;
   z-index: 100;
-  right: 1em;
-  margin-top: 1em; }
+  right: 2em;
+  margin-top: 2em; }
 
-#closeBtn {
+#mapUI .btn-lg {
+  background-color: #4A90E2;
+  border: 2px solid #4A90E2;
+  color: #FFF; }
+
+#mapUI .btn-lg:hover {
+  background-color: #FFF;
+  border: 2px solid #4A90E2;
+  color: #4A90E2; }
+
+#saveBtn {
+  right: 0;
+  background-color: #FF8500;
+  border-color: #FF8500; }
+
+#cancelBtn {
   left: 0; }
+
+#modalForm {
+  padding: 2em; }
+  #modalForm .row {
+    margin-bottom: 15px; }
+
+.form-inline .form-group {
+  margin-bottom: 2em; }
+  .form-inline .form-group label {
+    padding-right: 0.75em; }
+
+#contact sidebar {
+  padding: 1em;
+  float: right;
+  background-color: #F0F0F0; }

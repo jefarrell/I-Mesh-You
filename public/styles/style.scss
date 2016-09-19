@@ -2,7 +2,7 @@ $primary-orange: #FF8500;
 $map-height: 700px;
 
 body {
-	background-color: #F0F0F0;
+	background-color: #FFF;
 	padding-top: 50px;
 	position: relative;
 	font-family: 'Roboto', sans-serif;
@@ -16,6 +16,7 @@ body {
 }
 
 .navbar {
+	background-color: #FFF;
     -webkit-box-shadow: 0 2px 10px -4px #404040;
     -moz-box-shadow: 0 2px 10px -4px #404040;
     box-shadow: 0 2px 10px -4px #404040;
@@ -31,7 +32,7 @@ body {
 }
 
 #about {
-	color: #FFF;	
+	color: #FFF;
 	h1 {
 		padding-top: 0.35em;
 		padding-bottom: 1em;
@@ -59,11 +60,11 @@ body {
 	background-position: center center;
     background-repeat:no-repeat;
 	position: absolute;
-	-webkit-filter: blur(2px);
-	-moz-filter: blur(2px);
-	-o-filter: blur(2px);
-	-ms-filter: blur(2px);
-	filter: blur(2px);
+	-webkit-filter: blur(1px);
+	-moz-filter: blur(1px);
+	-o-filter: blur(1px);
+	-ms-filter: blur(1px);
+	filter: blur(1px);
 }
 
 #overlay {
@@ -82,6 +83,10 @@ body {
 
 .holder {
 	height: 500px;
+	h2 {
+		text-align: center;
+		padding: 1em;
+	}
 }
 
 #siteHeader {
@@ -109,12 +114,54 @@ body {
 	button {
 		position: absolute;
 		z-index: 100;
-		right: 1em;
-		margin-top: 1em;
+		right: 2em;
+		margin-top: 2em;
+	}
+
+	.btn-lg {
+		background-color: #4A90E2;
+		border: 2px solid #4A90E2;
+		color: #FFF;
+	}
+
+	.btn-lg:hover {
+		background-color: #FFF;
+		border: 2px solid #4A90E2;
+		color: #4A90E2;
 	}
 }
 
-#closeBtn {
+#saveBtn {
+	right: 0;
+	background-color: $primary-orange;
+	border-color: $primary-orange;
+}
+
+#cancelBtn {
 	left: 0;
 }
 
+#modalForm {
+	padding: 2em;
+
+	.row {
+		margin-bottom: 15px;
+	}
+}
+
+.form-inline .form-group {
+	margin-bottom: 2em;
+
+	label {
+		padding-right: 0.75em;
+	}
+
+}
+
+#contact {
+	sidebar {
+		padding: 1em;
+		float: right;
+		background-color: #F0F0F0;
+	}
+}

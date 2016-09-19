@@ -8,7 +8,7 @@ var glob = require('glob');
 
 var path = {
 	HTML: 'views/index.html',
-	SASS: './public/sass/style.scss',
+	SASS: './public/styles/style.scss',
 	MINIFIED_OUT: 'build.min.js',
 	OUT: 'bundle.js',
 	DEST: 'dist',

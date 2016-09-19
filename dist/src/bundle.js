@@ -30595,12 +30595,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Modal = require('boron/DropModal');
 
+var modalStyle = {
+    width: '80%'
+};
+
 var Popup = _react2.default.createClass({
     displayName: 'Popup',
 
 
     getInitialState: function getInitialState() {
-        test: null;
+        return {
+            test: null
+        };
     },
 
     showModal: function showModal() {
@@ -30625,27 +30631,42 @@ var Popup = _react2.default.createClass({
             null,
             _react2.default.createElement(
                 'button',
-                { onClick: this.showModal },
-                'Add Your Mesh'
+                { onClick: this.showModal, className: "btn btn-lg" },
+                'Add Your Mesh!'
             ),
             _react2.default.createElement(
                 Modal,
-                { ref: 'modal', keyboard: this.callback },
+                { ref: 'modal', modalStyle: modalStyle },
                 _react2.default.createElement(
                     'form',
-                    null,
+                    { id: "modalForm" },
                     _react2.default.createElement(
                         'div',
-                        { className: "form-group" },
+                        { className: "row" },
                         _react2.default.createElement(
-                            'label',
-                            { type: 'text' },
-                            'KickStarter Order Number'
+                            'div',
+                            { className: "col-md-4" },
+                            _react2.default.createElement('input', {
+                                type: 'text',
+                                className: "form-control",
+                                placeholder: "KickStarter Order # (a3kf2l2FDW)" })
                         ),
-                        _react2.default.createElement('input', {
-                            type: 'text',
-                            className: "form-control",
-                            placeholder: "a3kf2l2FDW" })
+                        _react2.default.createElement(
+                            'div',
+                            { className: "col-md-4" },
+                            _react2.default.createElement('input', {
+                                type: 'text',
+                                className: "form-control",
+                                placeholder: "Name (Jane Doe)" })
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: "col-md-4" },
+                            _react2.default.createElement('input', {
+                                type: 'text',
+                                className: "form-control",
+                                placeholder: "Twitter (JaneDoe23)" })
+                        )
                     ),
                     _react2.default.createElement(
                         'div',
@@ -30653,23 +30674,49 @@ var Popup = _react2.default.createClass({
                         _react2.default.createElement(
                             'label',
                             { type: 'text' },
-                            'Primary Location'
+                            'Primary Location of Your Mesh *'
                         ),
                         _react2.default.createElement('input', {
                             type: 'text',
                             className: "form-control",
-                            placeholder: "Where will you mainly use your Mesh?" })
+                            placeholder: "ex: 81 willoughby Street, Brooklyn, NY" })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: "form-group" },
+                        _react2.default.createElement(
+                            'label',
+                            { type: 'text' },
+                            'Potential Other Location'
+                        ),
+                        _react2.default.createElement('input', {
+                            type: 'text',
+                            className: "form-control",
+                            placeholder: "ex: 29 champs elysée paris" })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: "form-group" },
+                        _react2.default.createElement(
+                            'label',
+                            { type: 'text' },
+                            'Potential Other Location'
+                        ),
+                        _react2.default.createElement('input', {
+                            type: 'text',
+                            className: "form-control",
+                            placeholder: "ex: Hay St & Barrack St, Perth WA 6000, Australia" })
                     )
                 ),
                 _react2.default.createElement(
                     'button',
-                    { onClick: this.submitData, className: "btn btn-default", id: "saveBtn" },
-                    'Save!'
+                    { onClick: this.submitData, className: "btn btn-warning", id: "saveBtn" },
+                    'Save Information!'
                 ),
                 _react2.default.createElement(
                     'button',
-                    { onClick: this.hideModal, className: "btn btn-default", id: "closeBtn" },
-                    'Close'
+                    { onClick: this.hideModal, className: "btn btn-secondary", id: "cancelBtn" },
+                    'Cancel'
                 )
             )
         );
