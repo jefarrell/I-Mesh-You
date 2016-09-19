@@ -86,3 +86,6 @@ body {
   z-index: 100;
   right: 1em;
   margin-top: 1em; }
+
+#closeBtn {
+  left: 0; }
