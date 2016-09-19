@@ -34,3 +34,4 @@ const routes = require('./routes/index');
 app.get('/', routes.index);
 app.get('/test', routes.test);
 app.post('/addData', routes.addData);
+app.get('/mapData', routes.mapData);

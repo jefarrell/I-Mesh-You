@@ -30630,6 +30630,10 @@ var Popup = _react2.default.createClass({
 
     submitData: function submitData() {
 
+        $.get('/mapData', function (data) {
+            console.log("got this: ", data);
+        });
+
         var formData = {
             KON: _reactDom2.default.findDOMNode(this.refs.KON).value,
             name: _reactDom2.default.findDOMNode(this.refs.name).value,

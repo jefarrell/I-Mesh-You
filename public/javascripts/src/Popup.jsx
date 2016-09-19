@@ -31,6 +31,10 @@ const Popup = React.createClass({
 
     submitData: function() {
         
+        $.get('/mapData', function(data) {
+            console.log("got this: ", data);
+        });
+
         const formData = {
             KON: ReactDOM.findDOMNode(this.refs.KON).value,
             name: ReactDOM.findDOMNode(this.refs.name).value,

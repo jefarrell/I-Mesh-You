@@ -41,10 +41,10 @@ exports.addData = (req, res) => {
 		}
 	});
 
-	console.log("receiving... ", req.body);
+	console.log(req.body);
 
 	geocoder.batchGeocode([req.body.loc1, req.body.loc2, req.body.loc3], (err,res) => {
-		console.log("geocode");
+
 		if (res[0].error === null) { 
 			usr.primaryLoc.lon = res[0].value[0].longitude;
 			usr.primaryLoc.lat = res[0].value[0].latitude;
@@ -67,12 +67,38 @@ exports.addData = (req, res) => {
 		});
 	});
 
-
-
-
 	res.end();
 }
 
+
+
+
+exports.mapData = (req, res) => {
+
+	// PLaceholder GeoJSON obj
+	const geoData = {
+	  "type": "FeatureCollection",
+	  "features": []
+	};
+
+
+	// Need to check all 3 locs for each user
+	// for each valid loc, add entry to geojson
+		// { "type": "Feature",
+		//       "geometry": {"type": "Point", "coordinates": [ -75.534, 39.123]},
+		//       "properties": {
+		//         "name": "Location C"
+		//       }
+		// }
+	User.find({}, function(err, users) {
+		users.forEach(function(usr){
+			console.log(usr["primaryLoc"]);
+
+		});
+		res.send(users);
+	});
+	
+}
 
 
 
