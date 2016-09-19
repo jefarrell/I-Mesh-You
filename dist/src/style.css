@@ -80,6 +80,8 @@ body {
   padding: 0; }
   #mesh #meshCont {
     padding: 0; }
+  #mesh .alert {
+    border-radius: 0; }
 
 #mapHeader {
   padding: 2em;

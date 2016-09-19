@@ -39,21 +39,20 @@ const Popup = React.createClass({
             loc2: ReactDOM.findDOMNode(this.refs.loc2).value,
             loc3: ReactDOM.findDOMNode(this.refs.loc3).value
        };
-
+       var self = this;
         $.ajax({
             url: "/addData",
             type: "POST",
             data: JSON.stringify(formData),
             contentType: "application/json",
-            success: function(msg) 
-                {alert('success!')},
-            error: function(err)
-                {alert(err.responseText)}
+            success: function(msg) {
+                self.setState({type:'success', message:'Thanks for Submitting!'})
+            },
+            error: function(err) {
+                self.setState({type: 'danger', message: 'Something went wrong - please double check info'})
+            }
             
         });
-        // $.get('/addData', function(res){
-        //     console.log("back here ", res);
-        // })
     },
 
     callback: function(event){
@@ -61,10 +60,19 @@ const Popup = React.createClass({
     },
 
     render: function() {
+
+        if(this.state.type && this.state.message) {
+            var classString = 'alert alert-' + this.state.type;
+            var status = <div id="status" className={classString} ref="status">
+                     {this.state.message}
+                   </div>;
+        }
+
         return (
             <div>
                 <button onClick={this.showModal} className={"btn btn-lg"}>Add Your Mesh!</button>
                 <Modal ref="modal" modalStyle={modalStyle}>
+                    {status}
                     <form id={"modalForm"}>
                         <div className={"row"}>
                             <div className={"col-md-4"}>

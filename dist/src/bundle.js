@@ -30638,23 +30638,20 @@ var Popup = _react2.default.createClass({
             loc2: _reactDom2.default.findDOMNode(this.refs.loc2).value,
             loc3: _reactDom2.default.findDOMNode(this.refs.loc3).value
         };
-
+        var self = this;
         $.ajax({
             url: "/addData",
             type: "POST",
             data: JSON.stringify(formData),
             contentType: "application/json",
             success: function success(msg) {
-                alert('success!');
+                self.setState({ type: 'success', message: 'Thanks for Submitting!' });
             },
             error: function error(err) {
-                alert(err.responseText);
+                self.setState({ type: 'danger', message: 'Something went wrong - please double check info' });
             }
 
         });
-        // $.get('/addData', function(res){
-        //     console.log("back here ", res);
-        // })
     },
 
     callback: function callback(event) {
@@ -30662,6 +30659,16 @@ var Popup = _react2.default.createClass({
     },
 
     render: function render() {
+
+        if (this.state.type && this.state.message) {
+            var classString = 'alert alert-' + this.state.type;
+            var status = _react2.default.createElement(
+                'div',
+                { id: 'status', className: classString, ref: 'status' },
+                this.state.message
+            );
+        }
+
         return _react2.default.createElement(
             'div',
             null,
@@ -30673,6 +30680,7 @@ var Popup = _react2.default.createClass({
             _react2.default.createElement(
                 Modal,
                 { ref: 'modal', modalStyle: modalStyle },
+                status,
                 _react2.default.createElement(
                     'form',
                     { id: "modalForm" },
