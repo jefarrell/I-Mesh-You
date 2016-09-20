@@ -172,7 +172,11 @@ body {
 	}
 
 	.has-error input {
-		border: 2px solid #a94442;
+		border: 2px solid #e62e00;
+	}
+
+	.reqd input {
+		border: 2px solid #000;
 	}
 }
 

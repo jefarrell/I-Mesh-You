@@ -131,7 +131,9 @@ body {
   #modalForm .row {
     margin-bottom: 15px; }
   #modalForm .has-error input {
-    border: 2px solid #a94442; }
+    border: 2px solid #e62e00; }
+  #modalForm .reqd input {
+    border: 2px solid #000; }
 
 .form-inline .form-group {
   margin-bottom: 2em; }

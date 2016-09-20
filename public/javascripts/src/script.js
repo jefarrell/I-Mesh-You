@@ -1,9 +1,8 @@
-console.log(' checking in from script');
 
-// var offset = 50;
-
-// $('.navbar li a').click(function(event) {
-//     event.preventDefault();
-//     $($(this).attr('href'))[0].scrollIntoView();
-//     scrollBy(0, -offset);
-// });
+$(document).ready(function(){
+	$('body').on('click','a[href^="#"]',function(event){
+	    var target_offset = $(this.hash).offset() ? $(this.hash).offset().top : 0;     
+	    var customoffset = 45;
+	    $('html, body').animate({scrollTop:target_offset - customoffset}, 500);
+	});
+});

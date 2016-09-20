@@ -30700,7 +30700,7 @@ var Popup = _react2.default.createClass({
         if (formData.KON == '' || formData.loc1 == '') {
             console.log(_reactDom2.default.findDOMNode(this.refs.KON));
             this.setState({ type: 'danger', message: 'Missing Required Fields - Try again please' });
-            $('#KON ,#loc1').addClass('has-error');
+            $('#KON ,#loc1').removeClass('reqd').addClass('has-error');
         }
         // Validate number
         else if (formData.KON === "hello") {
@@ -30758,7 +30758,7 @@ var Popup = _react2.default.createClass({
                         { className: "row" },
                         _react2.default.createElement(
                             'div',
-                            { className: "col-md-4", id: 'KON' },
+                            { className: "col-md-4 reqd", id: 'KON' },
                             _react2.default.createElement('input', {
                                 type: 'text',
                                 ref: 'KON',
@@ -30786,7 +30786,7 @@ var Popup = _react2.default.createClass({
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: "form-group", id: 'loc1' },
+                        { className: "form-group reqd", id: 'loc1' },
                         _react2.default.createElement(
                             'label',
                             { type: 'text' },
@@ -30876,14 +30876,12 @@ var App = _react2.default.createClass({
 },{"./Map.jsx":182,"react":181,"react-dom":38}],185:[function(require,module,exports){
 'use strict';
 
-console.log(' checking in from script');
-
-// var offset = 50;
-
-// $('.navbar li a').click(function(event) {
-//     event.preventDefault();
-//     $($(this).attr('href'))[0].scrollIntoView();
-//     scrollBy(0, -offset);
-// });
+$(document).ready(function () {
+	$('body').on('click', 'a[href^="#"]', function (event) {
+		var target_offset = $(this.hash).offset() ? $(this.hash).offset().top : 0;
+		var customoffset = 45;
+		$('html, body').animate({ scrollTop: target_offset - customoffset }, 500);
+	});
+});
 
 },{}]},{},[185,184]);
