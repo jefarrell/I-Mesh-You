@@ -82,18 +82,13 @@ exports.mapData = (req, res) => {
 	};
 
 
-	// Need to check all 3 locs for each user
-	// for each valid loc, add entry to geojson
-		// { "type": "Feature",
-		//       "geometry": {"type": "Point", "coordinates": [ -75.534, 39.123]},
-		//       "properties": {
-		//         "name": "Location C"
-		//       }
-		// }
-
 	// Wonky fix because of course
 	const checker = ["primaryLoc", "secondLoc", "thirdLoc"];
 	const container = [];
+
+	// Query database, get location data
+	// Parse it and create GeoJSON object
+
 	User.find(function(err, data) {
 		for (key in data) {
 			if(data.hasOwnProperty(key)) {
@@ -105,9 +100,9 @@ exports.mapData = (req, res) => {
 		for(var i=0;i<container.length;i++){
 			var temp = container[i];
 			for (var x = 0; x < checker.length; x++){
-				var name = container[i][checker[x]]["name"];
-				var lat = container[i][checker[x]]["lat"];
-				var lng = container[i][checker[x]]["lon"];
+				var name = temp[checker[x]]["name"];
+				var lat = temp[checker[x]]["lat"];
+				var lng = temp[checker[x]]["lon"];
 
 				if (lat === null || lng === null) {} 
 				else {
@@ -124,12 +119,10 @@ exports.mapData = (req, res) => {
 			}	
 
 		 }
-	
-
 	console.log(JSON.stringify(geoData));
+	res.json(geoData);
+	
 	});
-
-	res.send('finished');
 }
 
 

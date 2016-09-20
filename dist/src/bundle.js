@@ -30534,23 +30534,65 @@ var Map = _react2.default.createClass({
 
 	getInitialState: function getInitialState() {
 		return {
-			tileLayer: null
+			tileLayer: null,
+			geojsonLayer: null,
+			geojson: null
 		};
 	},
 
 	map: null,
 
 	componentDidMount: function componentDidMount() {
+
+		this.getData();
+
 		if (!this.map) this.init(this.getID());
 	},
 
 	componentDidUpdate: function componentDidUpdate() {},
 
+	componentWillUnmount: function componentWillUnmount() {
+		this.map.remove();
+	},
+
 	updateMap: function updateMap() {},
 
-	pointToLayer: function pointToLayer() {},
+	getData: function getData() {
+		var self = this;
+		$.get('/mapData', function (data) {
+			self.addGeoJSONLayer(data);
+			console.log(data);
+		});
+	},
 
-	onEachFeature: function onEachFeature() {},
+	addGeoJSONLayer: function addGeoJSONLayer(geojson) {
+		this.setState({ geojson: geojson });
+		var geojsonLayer = L.geoJson(geojson, {
+			onEachFeature: this.onEachFeature,
+			pointToLayer: this.pointToLayer
+		});
+
+		geojsonLayer.addTo(this.map);
+		this.setState({ geojsonLayer: geojsonLayer });
+	},
+
+	pointToLayer: function pointToLayer(feature, latlng) {
+		var markerParams = {
+			radius: 4,
+			fillColor: 'orange',
+			color: '#fff',
+			weight: 1,
+			opacity: 0.5,
+			fillOpacity: 0.8
+		};
+
+		return L.circleMarker(latlng, markerParams);
+	},
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		var popup = '<div><p>' + feature.properties.name + '</p></div>';
+		layer.bindPopup(popup);
+	},
 
 	getID: function getID() {
 		return ReactDOM.findDOMNode(this).querySelectorAll('#map')[0];
