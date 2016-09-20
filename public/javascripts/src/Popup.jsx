@@ -22,6 +22,9 @@ const Popup = React.createClass({
     hideModal: function(){
         this.setState({type:'info', message:''})
         this.refs.modal.hide();
+        $.get('/mapData', function(data) {
+            console.log("got this: ", data);
+        });
     },
 
     handleSubmit: function(e) {
@@ -31,10 +34,6 @@ const Popup = React.createClass({
 
     submitData: function() {
         
-        $.get('/mapData', function(data) {
-            console.log("got this: ", data);
-        });
-
         const formData = {
             KON: ReactDOM.findDOMNode(this.refs.KON).value,
             name: ReactDOM.findDOMNode(this.refs.name).value,
@@ -63,6 +62,7 @@ const Popup = React.createClass({
                 }
             });
         }
+
     },
 
     callback: function(event){

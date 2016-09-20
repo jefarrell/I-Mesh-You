@@ -30621,6 +30621,9 @@ var Popup = _react2.default.createClass({
     hideModal: function hideModal() {
         this.setState({ type: 'info', message: '' });
         this.refs.modal.hide();
+        $.get('/mapData', function (data) {
+            console.log("got this: ", data);
+        });
     },
 
     handleSubmit: function handleSubmit(e) {
@@ -30629,10 +30632,6 @@ var Popup = _react2.default.createClass({
     },
 
     submitData: function submitData() {
-
-        $.get('/mapData', function (data) {
-            console.log("got this: ", data);
-        });
 
         var formData = {
             KON: _reactDom2.default.findDOMNode(this.refs.KON).value,
