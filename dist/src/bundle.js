@@ -30577,16 +30577,29 @@ var Map = _react2.default.createClass({
 	},
 
 	pointToLayer: function pointToLayer(feature, latlng) {
-		var markerParams = {
+
+		var primaryParams = {
 			radius: 4,
-			fillColor: 'orange',
+			fillColor: 'red',
 			color: '#fff',
 			weight: 1,
 			opacity: 0.5,
 			fillOpacity: 0.8
 		};
 
-		return L.circleMarker(latlng, markerParams);
+		var potentialParams = {
+			radius: 4,
+			fillColor: 'green',
+			color: '#fff',
+			weight: 1,
+			opacity: 0.5,
+			fillOpacity: 0.8
+		};
+		if (feature.properties.name === 'Primary Location') {
+			return L.circleMarker(latlng, primaryParams);
+		} else {
+			return L.circleMarker(latlng, potentialParams);
+		}
 	},
 
 	onEachFeature: function onEachFeature(feature, layer) {
@@ -30663,9 +30676,6 @@ var Popup = _react2.default.createClass({
     hideModal: function hideModal() {
         this.setState({ type: 'info', message: '' });
         this.refs.modal.hide();
-        $.get('/mapData', function (data) {
-            console.log("got this: ", data);
-        });
     },
 
     handleSubmit: function handleSubmit(e) {
@@ -30686,23 +30696,31 @@ var Popup = _react2.default.createClass({
 
         var self = this;
 
-        // Validate Order number here!
-        if (formData.KON === "hello") {
-            this.setState({ type: 'danger', message: 'Invalid Order Number!' });
-        } else {
-            $.ajax({
-                url: "/addData",
-                type: "POST",
-                data: JSON.stringify(formData),
-                contentType: "application/json",
-                success: function success(msg) {
-                    self.setState({ type: 'success', message: 'Thanks for Submitting!' });
-                },
-                error: function error(err) {
-                    self.setState({ type: 'danger', message: 'Something went wrong - please double check Information' });
-                }
-            });
+        // Check for null
+        if (formData.KON == '' || formData.loc1 == '') {
+            console.log(_reactDom2.default.findDOMNode(this.refs.KON));
+            this.setState({ type: 'danger', message: 'Missing Required Fields - Try again please' });
+            $('#KON ,#loc1').addClass('has-error');
         }
+        // Validate number
+        else if (formData.KON === "hello") {
+                this.setState({ type: 'danger', message: 'Invalid Order Number!' });
+            }
+            // All good, post
+            else {
+                    $.ajax({
+                        url: "/addData",
+                        type: "POST",
+                        data: JSON.stringify(formData),
+                        contentType: "application/json",
+                        success: function success(msg) {
+                            self.setState({ type: 'success', message: 'Thanks for Submitting!' });
+                        },
+                        error: function error(err) {
+                            self.setState({ type: 'danger', message: 'Something went wrong - please double check Information' });
+                        }
+                    });
+                }
     },
 
     callback: function callback(event) {
@@ -30740,12 +30758,12 @@ var Popup = _react2.default.createClass({
                         { className: "row" },
                         _react2.default.createElement(
                             'div',
-                            { className: "col-md-4" },
+                            { className: "col-md-4", id: 'KON' },
                             _react2.default.createElement('input', {
                                 type: 'text',
                                 ref: 'KON',
                                 className: "form-control",
-                                placeholder: "KickStarter Order # (a3kf2l2FDW)" })
+                                placeholder: "KickStarter Order # (a3kf2l2FDW)", required: true })
                         ),
                         _react2.default.createElement(
                             'div',
@@ -30768,7 +30786,7 @@ var Popup = _react2.default.createClass({
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: "form-group" },
+                        { className: "form-group", id: 'loc1' },
                         _react2.default.createElement(
                             'label',
                             { type: 'text' },
@@ -30777,6 +30795,7 @@ var Popup = _react2.default.createClass({
                         _react2.default.createElement('input', {
                             type: 'text',
                             ref: 'loc1',
+                            id: 'loc1',
                             className: "form-control",
                             placeholder: "ex: 81 willoughby Street, Brooklyn, NY" })
                     ),

@@ -22,9 +22,6 @@ const Popup = React.createClass({
     hideModal: function(){
         this.setState({type:'info', message:''})
         this.refs.modal.hide();
-        $.get('/mapData', function(data) {
-            console.log("got this: ", data);
-        });
     },
 
     handleSubmit: function(e) {
@@ -45,10 +42,18 @@ const Popup = React.createClass({
 
        var self = this;
        
-       // Validate Order number here!
-       if (formData.KON === "hello") {
+       // Check for null
+        if (formData.KON == '' || formData.loc1 == '' ) {
+            console.log(ReactDOM.findDOMNode(this.refs.KON))
+            this.setState({type: 'danger', message: 'Missing Required Fields - Try again please'});
+            $('#KON ,#loc1').addClass('has-error');
+       } 
+       // Validate number
+       else if (formData.KON === "hello") {
            this.setState({type: 'danger', message: 'Invalid Order Number!'})
-       } else {
+       } 
+       // All good, post
+       else {
             $.ajax({
                 url: "/addData",
                 type: "POST",
@@ -85,12 +90,12 @@ const Popup = React.createClass({
                     {status}
                     <form id={"modalForm"}>
                         <div className={"row"}>
-                            <div className={"col-md-4"}>
+                            <div className={"col-md-4"} id="KON">
                                 <input
                                     type="text"
                                     ref="KON"
                                     className={"form-control"}
-                                    placeholder={"KickStarter Order # (a3kf2l2FDW)"}>
+                                    placeholder={"KickStarter Order # (a3kf2l2FDW)"} required>
                                 </input>
                             </div>
                             <div className={"col-md-4"}>
@@ -111,11 +116,12 @@ const Popup = React.createClass({
                             </div>
                         </div> 
 
-                        <div className={"form-group"}>
+                        <div className={"form-group"} id="loc1">
                             <label type="text">Primary Location of Your Mesh *</label>
                             <input 
                                 type="text"
                                 ref="loc1"
+                                id="loc1"
                                 className={"form-control"}
                                 placeholder={"ex: 81 willoughby Street, Brooklyn, NY"}>
                             </input>

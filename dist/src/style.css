@@ -105,14 +105,14 @@ body {
 
 #mapUI .btn-lg {
   right: 2em;
-  background-color: #4A90E2;
-  border: 2px solid #4A90E2;
+  background-color: #FF8500;
+  border: 2px solid #FF8500;
   color: #FFF; }
 
 #mapUI .btn-lg:hover {
   background-color: #FFF;
-  border: 2px solid #4A90E2;
-  color: #4A90E2; }
+  border: 2px solid #FF8500;
+  color: #FF8500; }
 
 #saveBtn {
   right: 0;
@@ -130,6 +130,8 @@ body {
   padding: 2em; }
   #modalForm .row {
     margin-bottom: 15px; }
+  #modalForm .has-error input {
+    border: 2px solid #a94442; }
 
 .form-inline .form-group {
   margin-bottom: 2em; }

@@ -137,15 +137,15 @@ body {
 
 	.btn-lg {
 		right: 2em;
-		background-color: $primary-blue;
-		border: 2px solid $primary-blue;
+		background-color: $primary-orange;
+		border: 2px solid $primary-orange;
 		color: #FFF;
 	}
 
 	.btn-lg:hover {
 		background-color: #FFF;
-		border: 2px solid $primary-blue;
-		color: $primary-blue;
+		border: 2px solid $primary-orange;
+		color: $primary-orange;
 	}
 }
 
@@ -169,6 +169,10 @@ body {
 
 	.row {
 		margin-bottom: 15px;
+	}
+
+	.has-error input {
+		border: 2px solid #a94442;
 	}
 }
 

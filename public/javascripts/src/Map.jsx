@@ -86,16 +86,30 @@ const Map = React.createClass({
 
 
 	pointToLayer: function(feature, latlng) {
-		var markerParams = {
+
+		var primaryParams = {
 			radius: 4,
-			fillColor: 'orange',
+			fillColor: 'red',
 			color: '#fff',
 			weight: 1,
 			opacity: 0.5,
 			fillOpacity: 0.8
 		};
 
-		return L.circleMarker(latlng, markerParams);
+		var potentialParams = {
+			radius: 4,
+			fillColor: 'green',
+			color: '#fff',
+			weight: 1,
+			opacity: 0.5,
+			fillOpacity: 0.8
+		}
+		if (feature.properties.name === 'Primary Location') {
+			return L.circleMarker(latlng, primaryParams);
+		} else {
+			return L.circleMarker(latlng, potentialParams);
+		}
+		
 	},
 
 	onEachFeature: function(feature, layer) {

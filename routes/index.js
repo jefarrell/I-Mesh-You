@@ -58,15 +58,27 @@ exports.addData = (req, res) => {
 			usr.locations.thirdLoc.lat = res[2].value[0].latitude;
 		}
 
-		usr.save(function(err, data, numAffected) {
-			if (err) console.log(err);
-			else {
-				console.log("Working check ------------------------ : ", numAffected);
-				//console.log(data);
-			};
-		});
-	});
+		// usr.save(function(err, data, numAffected) {
+		// 	if (err) console.log(err);
+		// 	else {
+		// 		console.log("Working check ------------------------ : ", numAffected);
+		// 		//console.log(data);
+		// 	};
+		// });
 
+		// Check 
+		var toUpdate = {};
+		toUpdate = Object.assign(toUpdate, usr._doc);
+		delete toUpdate._id;
+
+		console.log(toUpdate.KON)
+		User.findOneAndUpdate({ KON: toUpdate.KON }, toUpdate, {upsert: true, new: true}, function(err, doc) {
+			if (err) { console.log("error!!! - ", err) }
+			else {
+				console.log("NEW THANG ", doc)
+			}
+		})
+	});
 	res.end();
 }
 
@@ -121,7 +133,7 @@ exports.mapData = (req, res) => {
 		 }
 	console.log(JSON.stringify(geoData));
 	res.json(geoData);
-	
+
 	});
 }
 
