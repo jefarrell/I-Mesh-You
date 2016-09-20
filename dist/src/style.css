@@ -116,24 +116,39 @@ body {
 
 #saveBtn {
   right: 0;
-  background-color: #FF8500;
-  border: 2px solid #FF8500; }
+  background-color: #4CAF50;
+  border: 2px solid #4CAF50; }
 
 #saveBtn:hover {
-  background-color: #b35c00;
-  border: 2px solid #b35c00; }
+  background-color: #2E7D32;
+  border: 2px solid #2E7D32; }
 
 #cancelBtn {
-  left: 0; }
+  left: 0;
+  background-color: #F44336;
+  border: 2px solid #F44336;
+  color: #FFF; }
+
+#cancelBtn:hover {
+  background-color: #D50000;
+  border: 2px solid #D50000; }
 
 #modalForm {
   padding: 2em; }
   #modalForm .row {
     margin-bottom: 15px; }
   #modalForm .has-error input {
-    border: 2px solid #e62e00; }
+    border: 2px solid #F44336; }
   #modalForm .reqd input {
     border: 2px solid #000; }
+  #modalForm .alert-danger {
+    background-color: #FFCDD2;
+    color: #F44336;
+    border-color: #FFCDD2; }
+  #modalForm .alert-success {
+    background-color: #C8E6C9;
+    color: #4CAF50;
+    border-color: #C8E6C9; }
 
 .form-inline .form-group {
   margin-bottom: 2em; }

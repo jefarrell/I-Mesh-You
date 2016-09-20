@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Map from './Map.jsx'
 const Modal = require('boron/DropModal');
 
 const modalStyle = {
@@ -54,6 +55,9 @@ const Popup = React.createClass({
        } 
        // All good, post
        else {
+
+            $('#KON ,#loc1').removeClass('has-error').addClass('reqd');
+
             $.ajax({
                 url: "/addData",
                 type: "POST",
@@ -75,13 +79,28 @@ const Popup = React.createClass({
     },
 
     render: function() {
+        // Build bigger component for success
+        // if(this.state.type && this.state.message) {
+        //     var classString = 'alert alert-' + this.state.type;
+        //     var status = <div id="status" className={classString} ref="status">
+        //              {this.state.message}
+        //            </div>;
+        // }
 
-        if(this.state.type && this.state.message) {
+        if(this.state.type === 'success' && this.state.message) {
+            var classString = 'alert alert-' + this.state.type;
+            var status = 
+                <div id="status" className={classString} ref="status">
+                     <h4>{this.state.message}</h4>
+                     <div> Please share on social media!</div>
+                </div>;           
+        } else if (this.state.type && this.state.message) {
             var classString = 'alert alert-' + this.state.type;
             var status = <div id="status" className={classString} ref="status">
                      {this.state.message}
                    </div>;
         }
+
 
         return (
             <div>

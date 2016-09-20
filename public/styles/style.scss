@@ -1,5 +1,7 @@
 $primary-orange: #FF8500;
 $primary-blue: #4A90E2;
+$primary-red: #F44336;
+$primary-green: #4CAF50;
 $map-height: 700px;
 
 body {
@@ -151,18 +153,26 @@ body {
 
 #saveBtn {
 	right: 0;
-	background-color: $primary-orange;
-	border: 2px solid $primary-orange;
+	background-color: $primary-green;
+	border: 2px solid $primary-green;
 }
 
 #saveBtn:hover {
-	background-color: #b35c00;
-	border:2px solid #b35c00;
+	background-color: #2E7D32;
+	border:2px solid #2E7D32;
 }
 
 #cancelBtn {
 	left: 0;
+	background-color: $primary-red;
+	border: 2px solid $primary-red;
+	color: #FFF;
 }
+
+#cancelBtn:hover {
+	background-color: #D50000;
+	border: 2px solid #D50000;
+}	
 
 #modalForm {
 	padding: 2em;
@@ -172,11 +182,23 @@ body {
 	}
 
 	.has-error input {
-		border: 2px solid #e62e00;
+		border: 2px solid $primary-red;
 	}
 
 	.reqd input {
 		border: 2px solid #000;
+	}
+
+	.alert-danger {
+		background-color: #FFCDD2;
+		color: $primary-red;
+		border-color: #FFCDD2;
+	}
+
+	.alert-success {
+		background-color: #C8E6C9;
+		color: $primary-green;
+		border-color: #C8E6C9;
 	}
 }
 

@@ -30507,9 +30507,9 @@ var L = require('leaflet');
 var config = {};
 
 config.params = {
-	center: [40.655769, -73.938503],
+	center: [40.7087462, -73.9707151],
 	zoomControl: false,
-	zoom: 3,
+	zoom: 12,
 	maxZoom: 19,
 	minZoom: 3,
 	scrollwheel: false,
@@ -30520,9 +30520,9 @@ config.params = {
 };
 
 config.tileLayer = {
-	uri: 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+	uri: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
 	params: {
-		attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
 		id: '',
 		accessToken: ''
 	}
@@ -30579,22 +30579,23 @@ var Map = _react2.default.createClass({
 	pointToLayer: function pointToLayer(feature, latlng) {
 
 		var primaryParams = {
-			radius: 4,
-			fillColor: 'red',
-			color: '#fff',
+			radius: 60,
+			fillColor: '#F44336',
+			color: '#B71C1C',
 			weight: 1,
-			opacity: 0.5,
-			fillOpacity: 0.8
+			opacity: 0.8,
+			fillOpacity: 0.6
 		};
 
 		var potentialParams = {
-			radius: 4,
-			fillColor: 'green',
-			color: '#fff',
+			radius: 60,
+			fillColor: '#4CAF50',
+			color: '#2E7D32',
 			weight: 1,
-			opacity: 0.5,
-			fillOpacity: 0.8
+			opacity: 0.8,
+			fillOpacity: 0.6
 		};
+
 		if (feature.properties.name === 'Primary Location') {
 			return L.circleMarker(latlng, primaryParams);
 		} else {
@@ -30649,6 +30650,10 @@ var _react2 = _interopRequireDefault(_react);
 var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _Map = require('./Map.jsx');
+
+var _Map2 = _interopRequireDefault(_Map);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30708,6 +30713,9 @@ var Popup = _react2.default.createClass({
             }
             // All good, post
             else {
+
+                    $('#KON ,#loc1').removeClass('has-error').addClass('reqd');
+
                     $.ajax({
                         url: "/addData",
                         type: "POST",
@@ -30728,8 +30736,31 @@ var Popup = _react2.default.createClass({
     },
 
     render: function render() {
+        // Build bigger component for success
+        // if(this.state.type && this.state.message) {
+        //     var classString = 'alert alert-' + this.state.type;
+        //     var status = <div id="status" className={classString} ref="status">
+        //              {this.state.message}
+        //            </div>;
+        // }
 
-        if (this.state.type && this.state.message) {
+        if (this.state.type === 'success' && this.state.message) {
+            var classString = 'alert alert-' + this.state.type;
+            var status = _react2.default.createElement(
+                'div',
+                { id: 'status', className: classString, ref: 'status' },
+                _react2.default.createElement(
+                    'h4',
+                    null,
+                    this.state.message
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    ' Please share on social media!'
+                )
+            );
+        } else if (this.state.type && this.state.message) {
             var classString = 'alert alert-' + this.state.type;
             var status = _react2.default.createElement(
                 'div',
@@ -30845,7 +30876,7 @@ var Popup = _react2.default.createClass({
 
 exports.default = Popup;
 
-},{"boron/DropModal":1,"react":181,"react-dom":38}],184:[function(require,module,exports){
+},{"./Map.jsx":182,"boron/DropModal":1,"react":181,"react-dom":38}],184:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');

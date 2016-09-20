@@ -8,9 +8,9 @@ var config = {};
 
 
 config.params = {
-	center: [40.655769,-73.938503],
+	center: [40.7087462,-73.9707151],
 	zoomControl: false,
-	zoom: 3,
+	zoom: 12,
 	maxZoom: 19,
 	minZoom: 3,
 	scrollwheel: false,
@@ -21,9 +21,9 @@ config.params = {
 }
 
 config.tileLayer = {
-  uri: 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+  uri: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
   params: {
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
     id: '',
     accessToken: ''
   }
@@ -88,29 +88,30 @@ const Map = React.createClass({
 	pointToLayer: function(feature, latlng) {
 
 		var primaryParams = {
-			radius: 4,
-			fillColor: 'red',
-			color: '#fff',
+			radius: 60,
+			fillColor: '#F44336',
+			color: '#B71C1C',
 			weight: 1,
-			opacity: 0.5,
-			fillOpacity: 0.8
+			opacity: 0.8,
+			fillOpacity: 0.6
 		};
 
 		var potentialParams = {
-			radius: 4,
-			fillColor: 'green',
-			color: '#fff',
+			radius: 60,
+			fillColor: '#4CAF50',
+			color: '#2E7D32',
 			weight: 1,
-			opacity: 0.5,
-			fillOpacity: 0.8
+			opacity: 0.8,
+			fillOpacity: 0.6
 		}
+
 		if (feature.properties.name === 'Primary Location') {
 			return L.circleMarker(latlng, primaryParams);
 		} else {
 			return L.circleMarker(latlng, potentialParams);
 		}
-		
 	},
+
 
 	onEachFeature: function(feature, layer) {
 		var popup = '<div><p>'+feature.properties.name+'</p></div>';
