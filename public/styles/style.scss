@@ -1,7 +1,7 @@
 $primary-orange: #FF8500;
 $secondary-orange: #FFC107;
 
-$primary-blue: #4A90E2;
+$primary-blue: #549AE6;
 
 
 $primary-red: #F44336;
@@ -12,19 +12,39 @@ $secondary-green: #2E7D32;
 
 $map-height: 700px;
 
+@font-face {
+	font-family: SalvoSans;
+	src: url('/fonts/FontBureau-SalvoSansRegular.otf');
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: SalvoSans;
+	src: url('/fonts/FontBureau-SalvoSansBold.otf');
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: SalvoSans;
+	src: url('/fonts/FontBureau-SalvoSansLight.otf');
+	font-weight: light;
+}
+
+
 body {
+
 	background-color: #FFF;
 	padding-top: 50px;
 	position: relative;
-	font-family: 'Roboto', sans-serif;
+	font-family: SalvoSans;
+	font-weight: normal;
 }
 
 #logoCont {
-	width: 10em;
+	width: 15em;
 	position: absolute;
 	top: 0.5em;
-
-	// left: 0.5em;
+	left: 1em;
 }
 
 button {
@@ -41,13 +61,6 @@ button:focus, a:focus {
     -moz-box-shadow: 0 2px 10px -4px #404040;
     box-shadow: 0 2px 10px -4px #404040;
 
-    svg path {
-		transition: fill 0.3s ease 0s;	
-	}
-
-	svg:hover path {
-	    fill: $primary-orange;
-	}
 }
 
 .navbar-default .navbar-nav>li>a {
@@ -69,6 +82,7 @@ button:focus, a:focus {
 }
 
 #about {
+	font-weight: light;
 	height: 600px;
 	color: $primary-blue;
 	h1 {
@@ -93,7 +107,8 @@ button:focus, a:focus {
 #imgCont {
 	width: 100%;
 	height: 100%;
-	background:url('/header.jpg');
+	background-color: #FFF;
+	background:url('/product.png');
 	background-size: cover;
 	background-attachment: fixed;
 	background-position: center center;
@@ -127,6 +142,29 @@ button:focus, a:focus {
 		text-align: center;
 		padding: 1em;
 	}
+	
+	p {
+		text-align: center;
+		padding: 0.35em 0.35em 2em 0.35em;
+		font-size: 1.5em;
+		font-weight: 400;
+		line-height: 2.25em;
+	}
+
+	svg path {
+		transition: fill 0.3s ease 0s;	
+	}
+
+	svg:hover path {
+	    fill: #2BDE73;
+	}
+}
+
+#ksLogo {
+	display:block;
+	margin:auto;
+	width: 50%;
+	padding-bottom: 2em;
 }
 
 #siteHeader {
@@ -190,12 +228,6 @@ button:focus, a:focus {
    		-moz-box-shadow: 0 2px 10px -4px #404040;
     	box-shadow: 0 2px 10px -4px #404040; 
 	}
-
-	// .btn-lg:active {
-	// 	-webkit-box-shadow: 0 10px 20px -4px #404040;
- //   		-moz-box-shadow: 0 10px 20px -4px #404040;
- //    	box-shadow: 0 8px 20px -4px #404040; 
-	// }
 }
 
 #saveBtn {

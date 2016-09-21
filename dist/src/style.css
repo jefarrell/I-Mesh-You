@@ -1,13 +1,30 @@
+@font-face {
+  font-family: SalvoSans;
+  src: url("/fonts/FontBureau-SalvoSansRegular.otf");
+  font-weight: normal; }
+
+@font-face {
+  font-family: SalvoSans;
+  src: url("/fonts/FontBureau-SalvoSansBold.otf");
+  font-weight: bold; }
+
+@font-face {
+  font-family: SalvoSans;
+  src: url("/fonts/FontBureau-SalvoSansLight.otf");
+  font-weight: light; }
+
 body {
   background-color: #FFF;
   padding-top: 50px;
   position: relative;
-  font-family: 'Roboto', sans-serif; }
+  font-family: SalvoSans;
+  font-weight: normal; }
 
 #logoCont {
-  width: 10em;
+  width: 15em;
   position: absolute;
-  top: 0.5em; }
+  top: 0.5em;
+  left: 1em; }
 
 button {
   transition: background-color 0.3s ease 0s; }
@@ -20,10 +37,6 @@ button:focus, a:focus {
   -webkit-box-shadow: 0 2px 10px -4px #404040;
   -moz-box-shadow: 0 2px 10px -4px #404040;
   box-shadow: 0 2px 10px -4px #404040; }
-  .navbar svg path {
-    transition: fill 0.3s ease 0s; }
-  .navbar svg:hover path {
-    fill: #FF8500; }
 
 .navbar-default .navbar-nav > li > a {
   transition: background-color 0.5s ease; }
@@ -40,8 +53,9 @@ button:focus, a:focus {
   color: #FFF; }
 
 #about {
+  font-weight: light;
   height: 600px;
-  color: #4A90E2; }
+  color: #549AE6; }
   #about h1 {
     padding-top: 0.35em;
     padding-bottom: 1em; }
@@ -59,7 +73,8 @@ button:focus, a:focus {
 #imgCont {
   width: 100%;
   height: 100%;
-  background: url("/header.jpg");
+  background-color: #FFF;
+  background: url("/product.png");
   background-size: cover;
   background-attachment: fixed;
   background-position: center center;
@@ -89,6 +104,22 @@ button:focus, a:focus {
   #kickstarter h2 {
     text-align: center;
     padding: 1em; }
+  #kickstarter p {
+    text-align: center;
+    padding: 0.35em 0.35em 2em 0.35em;
+    font-size: 1.5em;
+    font-weight: 400;
+    line-height: 2.25em; }
+  #kickstarter svg path {
+    transition: fill 0.3s ease 0s; }
+  #kickstarter svg:hover path {
+    fill: #2BDE73; }
+
+#ksLogo {
+  display: block;
+  margin: auto;
+  width: 50%;
+  padding-bottom: 2em; }
 
 #siteHeader {
   font-weight: 700;
@@ -107,9 +138,9 @@ button:focus, a:focus {
 
 #mapHeader {
   padding: 2em;
-  background-color: #4A90E2;
-  border-top: 2px solid #4A90E2;
-  border-bottom: 2px solid #4A90E2;
+  background-color: #549AE6;
+  border-top: 2px solid #549AE6;
+  border-bottom: 2px solid #549AE6;
   text-align: center; }
   #mapHeader span {
     color: white;
@@ -189,7 +220,7 @@ button:focus, a:focus {
   margin-left: -15px; }
 
 #contact {
-  background-color: #4A90E2;
+  background-color: #549AE6;
   color: #FFF;
   max-height: 250px; }
   #contact hr {
