@@ -42,7 +42,6 @@ const Popup = React.createClass({
        };
 
        var self = this;
-       
        // Check for null
         if (formData.KON == '' || formData.loc1 == '' ) {
             console.log(ReactDOM.findDOMNode(this.refs.KON))
@@ -71,34 +70,30 @@ const Popup = React.createClass({
                 }
             });
         }
-
     },
 
-    callback: function(event){
+    callback: function(event) {
         console.log(event);
     },
 
     render: function() {
         // Build bigger component for success
-        // if(this.state.type && this.state.message) {
-        //     var classString = 'alert alert-' + this.state.type;
-        //     var status = <div id="status" className={classString} ref="status">
-        //              {this.state.message}
-        //            </div>;
-        // }
 
         if(this.state.type === 'success' && this.state.message) {
+
             var classString = 'alert alert-' + this.state.type;
             var status = 
                 <div id="status" className={classString} ref="status">
-                     <h4>{this.state.message}</h4>
-                     <div> Please share on social media!</div>
-                </div>;           
+                    <h4>{this.state.message}</h4>
+                    <div> Please share on social media!</div>
+                </div>; 
+
         } else if (this.state.type && this.state.message) {
+
             var classString = 'alert alert-' + this.state.type;
             var status = <div id="status" className={classString} ref="status">
-                     {this.state.message}
-                   </div>;
+                    {this.state.message}
+                </div>;
         }
 
 

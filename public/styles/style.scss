@@ -44,9 +44,9 @@ body {
 	p {
 		text-align: center;
 		padding: 0.35em 0.35em 2em 0.35em;
-		font-size: 1.25em;
+		font-size: 1.5em;
 		font-weight: 400;
-		line-height: 1.75em;
+		line-height: 2.25em;
 	}
 }
 
@@ -84,8 +84,9 @@ body {
 	z-index: 10;	
 }
 
-.holder {
-	min-height: 400px;
+#kickstarter{
+
+	height: 600px;
 	h2 {
 		text-align: center;
 		padding: 1em;
@@ -219,19 +220,43 @@ body {
 }
 
 #contact {
-	sidebar {
-		padding: 1em;
-		float: right;
-		// background-color: #F0F0F0;
-	}
+	background-color: $primary-blue;
+	color: #FFF;
+	max-height: 250px;
 
+	hr {
+		border: none;
+		height: 3px;
+		background-color: #FFF;
+	}
 	i {
-		color: $primary-blue;
-		font-size: large;
+		color: #FFF;
 		padding: 0 1em 0 1em;
 	}
 
-	small {
+	p {
+		text-align: center;
+		padding-bottom: 1em;
+	}
+
+	h3 {
+		display: inline-block;
+		padding-bottom: 0.3em;
+		border-bottom: 2px solid #FFF;
+	}
+	.col-md-10 {
 		text-align: center;
 	}
+
+	.fa:hover {
+		color: $primary-orange;
+	}
+}
+
+#social {
+	margin-top: 1em;
+}
+
+#copy {
+	padding-top: 3em;
 }

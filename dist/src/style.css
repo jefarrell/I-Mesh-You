@@ -30,9 +30,9 @@ body {
   #about p {
     text-align: center;
     padding: 0.35em 0.35em 2em 0.35em;
-    font-size: 1.25em;
+    font-size: 1.5em;
     font-weight: 400;
-    line-height: 1.75em; }
+    line-height: 2.25em; }
 
 #box {
   position: relative; }
@@ -64,9 +64,9 @@ body {
 .content {
   z-index: 10; }
 
-.holder {
-  min-height: 400px; }
-  .holder h2 {
+#kickstarter {
+  height: 600px; }
+  #kickstarter h2 {
     text-align: center;
     padding: 1em; }
 
@@ -161,14 +161,31 @@ body {
   position: absolute;
   margin-left: -15px; }
 
-#contact sidebar {
-  padding: 1em;
-  float: right; }
+#contact {
+  background-color: #4A90E2;
+  color: #FFF;
+  max-height: 250px; }
+  #contact hr {
+    border: none;
+    height: 3px;
+    background-color: #FFF; }
+  #contact i {
+    color: #FFF;
+    padding: 0 1em 0 1em; }
+  #contact p {
+    text-align: center;
+    padding-bottom: 1em; }
+  #contact h3 {
+    display: inline-block;
+    padding-bottom: 0.3em;
+    border-bottom: 2px solid #FFF; }
+  #contact .col-md-10 {
+    text-align: center; }
+  #contact .fa:hover {
+    color: #FF8500; }
 
-#contact i {
-  color: #4A90E2;
-  font-size: large;
-  padding: 0 1em 0 1em; }
+#social {
+  margin-top: 1em; }
 
-#contact small {
-  text-align: center; }
+#copy {
+  padding-top: 3em; }

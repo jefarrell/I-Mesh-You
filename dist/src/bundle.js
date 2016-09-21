@@ -30700,7 +30700,6 @@ var Popup = _react2.default.createClass({
         };
 
         var self = this;
-
         // Check for null
         if (formData.KON == '' || formData.loc1 == '') {
             console.log(_reactDom2.default.findDOMNode(this.refs.KON));
@@ -30737,14 +30736,9 @@ var Popup = _react2.default.createClass({
 
     render: function render() {
         // Build bigger component for success
-        // if(this.state.type && this.state.message) {
-        //     var classString = 'alert alert-' + this.state.type;
-        //     var status = <div id="status" className={classString} ref="status">
-        //              {this.state.message}
-        //            </div>;
-        // }
 
         if (this.state.type === 'success' && this.state.message) {
+
             var classString = 'alert alert-' + this.state.type;
             var status = _react2.default.createElement(
                 'div',
@@ -30761,6 +30755,7 @@ var Popup = _react2.default.createClass({
                 )
             );
         } else if (this.state.type && this.state.message) {
+
             var classString = 'alert alert-' + this.state.type;
             var status = _react2.default.createElement(
                 'div',
@@ -30908,11 +30903,33 @@ var App = _react2.default.createClass({
 'use strict';
 
 $(document).ready(function () {
-	$('body').on('click', 'a[href^="#"]', function (event) {
-		var target_offset = $(this.hash).offset() ? $(this.hash).offset().top : 0;
-		var customoffset = 45;
-		$('html, body').animate({ scrollTop: target_offset - customoffset }, 500);
-	});
+			$('body').on('click', 'a[href^="#"]', function (event) {
+						var target_offset = $(this.hash).offset() ? $(this.hash).offset().top : 0;
+						var customoffset = 45;
+						$('html, body').animate({ scrollTop: target_offset - customoffset }, 500);
+			});
+
+			console.log("map: ", map.getZoom());
+			// map.on('click', function() {
+			// 	var currentZoom = map.getZoom();
+			// 	console.log(currentZoom);
+			// });
+
+			function getAllMarkers() {
+
+						var allMarkersObjArray = []; //new Array();
+						var allMarkersGeoJsonArray = []; //new Array();
+
+						$.each(map._layers, function (ml) {
+									//console.log(map._layers)
+									if (map._layers[ml].feature) {
+
+												allMarkersObjArray.push(this);
+												allMarkersGeoJsonArray.push(JSON.stringify(this.toGeoJSON()));
+									}
+						});
+						console.log(allMarkersObjArray);
+			}
 });
 
 },{}]},{},[185,184]);
