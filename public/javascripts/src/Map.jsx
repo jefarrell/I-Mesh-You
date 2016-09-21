@@ -88,7 +88,7 @@ const Map = React.createClass({
 	pointToLayer: function(feature, latlng) {
 
 		var primaryParams = {
-			radius: 60,
+			//radius: 60,
 			fillColor: '#F44336',
 			color: '#B71C1C',
 			weight: 1,
@@ -97,7 +97,7 @@ const Map = React.createClass({
 		};
 
 		var potentialParams = {
-			radius: 60,
+			//radius: 60,
 			fillColor: '#4CAF50',
 			color: '#2E7D32',
 			weight: 1,
@@ -105,13 +105,14 @@ const Map = React.createClass({
 			fillOpacity: 0.6
 		}
 
+		const halfMileMeter = 804;
+
 		if (feature.properties.name === 'Primary Location') {
-			return L.circleMarker(latlng, primaryParams);
+			return L.circle(latlng, halfMileMeter, primaryParams);
 		} else {
-			return L.circleMarker(latlng, potentialParams);
+			return L.circle(latlng, halfMileMeter, potentialParams);
 		}
 	},
-
 
 	onEachFeature: function(feature, layer) {
 		var popup = '<div><p>'+feature.properties.name+'</p></div>';

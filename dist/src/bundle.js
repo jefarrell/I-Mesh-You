@@ -30579,7 +30579,7 @@ var Map = _react2.default.createClass({
 	pointToLayer: function pointToLayer(feature, latlng) {
 
 		var primaryParams = {
-			radius: 60,
+			//radius: 60,
 			fillColor: '#F44336',
 			color: '#B71C1C',
 			weight: 1,
@@ -30588,7 +30588,7 @@ var Map = _react2.default.createClass({
 		};
 
 		var potentialParams = {
-			radius: 60,
+			//radius: 60,
 			fillColor: '#4CAF50',
 			color: '#2E7D32',
 			weight: 1,
@@ -30596,10 +30596,12 @@ var Map = _react2.default.createClass({
 			fillOpacity: 0.6
 		};
 
+		var halfMileMeter = 804;
+
 		if (feature.properties.name === 'Primary Location') {
-			return L.circleMarker(latlng, primaryParams);
+			return L.circle(latlng, halfMileMeter, primaryParams);
 		} else {
-			return L.circleMarker(latlng, potentialParams);
+			return L.circle(latlng, halfMileMeter, potentialParams);
 		}
 	},
 
@@ -30855,20 +30857,23 @@ var Popup = _react2.default.createClass({
                     )
                 ),
                 _react2.default.createElement(
-                    'button',
-                    { onClick: this.submitData, className: "btn btn-warning", id: "saveBtn" },
-                    'Save Information!'
+                    'a',
+                    { className: "btn btn-warning", id: "saveBtn", onClick: this.submitData },
+                    _react2.default.createElement('i', { className: "fa fa-map-marker fa-lg" }),
+                    '  Add to Map! '
                 ),
                 _react2.default.createElement(
-                    'button',
-                    { onClick: this.hideModal, className: "btn btn-secondary", id: "cancelBtn" },
-                    'Close'
+                    'a',
+                    { className: "btn btn-danger btn-secondary", id: "cancelBtn", onClick: this.hideModal },
+                    _react2.default.createElement('i', { className: "fa fa-trash-o fa-lg" }),
+                    '  Cancel'
                 )
             )
         );
     }
 });
-
+//<button onClick={this.submitData} className={"btn btn-warning"} id={"saveBtn"}>Add to Map!</button>
+//<button onClick={this.hideModal} className={"btn btn-secondary"} id={"cancelBtn"}>Close</button>
 exports.default = Popup;
 
 },{"./Map.jsx":182,"boron/DropModal":1,"react":181,"react-dom":38}],184:[function(require,module,exports){
@@ -30903,33 +30908,60 @@ var App = _react2.default.createClass({
 'use strict';
 
 $(document).ready(function () {
-			$('body').on('click', 'a[href^="#"]', function (event) {
-						var target_offset = $(this.hash).offset() ? $(this.hash).offset().top : 0;
-						var customoffset = 45;
-						$('html, body').animate({ scrollTop: target_offset - customoffset }, 500);
-			});
+				$('body').on('click', 'a[href^="#"]', function (event) {
+								var target_offset = $(this.hash).offset() ? $(this.hash).offset().top : 0;
+								var customoffset = 45;
+								$('html, body').animate({ scrollTop: target_offset - customoffset }, 500);
+				});
 
-			console.log("map: ", map.getZoom());
-			// map.on('click', function() {
-			// 	var currentZoom = map.getZoom();
-			// 	console.log(currentZoom);
-			// });
+				$('img.svg').each(function () {
+								var $img = jQuery(this);
+								var imgID = $img.attr('id');
+								var imgClass = $img.attr('class');
+								var imgURL = $img.attr('src');
 
-			function getAllMarkers() {
+								jQuery.get(imgURL, function (data) {
+												// Get the SVG tag, ignore the rest
+												var $svg = jQuery(data).find('svg');
 
-						var allMarkersObjArray = []; //new Array();
-						var allMarkersGeoJsonArray = []; //new Array();
+												// Add replaced image's ID to the new SVG
+												if (typeof imgID !== 'undefined') {
+																$svg = $svg.attr('id', imgID);
+												}
+												// Add replaced image's classes to the new SVG
+												if (typeof imgClass !== 'undefined') {
+																$svg = $svg.attr('class', imgClass + ' replaced-svg');
+												}
 
-						$.each(map._layers, function (ml) {
-									//console.log(map._layers)
-									if (map._layers[ml].feature) {
+												// Remove any invalid XML tags as per http://validator.w3.org
+												$svg = $svg.removeAttr('xmlns:a');
 
-												allMarkersObjArray.push(this);
-												allMarkersGeoJsonArray.push(JSON.stringify(this.toGeoJSON()));
-									}
-						});
-						console.log(allMarkersObjArray);
-			}
+												// Replace image with new SVG
+												$img.replaceWith($svg);
+								}, 'xml');
+				});
+
+				// console.log("map: ", map.getZoom());
+				// // map.on('click', function() {
+				// // 	var currentZoom = map.getZoom();
+				// // 	console.log(currentZoom);
+				// // });
+
+				// function getAllMarkers() {
+
+				//     var allMarkersObjArray = [];//new Array();
+				//     var allMarkersGeoJsonArray = [];//new Array();
+
+				//     $.each(map._layers, function (ml) {
+				//         //console.log(map._layers)
+				//         if (map._layers[ml].feature) {
+
+				//             allMarkersObjArray.push(this)
+				// 			allMarkersGeoJsonArray.push(JSON.stringify(this.toGeoJSON()))
+				//         }
+				//     })
+				//     console.log(allMarkersObjArray);
+				// }
 });
 
 },{}]},{},[185,184]);

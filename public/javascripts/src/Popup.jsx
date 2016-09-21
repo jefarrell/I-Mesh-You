@@ -159,12 +159,17 @@ const Popup = React.createClass({
                             </input>
                         </div>                                                
                     </form>
-                    <button onClick={this.submitData} className={"btn btn-warning"} id={"saveBtn"}>Save Information!</button>
-                    <button onClick={this.hideModal} className={"btn btn-secondary"} id={"cancelBtn"}>Close</button>
+                    
+                    <a className={"btn btn-warning"} id={"saveBtn"} onClick={this.submitData}>
+                        <i className={"fa fa-map-marker fa-lg"}></i>  Add to Map! </a>
+
+                    <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onClick={this.hideModal}>
+                        <i className={"fa fa-trash-o fa-lg"}></i>  Cancel</a>
                 </Modal>
             </div>
         );
     }
 });
-
+//<button onClick={this.submitData} className={"btn btn-warning"} id={"saveBtn"}>Add to Map!</button>
+//<button onClick={this.hideModal} className={"btn btn-secondary"} id={"cancelBtn"}>Close</button>
 export default Popup;

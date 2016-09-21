@@ -1,7 +1,15 @@
 $primary-orange: #FF8500;
+$secondary-orange: #FFC107;
+
 $primary-blue: #4A90E2;
+
+
 $primary-red: #F44336;
+$secondary-red: #D50000;
+
 $primary-green: #4CAF50;
+$secondary-green: #2E7D32;
+
 $map-height: 700px;
 
 body {
@@ -11,11 +19,20 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
-#navLogo {
+#logoCont {
 	width: 10em;
 	position: absolute;
 	top: 0.5em;
+
 	// left: 0.5em;
+}
+
+button {
+	transition: background-color 0.3s ease 0s;
+}
+
+button:focus, a:focus {
+		outline: none !important;
 }
 
 .navbar {
@@ -23,10 +40,27 @@ body {
     -webkit-box-shadow: 0 2px 10px -4px #404040;
     -moz-box-shadow: 0 2px 10px -4px #404040;
     box-shadow: 0 2px 10px -4px #404040;
+
+    svg path {
+		transition: fill 0.3s ease 0s;	
+	}
+
+	svg:hover path {
+	    fill: $primary-orange;
+	}
 }
 
 .navbar-default .navbar-nav>li>a {
 	transition: background-color 0.5s ease;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+	color: $primary-orange;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+	background-color: $secondary-orange;
+	color: white;
 }
 
 .navbar-default .navbar-nav>.active>a {
@@ -35,7 +69,8 @@ body {
 }
 
 #about {
-	color: #FFF;
+	height: 600px;
+	color: $primary-blue;
 	h1 {
 		padding-top: 0.35em;
 		padding-bottom: 1em;
@@ -52,6 +87,7 @@ body {
 
 #box {
 	position: relative;
+	height: 100%;
 }
 
 #imgCont {
@@ -85,7 +121,7 @@ body {
 }
 
 #kickstarter{
-
+	color: #FFF;
 	height: 600px;
 	h2 {
 		text-align: center;
@@ -110,6 +146,10 @@ body {
 	.alert {
 		border-radius: 0;
 	}
+
+	div:focus {
+		outline: none !important;
+	}
 }
 
 #mapHeader {
@@ -132,7 +172,7 @@ body {
 }
 
 #mapUI {
-	button {
+	button, #cancelBtn, #saveBtn {
 		position: absolute;
 		z-index: 100;
 		margin-top: 2em;
@@ -141,39 +181,51 @@ body {
 	.btn-lg {
 		right: 2em;
 		background-color: $primary-orange;
-		border: 2px solid $primary-orange;
 		color: #FFF;
 	}
 
 	.btn-lg:hover {
-		background-color: #FFF;
-		border: 2px solid $primary-orange;
-		color: $primary-orange;
+		background-color: #FFC107;
+		-webkit-box-shadow: 0 2px 10px -4px #404040;
+   		-moz-box-shadow: 0 2px 10px -4px #404040;
+    	box-shadow: 0 2px 10px -4px #404040; 
 	}
+
+	// .btn-lg:active {
+	// 	-webkit-box-shadow: 0 10px 20px -4px #404040;
+ //   		-moz-box-shadow: 0 10px 20px -4px #404040;
+ //    	box-shadow: 0 8px 20px -4px #404040; 
+	// }
 }
 
 #saveBtn {
 	right: 0;
-	background-color: $primary-green;
-	border: 2px solid $primary-green;
+	background-color: $secondary-green;
+	border: none;
+	border-radius: 0;
 }
 
 #saveBtn:hover {
-	background-color: #2E7D32;
-	border:2px solid #2E7D32;
+	background-color: $primary-green;
+	border: none;
 }
 
 #cancelBtn {
 	left: 0;
-	background-color: $primary-red;
-	border: 2px solid $primary-red;
+	background-color: $secondary-red;
+	border: none;
 	color: #FFF;
+	border-radius: 0;
+}	
+
+#cancelBtn:hover {	
+	background-color: $primary-red;
+	border: none;
 }
 
-#cancelBtn:hover {
-	background-color: #D50000;
-	border: 2px solid #D50000;
-}	
+#saveBtn:focus, #cancelBtn:focus {
+	outline: none !important;
+}
 
 #modalForm {
 	padding: 2em;
@@ -191,15 +243,15 @@ body {
 	}
 
 	.alert-danger {
-		background-color: #FFCDD2;
-		color: $primary-red;
-		border-color: #FFCDD2;
+		background-color: $primary-red;
+		color: $secondary-red;
+		border-color: $primary-red;
 	}
 
 	.alert-success {
-		background-color: #C8E6C9;
-		color: $primary-green;
-		border-color: #C8E6C9;
+		background-color: $primary-green;
+		color: $secondary-green;
+		border-color: $primary-green;
 	}
 }
 
@@ -247,9 +299,11 @@ body {
 	.col-md-10 {
 		text-align: center;
 	}
-
+	.fa {
+		transition: color 0.3s ease 0s;
+	}
 	.fa:hover {
-		color: $primary-orange;
+		color: $secondary-orange;
 	}
 }
 

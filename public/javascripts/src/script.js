@@ -6,29 +6,57 @@ $(document).ready(function(){
 	    $('html, body').animate({scrollTop:target_offset - customoffset}, 500);
 	});
 
+	$('img.svg').each(function(){
+            var $img = jQuery(this);
+            var imgID = $img.attr('id');
+            var imgClass = $img.attr('class');
+            var imgURL = $img.attr('src');
+
+            jQuery.get(imgURL, function(data) {
+                // Get the SVG tag, ignore the rest
+                var $svg = jQuery(data).find('svg');
+
+                // Add replaced image's ID to the new SVG
+                if(typeof imgID !== 'undefined') {
+                    $svg = $svg.attr('id', imgID);
+                }
+                // Add replaced image's classes to the new SVG
+                if(typeof imgClass !== 'undefined') {
+                    $svg = $svg.attr('class', imgClass+' replaced-svg');
+                }
+
+                // Remove any invalid XML tags as per http://validator.w3.org
+                $svg = $svg.removeAttr('xmlns:a');
+
+                // Replace image with new SVG
+                $img.replaceWith($svg);
+
+            }, 'xml');
+
+        });
 
 
 
-	console.log("map: ", map.getZoom());
-	// map.on('click', function() {
-	// 	var currentZoom = map.getZoom();
-	// 	console.log(currentZoom);
-	// });
+	// console.log("map: ", map.getZoom());
+	// // map.on('click', function() {
+	// // 	var currentZoom = map.getZoom();
+	// // 	console.log(currentZoom);
+	// // });
 
-	function getAllMarkers() {
+	// function getAllMarkers() {
     
-	    var allMarkersObjArray = [];//new Array();
-	    var allMarkersGeoJsonArray = [];//new Array();
+	//     var allMarkersObjArray = [];//new Array();
+	//     var allMarkersGeoJsonArray = [];//new Array();
 
-	    $.each(map._layers, function (ml) {
-	        //console.log(map._layers)
-	        if (map._layers[ml].feature) {
+	//     $.each(map._layers, function (ml) {
+	//         //console.log(map._layers)
+	//         if (map._layers[ml].feature) {
 	            
-	            allMarkersObjArray.push(this)
-				allMarkersGeoJsonArray.push(JSON.stringify(this.toGeoJSON()))
-	        }
-	    })
-	    console.log(allMarkersObjArray);
-	}
+	//             allMarkersObjArray.push(this)
+	// 			allMarkersGeoJsonArray.push(JSON.stringify(this.toGeoJSON()))
+	//         }
+	//     })
+	//     console.log(allMarkersObjArray);
+	// }
 
 });
