@@ -31152,9 +31152,14 @@ var Map = _react2.default.createClass({
 		});
 	},
 
-	addGeoJSONLayer: function addGeoJSONLayer(geojson) {
-		this.setState({ geojson: geojson });
-		var geojsonLayer = L.geoJson(geojson, {
+	addGeoJSONLayer: function addGeoJSONLayer(data) {
+
+		if (this.state.geojsonLayer && data) {
+			this.state.geojsonLayer.clearLayers();
+		}
+
+		this.setState({ geojson: data });
+		var geojsonLayer = L.geoJson(data, {
 			// popup here if needed later
 			pointToLayer: this.pointToLayer
 		});
@@ -31277,9 +31282,8 @@ var Popup = _react2.default.createClass({
     hideModal: function hideModal() {
         this.setState({ type: 'info', message: '' });
         this.refs.modal.hide();
-
         console.log('hideModal runs');
-        this.updatez();
+        return this.props.updater;
     },
 
     updatez: function updatez() {
@@ -31308,6 +31312,7 @@ var Popup = _react2.default.createClass({
         };
 
         var self = this;
+
         // Check for null
         if (formData.KON == '' || formData.loc1 == '') {
             this.setState({ type: 'danger', message: 'Missing Required Fields - Try again please' });

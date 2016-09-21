@@ -27,9 +27,8 @@ const Popup = React.createClass({
     hideModal: function(){
         this.setState({type:'info', message:''})
         this.refs.modal.hide();
-
         console.log('hideModal runs');
-        this.updatez();
+        return this.props.updater
     },
 
     updatez: function() {
@@ -58,6 +57,7 @@ const Popup = React.createClass({
        };
 
        var self = this;
+
        // Check for null
         if (formData.KON == '' || formData.loc1 == '' ) {
             this.setState({type: 'danger', message: 'Missing Required Fields - Try again please'});

@@ -62,14 +62,6 @@ exports.addData = (req, res) => {
 			usr.locations.thirdLoc.lat = res[2].value[0].latitude;
 		}
 
-		// usr.save(function(err, data, numAffected) {
-		// 	if (err) console.log(err);
-		// 	else {
-		// 		console.log("Working check ------------------------ : ", numAffected);
-		// 		//console.log(data);
-		// 	};
-		// });
-
 		// Check 
 		var toUpdate = {};
 		toUpdate = Object.assign(toUpdate, usr._doc);

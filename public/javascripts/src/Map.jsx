@@ -73,14 +73,20 @@ const Map = React.createClass({
 	},
 
 
-	addGeoJSONLayer: function(geojson) {
-		this.setState({geojson: geojson});
-		var geojsonLayer = L.geoJson(geojson, {
+	addGeoJSONLayer: function(data) {
+		
+		if(this.state.geojsonLayer && data) {
+			this.state.geojsonLayer.clearLayers();
+		}
+
+		this.setState({geojson: data});
+		var geojsonLayer = L.geoJson(data, {
 			// popup here if needed later
 			pointToLayer: this.pointToLayer
 		});
 		geojsonLayer.addTo(this.map);
 		this.setState({geojsonLayer: geojsonLayer});
+
 	},
 
 
