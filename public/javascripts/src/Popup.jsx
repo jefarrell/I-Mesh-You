@@ -131,7 +131,7 @@ const Popup = React.createClass({
                         </div> 
 
                         <div className={"form-group reqd"} id="loc1">
-                            <label type="text">Primary Location of Your Mesh *</label>
+                            <label type="text">Primary Location of Your Mesh</label>
                             <input 
                                 type="text"
                                 ref="loc1"

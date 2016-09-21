@@ -1,5 +1,6 @@
 import React from 'react';
 import Popup from './Popup.jsx'
+import Legend from './Legend.jsx'
 
 const ReactDOM = require('react-dom');
 const L = require('leaflet');
@@ -75,7 +76,7 @@ const Map = React.createClass({
 	addGeoJSONLayer: function(geojson) {
 		this.setState({geojson: geojson});
 		var geojsonLayer = L.geoJson(geojson, {
-			onEachFeature: this.onEachFeature,
+			// onEachFeature: this.onEachFeature,
 			pointToLayer: this.pointToLayer
 		});
 
@@ -127,8 +128,8 @@ const Map = React.createClass({
 		if (this.map) return;
 		
 		this.map = L.map(id, config.params);
-	    L.control.zoom({ position: "topleft"}).addTo(this.map);
-	    L.control.scale({ position: "bottomleft"}).addTo(this.map);
+	    L.control.zoom({ position: "bottomleft"}).addTo(this.map);
+	    L.control.scale({ position: "bottomright"}).addTo(this.map);
 
 	    var tileLayer = L.tileLayer(config.tileLayer.uri, config.tileLayer.params).addTo(this.map);
 		this.setState({ tilelayer: tileLayer });
@@ -138,6 +139,7 @@ const Map = React.createClass({
 		return (
 			<div id="mapUI">
 				<Popup />
+				<Legend potCol="4CAF50" primCol="F44336"/>
 				<div id="map"></div>
 			</div>
 		);

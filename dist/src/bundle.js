@@ -30495,9 +30495,78 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Legend = _react2.default.createClass({
+	displayName: 'Legend',
+
+
+	render: function render() {
+		var primStyle = {
+			backgroundColor: '#' + this.props.primCol,
+			WebkitTransition: 'all',
+			msTransition: 'all'
+		};
+
+		var potStyle = {
+			backgroundColor: '#' + this.props.potCol,
+			WebkitTransition: 'all',
+			msTransition: 'all'
+		};
+
+		return _react2.default.createElement(
+			'div',
+			null,
+			_react2.default.createElement(
+				'div',
+				{ className: "row cards", id: 'primCard', style: primStyle },
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'p',
+						{ className: "cardText" },
+						'Primary Locations'
+					)
+				)
+			),
+			_react2.default.createElement(
+				'div',
+				{ className: "row cards", id: 'potCard', style: potStyle },
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'p',
+						{ className: "cardText" },
+						'Potential Locations'
+					)
+				)
+			)
+		);
+	}
+});
+
+exports.default = Legend;
+
+},{"react":181}],183:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
 var _Popup = require('./Popup.jsx');
 
 var _Popup2 = _interopRequireDefault(_Popup);
+
+var _Legend = require('./Legend.jsx');
+
+var _Legend2 = _interopRequireDefault(_Legend);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30568,7 +30637,7 @@ var Map = _react2.default.createClass({
 	addGeoJSONLayer: function addGeoJSONLayer(geojson) {
 		this.setState({ geojson: geojson });
 		var geojsonLayer = L.geoJson(geojson, {
-			onEachFeature: this.onEachFeature,
+			// onEachFeature: this.onEachFeature,
 			pointToLayer: this.pointToLayer
 		});
 
@@ -30618,8 +30687,8 @@ var Map = _react2.default.createClass({
 		if (this.map) return;
 
 		this.map = L.map(id, config.params);
-		L.control.zoom({ position: "topleft" }).addTo(this.map);
-		L.control.scale({ position: "bottomleft" }).addTo(this.map);
+		L.control.zoom({ position: "bottomleft" }).addTo(this.map);
+		L.control.scale({ position: "bottomright" }).addTo(this.map);
 
 		var tileLayer = L.tileLayer(config.tileLayer.uri, config.tileLayer.params).addTo(this.map);
 		this.setState({ tilelayer: tileLayer });
@@ -30630,6 +30699,7 @@ var Map = _react2.default.createClass({
 			'div',
 			{ id: 'mapUI' },
 			_react2.default.createElement(_Popup2.default, null),
+			_react2.default.createElement(_Legend2.default, { potCol: '4CAF50', primCol: 'F44336' }),
 			_react2.default.createElement('div', { id: 'map' })
 		);
 	}
@@ -30638,7 +30708,7 @@ var Map = _react2.default.createClass({
 
 exports.default = Map;
 
-},{"./Popup.jsx":183,"leaflet":35,"react":181,"react-dom":38}],183:[function(require,module,exports){
+},{"./Legend.jsx":182,"./Popup.jsx":184,"leaflet":35,"react":181,"react-dom":38}],184:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30818,7 +30888,7 @@ var Popup = _react2.default.createClass({
                         _react2.default.createElement(
                             'label',
                             { type: 'text' },
-                            'Primary Location of Your Mesh *'
+                            'Primary Location of Your Mesh'
                         ),
                         _react2.default.createElement('input', {
                             type: 'text',
@@ -30876,7 +30946,7 @@ var Popup = _react2.default.createClass({
 //<button onClick={this.hideModal} className={"btn btn-secondary"} id={"cancelBtn"}>Close</button>
 exports.default = Popup;
 
-},{"./Map.jsx":182,"boron/DropModal":1,"react":181,"react-dom":38}],184:[function(require,module,exports){
+},{"./Map.jsx":183,"boron/DropModal":1,"react":181,"react-dom":38}],185:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -30904,7 +30974,7 @@ var App = _react2.default.createClass({
 
 (0, _reactDom.render)(_react2.default.createElement(App, null), document.getElementById('root'));
 
-},{"./Map.jsx":182,"react":181,"react-dom":38}],185:[function(require,module,exports){
+},{"./Map.jsx":183,"react":181,"react-dom":38}],186:[function(require,module,exports){
 'use strict';
 
 $(document).ready(function () {
@@ -30964,4 +31034,4 @@ $(document).ready(function () {
 	// }
 });
 
-},{}]},{},[185,184]);
+},{}]},{},[186,185]);

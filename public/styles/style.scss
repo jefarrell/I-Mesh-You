@@ -230,6 +230,35 @@ button:focus, a:focus {
 	}
 }
 
+#primCard {
+	margin-top: 2em;
+}
+
+#potCard {
+	margin-top: 6em;
+}
+
+#primCard, #potCard {
+	position: absolute;
+	z-index: 100;
+	width: 4em;
+	height: 4em;
+	left: 3em;
+	opacity: 0.8;
+}
+
+.cardText {
+	text-align: center;
+	color: white;
+	font-size: 0.75em;
+	padding-top: 1em;
+}
+
+.square {
+    width: 10%;
+    
+}
+
 #saveBtn {
 	right: 0;
 	background-color: $secondary-green;
@@ -324,6 +353,7 @@ button:focus, a:focus {
 	}
 
 	h3 {
+		font-weight: normal;
 		display: inline-block;
 		padding-bottom: 0.3em;
 		border-bottom: 2px solid #FFF;
