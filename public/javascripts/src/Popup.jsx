@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Map from './Map.jsx'
+import {TwitterButton, EmailButton, RedditButton} from 'react-social'
+
 const Modal = require('boron/DropModal');
 
 const modalStyle = {
@@ -77,15 +79,36 @@ const Popup = React.createClass({
     },
 
     render: function() {
-        // Build bigger component for success
 
         if(this.state.type === 'success' && this.state.message) {
 
             var classString = 'alert alert-' + this.state.type;
+            var msg = "I just started a mesh network with GoTenna! Join me: "
+            var url = "https://kickstarter.com"
             var status = 
                 <div id="status" className={classString} ref="status">
                     <h4>{this.state.message}</h4>
                     <div> Please share on social media!</div>
+                    <TwitterButton 
+                        message={msg}
+                        url={url}
+                        element="a">
+                        <i className={"fa fa-twitter-square fa-2x"} aria-hidden="true"/>
+                    </TwitterButton>
+                    <EmailButton 
+                        title="Share via E-Mail"
+                        message={msg}
+                        url={url}
+                        element="a" className="">
+                        <i className={"fa fa-envelope fa-2x"} aria-hidden="true"/>
+                    </EmailButton>
+                    <RedditButton 
+                        title="Share via Reddit"
+                        message={msg}
+                        url={url}
+                        element="a" className="">
+                        <i className="fa fa-reddit fa-2x" aria-hidden="true"/>
+                    </RedditButton>
                 </div>; 
 
         } else if (this.state.type && this.state.message) {
@@ -99,7 +122,7 @@ const Popup = React.createClass({
 
         return (
             <div>
-                <button onClick={this.showModal} className={"btn btn-lg"}>Add Your Mesh!</button>
+                <button onClick={this.showModal} className={"btn btn-lg"} id="addBtn">Add Your Mesh!</button>
                 <Modal ref="modal" modalStyle={modalStyle}>
                     {status}
                     <form id={"modalForm"}>
@@ -120,7 +143,8 @@ const Popup = React.createClass({
                                     placeholder={"Name (Jane Doe)"}>
                                 </input>
                             </div>
-                            <div className={"col-md-4"}>
+                            <div className={"col-md-4 input-group"}>
+                                <span className={"input-group-addon"}><i className={"fa fa-at"} aria-hidden="true"></i></span>
                                 <input
                                     type="text"
                                     ref="twitter"
@@ -163,13 +187,12 @@ const Popup = React.createClass({
                     <a className={"btn btn-warning"} id={"saveBtn"} onClick={this.submitData}>
                         <i className={"fa fa-map-marker fa-lg"}></i>  Add to Map! </a>
 
-                    <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onClick={this.hideModal}>
-                        <i className={"fa fa-trash-o fa-lg"}></i>  Cancel</a>
+                    <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onClick={this.hideModal}>Close</a>
                 </Modal>
             </div>
         );
     }
 });
-//<button onClick={this.submitData} className={"btn btn-warning"} id={"saveBtn"}>Add to Map!</button>
-//<button onClick={this.hideModal} className={"btn btn-secondary"} id={"cancelBtn"}>Close</button>
+
+//<i className={"fa fa-trash-o fa-lg"}></i>
 export default Popup;

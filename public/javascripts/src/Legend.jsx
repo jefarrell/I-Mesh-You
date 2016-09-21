@@ -16,16 +16,16 @@ const Legend = React.createClass({
 		}
 
 		return(
-			<div>
+			<div id="legend">
 				<div className={"row cards"} id="primCard" style={primStyle}>
 					<div>
-						<p className={"cardText"}>Primary Locations</p>
+						<p className={"cardText"}>Primary Mesh</p>
 					</div>
 				</div>
 
 				<div className={"row cards"} id="potCard" style={potStyle}> 
 					<div>
-						<p className={"cardText"}>Potential Locations</p>
+						<p className={"cardText"}>Potential Mesh</p>
 					</div>
 				</div>
 			</div>
