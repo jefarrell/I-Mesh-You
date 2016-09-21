@@ -17,6 +17,16 @@ const Legend = React.createClass({
 
 		return(
 			<div id="legend">
+				
+			</div>
+		)
+	}
+});
+
+export default Legend
+
+/*
+			<div id="legend">
 				<div className={"row cards"} id="primCard" style={primStyle}>
 					<div>
 						<p className={"cardText"}>Primary Mesh</p>
@@ -29,8 +39,4 @@ const Legend = React.createClass({
 					</div>
 				</div>
 			</div>
-		)
-	}
-});
-
-export default Legend
+			*/

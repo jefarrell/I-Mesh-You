@@ -44,6 +44,10 @@ exports.addData = (req, res) => {
 	});
 
 	geocoder.batchGeocode([req.body.loc1, req.body.loc2, req.body.loc3], (err,res) => {
+		if(err) {
+			console.log('geocode error - ', err);
+			return
+		};
 
 		if (res[0].error === null) { 
 			usr.locations.primaryLoc.lon = res[0].value[0].longitude;
@@ -73,9 +77,12 @@ exports.addData = (req, res) => {
 
 		console.log(toUpdate.KON)
 		User.findOneAndUpdate({ KON: toUpdate.KON }, toUpdate, {upsert: true, new: true}, function(err, doc) {
-			if (err) { console.log("error!!! - ", err) }
+			if (err) { 
+				console.log("User find&update Error! - ", err);
+				return;
+			}
 			else {
-				console.log("NEW THANG ", doc)
+				console.log("NEW THANG ", doc);
 			}
 		})
 	});

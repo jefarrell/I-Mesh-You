@@ -32,7 +32,7 @@ $map-height: 700px;
 
 
 body {
-
+	overflow-x: hidden;
 	background-color: #FFF;
 	padding-top: 50px;
 	position: relative;
@@ -250,22 +250,34 @@ button:focus, a:focus {
 	}
 }
 
-#primCard {
-	margin-top: 2em;
-}
-
-#potCard {
-	margin-top: 6em;
-}
-
-#primCard, #potCard {
+#legend {
+	width: 100px;
+	height: 100px;
+	background-color: #FFF;
+	border: 2px solid $primary-blue;
+	border-radius: 6px;
+	opacity: 0.9;
 	position: absolute;
 	z-index: 100;
-	width: 4em;
-	height: 4em;
-	left: 3em;
-	opacity: 0.9;
+	margin: 1em;
 }
+
+// #primCard {
+// 	margin-top: 2em;
+// }
+
+// #potCard {
+// 	margin-top: 6em;
+// }
+
+// #primCard, #potCard {
+// 	position: absolute;
+// 	z-index: 100;
+// 	width: 4em;
+// 	height: 4em;
+// 	left: 3em;
+// 	opacity: 0.9;
+// }
 
 .cardText {
 	text-align: center;

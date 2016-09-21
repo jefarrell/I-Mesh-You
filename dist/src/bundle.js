@@ -31041,40 +31041,27 @@ var Legend = _react2.default.createClass({
 			msTransition: 'all'
 		};
 
-		return _react2.default.createElement(
-			'div',
-			{ id: 'legend' },
-			_react2.default.createElement(
-				'div',
-				{ className: "row cards", id: 'primCard', style: primStyle },
-				_react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'p',
-						{ className: "cardText" },
-						'Primary Mesh'
-					)
-				)
-			),
-			_react2.default.createElement(
-				'div',
-				{ className: "row cards", id: 'potCard', style: potStyle },
-				_react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'p',
-						{ className: "cardText" },
-						'Potential Mesh'
-					)
-				)
-			)
-		);
+		return _react2.default.createElement('div', { id: 'legend' });
 	}
 });
 
 exports.default = Legend;
+
+/*
+			<div id="legend">
+				<div className={"row cards"} id="primCard" style={primStyle}>
+					<div>
+						<p className={"cardText"}>Primary Mesh</p>
+					</div>
+				</div>
+
+				<div className={"row cards"} id="potCard" style={potStyle}> 
+					<div>
+						<p className={"cardText"}>Potential Mesh</p>
+					</div>
+				</div>
+			</div>
+			*/
 
 },{"react":182}],184:[function(require,module,exports){
 'use strict';
@@ -31132,7 +31119,8 @@ var Map = _react2.default.createClass({
 		return {
 			tileLayer: null,
 			geojsonLayer: null,
-			geojson: null
+			geojson: null,
+			lastAdd: null
 		};
 	},
 
@@ -31151,23 +31139,25 @@ var Map = _react2.default.createClass({
 		this.map.remove();
 	},
 
-	updateMap: function updateMap() {},
+	updateMap: function updateMap() {
+		this.setState({ lasAdd: "hi" });
+		console.log('map update state runs');
+	},
 
 	getData: function getData() {
 		var self = this;
 		$.get('/mapData', function (data) {
 			self.addGeoJSONLayer(data);
-			console.log(data);
+			console.log("Map getData(): ", data);
 		});
 	},
 
 	addGeoJSONLayer: function addGeoJSONLayer(geojson) {
 		this.setState({ geojson: geojson });
 		var geojsonLayer = L.geoJson(geojson, {
-			// onEachFeature: this.onEachFeature,
+			// popup here if needed later
 			pointToLayer: this.pointToLayer
 		});
-
 		geojsonLayer.addTo(this.map);
 		this.setState({ geojsonLayer: geojsonLayer });
 	},
@@ -31176,8 +31166,8 @@ var Map = _react2.default.createClass({
 
 		var primaryParams = {
 			//radius: 60,
-			fillColor: '#F44336',
-			color: '#B71C1C',
+			fillColor: '#66a61e',
+			color: '#508118',
 			weight: 1,
 			opacity: 0.8,
 			fillOpacity: 0.6
@@ -31185,8 +31175,8 @@ var Map = _react2.default.createClass({
 
 		var potentialParams = {
 			//radius: 60,
-			fillColor: '#4CAF50',
-			color: '#2E7D32',
+			fillColor: '#e7298a',
+			color: '#cf1776',
 			weight: 1,
 			opacity: 0.8,
 			fillOpacity: 0.6
@@ -31222,10 +31212,14 @@ var Map = _react2.default.createClass({
 	},
 
 	render: function render() {
+		var _this = this;
+
 		return _react2.default.createElement(
 			'div',
 			{ id: 'mapUI' },
-			_react2.default.createElement(_Popup2.default, null),
+			_react2.default.createElement(_Popup2.default, { updater: function updater() {
+					return _this.getData();
+				} }),
 			_react2.default.createElement(_Legend2.default, { potCol: '4CAF50', primCol: 'F44336' }),
 			_react2.default.createElement('div', { id: 'map' })
 		);
@@ -31279,12 +31273,25 @@ var Popup = _react2.default.createClass({
         this.refs.modal.show();
     },
 
+    /////////////////////////
     hideModal: function hideModal() {
         this.setState({ type: 'info', message: '' });
         this.refs.modal.hide();
+
+        console.log('hideModal runs');
+        this.updatez();
     },
 
+    updatez: function updatez() {
+
+        console.log('updater runs');
+        return this.props.updater;
+    },
+    /////////////////////////
+
+
     handleSubmit: function handleSubmit(e) {
+        console.log("handle submit called");
         e.preventDefault();
         this.setState({ type: 'info', message: 'Sending..' }, this.submitData);
     },
@@ -31303,7 +31310,6 @@ var Popup = _react2.default.createClass({
         var self = this;
         // Check for null
         if (formData.KON == '' || formData.loc1 == '') {
-            console.log(_reactDom2.default.findDOMNode(this.refs.KON));
             this.setState({ type: 'danger', message: 'Missing Required Fields - Try again please' });
             $('#KON ,#loc1').removeClass('reqd').addClass('has-error');
         }
@@ -31489,13 +31495,13 @@ var Popup = _react2.default.createClass({
                 ),
                 _react2.default.createElement(
                     'a',
-                    { className: "btn btn-warning", id: "saveBtn", onClick: this.submitData },
+                    { className: "btn btn-warning", id: "saveBtn", onClick: this.handleSubmit },
                     _react2.default.createElement('i', { className: "fa fa-map-marker fa-lg" }),
                     '  Add to Map! '
                 ),
                 _react2.default.createElement(
                     'a',
-                    { className: "btn btn-danger btn-secondary", id: "cancelBtn", onClick: this.hideModal },
+                    { className: "btn btn-danger btn-secondary", id: "cancelBtn", onClick: this.props.updater },
                     'Close'
                 )
             )
@@ -31537,61 +31543,40 @@ var App = _react2.default.createClass({
 },{"./Map.jsx":184,"react":182,"react-dom":38}],187:[function(require,module,exports){
 'use strict';
 
-$(document).ready(function () {
-	$('body').on('click', 'a[href^="#"]', function (event) {
-		var target_offset = $(this.hash).offset() ? $(this.hash).offset().top : 0;
-		var customoffset = 45;
-		$('html, body').animate({ scrollTop: target_offset - customoffset }, 500);
-	});
+$(window).bind("load", function () {
+    //$(document).ready(function(){
+    $('body').on('click', 'a[href^="#"]', function (event) {
+        var target_offset = $(this.hash).offset() ? $(this.hash).offset().top : 0;
+        var customoffset = 45;
+        $('html, body').animate({ scrollTop: target_offset - customoffset }, 500);
+    });
 
-	$('img.svg').each(function () {
-		var $img = jQuery(this);
-		var imgID = $img.attr('id');
-		var imgClass = $img.attr('class');
-		var imgURL = $img.attr('src');
+    $('img.svg').each(function () {
+        var $img = jQuery(this);
+        var imgID = $img.attr('id');
+        var imgClass = $img.attr('class');
+        var imgURL = $img.attr('src');
 
-		jQuery.get(imgURL, function (data) {
-			// Get the SVG tag, ignore the rest
-			var $svg = jQuery(data).find('svg');
+        jQuery.get(imgURL, function (data) {
+            // Get the SVG tag, ignore the rest
+            var $svg = jQuery(data).find('svg');
 
-			// Add replaced image's ID to the new SVG
-			if (typeof imgID !== 'undefined') {
-				$svg = $svg.attr('id', imgID);
-			}
-			// Add replaced image's classes to the new SVG
-			if (typeof imgClass !== 'undefined') {
-				$svg = $svg.attr('class', imgClass + ' replaced-svg');
-			}
+            // Add replaced image's ID to the new SVG
+            if (typeof imgID !== 'undefined') {
+                $svg = $svg.attr('id', imgID);
+            }
+            // Add replaced image's classes to the new SVG
+            if (typeof imgClass !== 'undefined') {
+                $svg = $svg.attr('class', imgClass + ' replaced-svg');
+            }
 
-			// Remove any invalid XML tags as per http://validator.w3.org
-			$svg = $svg.removeAttr('xmlns:a');
+            // Remove any invalid XML tags as per http://validator.w3.org
+            $svg = $svg.removeAttr('xmlns:a');
 
-			// Replace image with new SVG
-			$img.replaceWith($svg);
-		}, 'xml');
-	});
-
-	// console.log("map: ", map.getZoom());
-	// // map.on('click', function() {
-	// // 	var currentZoom = map.getZoom();
-	// // 	console.log(currentZoom);
-	// // });
-
-	// function getAllMarkers() {
-
-	//     var allMarkersObjArray = [];//new Array();
-	//     var allMarkersGeoJsonArray = [];//new Array();
-
-	//     $.each(map._layers, function (ml) {
-	//         //console.log(map._layers)
-	//         if (map._layers[ml].feature) {
-
-	//             allMarkersObjArray.push(this)
-	// 			allMarkersGeoJsonArray.push(JSON.stringify(this.toGeoJSON()))
-	//         }
-	//     })
-	//     console.log(allMarkersObjArray);
-	// }
+            // Replace image with new SVG
+            $img.replaceWith($svg);
+        }, 'xml');
+    });
 });
 
 },{}]},{},[187,186]);

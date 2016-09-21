@@ -37,7 +37,8 @@ const Map = React.createClass({
 		return {
 			tileLayer: null,
 			geojsonLayer: null,
-			geojson: null
+			geojson: null,
+			lastAdd: null
 		};
 	},
 
@@ -59,16 +60,15 @@ const Map = React.createClass({
 	},
 
 	updateMap: function() {
-
+		this.setState({lasAdd: "hi"});
+		console.log('map update state runs');
 	},
-
-
 
 	getData: function() {
 		var self = this;
 		$.get('/mapData', function(data) {
 			self.addGeoJSONLayer(data);
-			console.log(data);
+			console.log("Map getData(): ", data);
 		});
 	},
 
@@ -76,10 +76,9 @@ const Map = React.createClass({
 	addGeoJSONLayer: function(geojson) {
 		this.setState({geojson: geojson});
 		var geojsonLayer = L.geoJson(geojson, {
-			// onEachFeature: this.onEachFeature,
+			// popup here if needed later
 			pointToLayer: this.pointToLayer
 		});
-
 		geojsonLayer.addTo(this.map);
 		this.setState({geojsonLayer: geojsonLayer});
 	},
@@ -90,8 +89,8 @@ const Map = React.createClass({
 
 		var primaryParams = {
 			//radius: 60,
-			fillColor: '#F44336',
-			color: '#B71C1C',
+			fillColor: '#66a61e',
+			color: '#508118',
 			weight: 1,
 			opacity: 0.8,
 			fillOpacity: 0.6
@@ -99,8 +98,8 @@ const Map = React.createClass({
 
 		var potentialParams = {
 			//radius: 60,
-			fillColor: '#4CAF50',
-			color: '#2E7D32',
+			fillColor: '#e7298a',
+			color: '#cf1776',
 			weight: 1,
 			opacity: 0.8,
 			fillOpacity: 0.6
@@ -138,8 +137,8 @@ const Map = React.createClass({
 	render: function() {
 		return (
 			<div id="mapUI">
-				<Popup />
-				<Legend potCol="4CAF50" primCol="F44336"/>
+				<Popup updater={()=>this.getData()}/>
+				<Legend potCol="4CAF50" primCol="F44336" />
 				<div id="map"></div>
 			</div>
 		);

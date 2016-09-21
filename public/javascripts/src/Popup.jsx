@@ -18,16 +18,30 @@ const Popup = React.createClass({
         }
     },
 
-	 showModal: function(){
+	showModal: function(){
         this.refs.modal.show();
     },
 
+
+/////////////////////////
     hideModal: function(){
         this.setState({type:'info', message:''})
         this.refs.modal.hide();
+
+        console.log('hideModal runs');
+        this.updatez();
     },
 
+    updatez: function() {
+
+        console.log('updater runs');
+        return this.props.updater;
+    },
+/////////////////////////
+
+
     handleSubmit: function(e) {
+        console.log("handle submit called");
         e.preventDefault();
         this.setState({type:'info', message:'Sending..'}, this.submitData);
     },
@@ -46,7 +60,6 @@ const Popup = React.createClass({
        var self = this;
        // Check for null
         if (formData.KON == '' || formData.loc1 == '' ) {
-            console.log(ReactDOM.findDOMNode(this.refs.KON))
             this.setState({type: 'danger', message: 'Missing Required Fields - Try again please'});
             $('#KON ,#loc1').removeClass('reqd').addClass('has-error');
        } 
@@ -184,10 +197,10 @@ const Popup = React.createClass({
                         </div>                                                
                     </form>
                     
-                    <a className={"btn btn-warning"} id={"saveBtn"} onClick={this.submitData}>
+                    <a className={"btn btn-warning"} id={"saveBtn"} onClick={this.handleSubmit}>
                         <i className={"fa fa-map-marker fa-lg"}></i>  Add to Map! </a>
 
-                    <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onClick={this.hideModal}>Close</a>
+                    <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onClick={this.props.updater}>Close</a>
                 </Modal>
             </div>
         );
