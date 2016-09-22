@@ -14,39 +14,38 @@ const Popup = React.createClass({
     getInitialState: function(){
         return {
             type: 'info',
-            message: ''
+            message: '',
+            closeClicked: false,
+            submitClicked: false
         }
     },
 
 	showModal: function(){
+        //this.setState({'closeClicked': false, 'submitClicked': false})
         this.refs.modal.show();
+        console.log("popup state: ", this.state)
     },
 
 
 /////////////////////////
     hideModal: function(){
-        this.setState({type:'info', message:''})
+        // this.setState({type:'info', message:'', closeClicked: true})
         this.refs.modal.hide();
-        console.log('hideModal runs');
+        console.log('hideModal runs ', this.state);
         return this.props.updater
     },
 
-    updatez: function() {
-
-        console.log('updater runs');
-        return this.props.updater;
-    },
 /////////////////////////
 
 
     handleSubmit: function(e) {
         console.log("handle submit called");
         e.preventDefault();
-        this.setState({type:'info', message:'Sending..'}, this.submitData);
+        this.setState({type:'info', message:'Sending..', submitClicked: true}, this.submitData);
     },
 
     submitData: function() {
-        
+        console.log("submit data runs")
         const formData = {
             KON: ReactDOM.findDOMNode(this.refs.KON).value,
             name: ReactDOM.findDOMNode(this.refs.name).value,
@@ -78,7 +77,7 @@ const Popup = React.createClass({
                 data: JSON.stringify(formData),
                 contentType: "application/json",
                 success: function(msg) {
-                    self.setState({type:'success', message:'Thanks for Submitting!'})
+                    self.setState({type:'success', message:'Thanks for Submitting!', closeClicked: true})
                 },
                 error: function(err) {
                     self.setState({type: 'danger', message: 'Something went wrong - please double check Information'})
@@ -200,12 +199,17 @@ const Popup = React.createClass({
                     <a className={"btn btn-warning"} id={"saveBtn"} onClick={this.handleSubmit}>
                         <i className={"fa fa-map-marker fa-lg"}></i>  Add to Map! </a>
 
+<<<<<<< HEAD
                     <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onClick={this.hideModal} onMouseUp={this.props.updater}>Close</a>
+=======
+                    <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onClick={this.hideModal}>Close</a>
+>>>>>>> d544bfe6cf33b7c44ed5c89f1998c9f95b391df9
                 </Modal>
+                <Map close={this.state.closeClicked} submit={this.state.submitClicked}/>
             </div>
         );
     }
 });
 
-//<i className={"fa fa-trash-o fa-lg"}></i>
+
 export default Popup;
