@@ -112009,7 +112009,7 @@ var Legend = _react2.default.createClass({
 			),
 			_react2.default.createElement(
 				'div',
-				{ className: "row legRow" },
+				{ className: "row legRow", id: 'bottomRow' },
 				_react2.default.createElement('div', { id: 'pot', style: potStyle }),
 				_react2.default.createElement(
 					'div',
