@@ -144,7 +144,7 @@ const Map = React.createClass({
 		return (
 			<div id="mapUI">
 				<Popup updater={()=>this.getData()}/>
-				<Legend potCol="4CAF50" primCol="F44336" />
+				<Legend potCol="e7298a" primCol="66a61e" />
 				<div id="map"></div>
 			</div>
 		);

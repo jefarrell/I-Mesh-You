@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Map from './Map.jsx'
 import {TwitterButton, EmailButton, RedditButton} from 'react-social'
 
 const Modal = require('boron/DropModal');

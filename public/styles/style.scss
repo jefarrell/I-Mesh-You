@@ -41,11 +41,6 @@ $map-height: 700px;
 	position: fixed;
 }
 
-
-
-
-
-
 body {
 	overflow-x: hidden;
 	background-color: #FFF;
@@ -266,33 +261,40 @@ button:focus, a:focus {
 }
 
 #legend {
-	width: 100px;
-	height: 100px;
+	width: 145px;
+	height: 50px;
 	background-color: #FFF;
-	border: 2px solid $primary-blue;
-	border-radius: 6px;
+	border: 2px solid #B7BFC0;
+	border-radius: 3px;
 	opacity: 0.9;
 	position: absolute;
 	z-index: 100;
-	margin: 1em;
+	margin: 2em;
+	padding: 3px;
+
+	.row {
+		margin: 2px;
+		position: relative;
+	}
 }
 
-// #primCard {
-// 	margin-top: 2em;
-// }
 
-// #potCard {
-// 	margin-top: 6em;
-// }
 
-// #primCard, #potCard {
-// 	position: absolute;
-// 	z-index: 100;
-// 	width: 4em;
-// 	height: 4em;
-// 	left: 3em;
-// 	opacity: 0.9;
-// }
+.legText {
+	margin-top: -2px;
+}
+
+#prim, #pot {
+	width: 15px;
+	height: 15px;
+	padding: 0;
+	float:left;
+	margin-right: 0.5em;
+	bottom: 0;
+	opacity: 0.8;
+	border-radius: 2px;
+}
+
 
 .cardText {
 	text-align: center;

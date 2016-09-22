@@ -17,11 +17,20 @@ const Legend = React.createClass({
 
 		return(
 			<div id="legend">
+				<div className={"row legRow"}>
+					<div id="prim" style={primStyle}></div>
+					<div className={"legText"}> Primary Mesh </div>
+				</div>
+				<div className={"row legRow"}>
+					<div id="pot" style={potStyle}></div>
+					<div className={"legText"}> Potential Mesh </div>
+				</div>
 				
 			</div>
 		)
 	}
 });
+
 
 export default Legend
 

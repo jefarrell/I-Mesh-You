@@ -31041,7 +31041,30 @@ var Legend = _react2.default.createClass({
 			msTransition: 'all'
 		};
 
-		return _react2.default.createElement('div', { id: 'legend' });
+		return _react2.default.createElement(
+			'div',
+			{ id: 'legend' },
+			_react2.default.createElement(
+				'div',
+				{ className: "row legRow" },
+				_react2.default.createElement('div', { id: 'prim', style: primStyle }),
+				_react2.default.createElement(
+					'div',
+					{ className: "legText" },
+					' Primary Mesh '
+				)
+			),
+			_react2.default.createElement(
+				'div',
+				{ className: "row legRow" },
+				_react2.default.createElement('div', { id: 'pot', style: potStyle }),
+				_react2.default.createElement(
+					'div',
+					{ className: "legText" },
+					' Potential Mesh '
+				)
+			)
+		);
 	}
 });
 
@@ -31225,7 +31248,7 @@ var Map = _react2.default.createClass({
 			_react2.default.createElement(_Popup2.default, { updater: function updater() {
 					return _this.getData();
 				} }),
-			_react2.default.createElement(_Legend2.default, { potCol: '4CAF50', primCol: 'F44336' }),
+			_react2.default.createElement(_Legend2.default, { potCol: 'e7298a', primCol: '66a61e' }),
 			_react2.default.createElement('div', { id: 'map' })
 		);
 	}
@@ -31248,10 +31271,6 @@ var _react2 = _interopRequireDefault(_react);
 var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _Map = require('./Map.jsx');
-
-var _Map2 = _interopRequireDefault(_Map);
 
 var _reactSocial = require('react-social');
 
@@ -31508,7 +31527,7 @@ var Popup = _react2.default.createClass({
 //<i className={"fa fa-trash-o fa-lg"}></i>
 exports.default = Popup;
 
-},{"./Map.jsx":184,"boron/DropModal":1,"react":182,"react-dom":38,"react-social":39}],186:[function(require,module,exports){
+},{"boron/DropModal":1,"react":182,"react-dom":38,"react-social":39}],186:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -31573,9 +31592,6 @@ $(window).bind("load", function () {
             $img.replaceWith($svg);
         }, 'xml');
     });
-
-    // $("#mapUI").find('span').children().eq(1).mousedown(function(){ console.log('yup')});
-
 });
 
 },{}]},{},[187,186]);
