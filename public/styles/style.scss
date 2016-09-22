@@ -183,6 +183,14 @@ button:focus, a:focus {
 	font-size: 5em;
 }
 
+
+#searchBar {
+	z-index: 100;
+	position: absolute;
+	margin: 2.3% 35%;
+}
+
+
 #mesh {
 	height: $map-height;
 	padding: 0;
@@ -282,6 +290,7 @@ button:focus, a:focus {
 
 .legText {
 	margin-top: -2px;
+	color: #595959;
 }
 
 #prim, #pot {
@@ -295,13 +304,6 @@ button:focus, a:focus {
 	border-radius: 2px;
 }
 
-
-.cardText {
-	text-align: center;
-	color: white;
-	font-size: 0.75em;
-	padding-top: 1em;
-}
 
 .square {
     width: 10%;

@@ -67,7 +67,6 @@ exports.addData = (req, res) => {
 		toUpdate = Object.assign(toUpdate, usr._doc);
 		delete toUpdate._id;
 
-		console.log(toUpdate.KON)
 		User.findOneAndUpdate({ KON: toUpdate.KON }, toUpdate, {upsert: true, new: true}, function(err, doc) {
 			if (err) { 
 				console.log("User find&update Error! - ", err);
@@ -137,5 +136,19 @@ exports.mapData = (req, res) => {
 }
 
 
-
+exports.inputgeo = (req,res) => {
+	geocoder.geocode(req.body.input, function(err,response){
+		if (err) {
+			console.log(err);
+			return;
+		}
+			else {
+				geoResponse = {
+					lat: response[0].latitude,
+					lon: response[0].longitude
+				};
+				res.json(geoResponse);
+			}
+	})
+}
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Popup from './Popup.jsx'
 import Legend from './Legend.jsx'
+import Search from './Search.jsx';
 
 const ReactDOM = require('react-dom');
 const L = require('leaflet');
@@ -9,9 +10,9 @@ var config = {};
 
 
 config.params = {
-	center: [40.7087462,-73.9707151],
+	center: [38.180546,-98.3345714],
 	zoomControl: false,
-	zoom: 12,
+	zoom: 4,
 	maxZoom: 19,
 	minZoom: 3,
 	scrollwheel: false,
@@ -37,31 +38,38 @@ const Map = React.createClass({
 		return {
 			tileLayer: null,
 			geojsonLayer: null,
-			geojson: null,
-			lastAdd: null
+			geojson: null
 		};
 	},
 
+
 	map: null,
+	primCol: '#66a61e',
+	potCol: '#e7298a',
+
+
 
 	componentDidMount: function() {
-
 		this.getData();
-
 		if(!this.map) this.init(this.getID());
 	},
 
-	componentDidUpdate: function() {
-
-	},
 
 	componentWillUnmount: function() {
 		this.map.remove();
 	},
 
+
 	updateMap: function() {
 		this.setState({lasAdd: "hi"});
 		console.log('map update state runs');
+	},
+
+	componentWillReceiveProps(nextProps) {
+		console.log("next props: ", nextProps.lat, nextProps.lon, typeof(nextProps.lat));
+		config.params.center[0] = nextProps.lon;
+		config.params.center[1] = nextProps.lat;
+		this.map.setView([nextProps.lat, nextProps.lon], 9);
 	},
 
 	getData: function() {
@@ -94,19 +102,15 @@ const Map = React.createClass({
 	pointToLayer: function(feature, latlng) {
 
 		var primaryParams = {
-			//radius: 60,
-			fillColor: '#66a61e',
-			color: '#508118',
-			weight: 1,
+			fillColor: this.primCol,
+			weight: 0,
 			opacity: 0.8,
 			fillOpacity: 0.6
 		};
 
 		var potentialParams = {
-			//radius: 60,
-			fillColor: '#e7298a',
-			color: '#cf1776',
-			weight: 1,
+			fillColor: this.potCol,
+			weight: 0,
 			opacity: 0.8,
 			fillOpacity: 0.6
 		}
@@ -120,14 +124,17 @@ const Map = React.createClass({
 		}
 	},
 
+
 	onEachFeature: function(feature, layer) {
 		var popup = '<div><p>'+feature.properties.name+'</p></div>';
 		layer.bindPopup(popup);
 	},
 
+
 	getID: function() {
 		return ReactDOM.findDOMNode(this).querySelectorAll('#map')[0];
 	},
+
 
 	init: function(id) {
 		if (this.map) return;
@@ -140,11 +147,12 @@ const Map = React.createClass({
 		this.setState({ tilelayer: tileLayer });
 	},
 
+
 	render: function() {
 		return (
 			<div id="mapUI">
 				<Popup updater={()=>this.getData()}/>
-				<Legend potCol="e7298a" primCol="66a61e" />
+				<Legend potCol={this.potCol} primCol={this.primCol} />
 				<div id="map"></div>
 			</div>
 		);

@@ -28,7 +28,6 @@ const Popup = React.createClass({
         this.setState({type:'info', message:''})
         this.refs.modal.hide();
         $('#coverFix').remove();
-        return this.props.updater
     },
 
 
@@ -199,5 +198,4 @@ const Popup = React.createClass({
     }
 });
 
-//<i className={"fa fa-trash-o fa-lg"}></i>
 export default Popup;
