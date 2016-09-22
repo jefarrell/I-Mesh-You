@@ -38,7 +38,7 @@ const Map = React.createClass({
 			tileLayer: null,
 			geojsonLayer: null,
 			geojson: null,
-			popState: false
+			lastAdd: null
 		};
 	},
 
@@ -47,41 +47,28 @@ const Map = React.createClass({
 	componentDidMount: function() {
 
 		this.getData();
+
 		if(!this.map) this.init(this.getID());
+	},
+
+	componentDidUpdate: function() {
+
 	},
 
 	componentWillUnmount: function() {
 		this.map.remove();
 	},
 
-	componentWillReceiveProps: function(nextProps) {
-		if (nextProps.close === true) {
-			console.log('got a true')
-			this.setState({popState: true})
-		} else {
-			console.log('got a false');
-			this.setState({popState: false})
-		}
-	},
-
-	componentDidUpdate: function(prevProps) {
-		console.log("didupdate: ",prevProps);
-		// this.getData();
-		if (this.state.popState !== prevProps.close) {
-			// this.getData();
-			console.log("there's a change")
-			this.getData();
-		} else{
-			console.log("props are the same")
-		}
+	updateMap: function() {
+		this.setState({lasAdd: "hi"});
+		console.log('map update state runs');
 	},
 
 	getData: function() {
-		console.log("get data runs");
 		var self = this;
 		$.get('/mapData', function(data) {
 			self.addGeoJSONLayer(data);
-			console.log("data: ", data);
+			console.log("Map getData(): ", data);
 		});
 	},
 
@@ -90,7 +77,6 @@ const Map = React.createClass({
 		
 		if(this.state.geojsonLayer && data) {
 			this.state.geojsonLayer.clearLayers();
-			console.log("clear geo layer");
 		}
 
 		this.setState({geojson: data});
@@ -157,7 +143,7 @@ const Map = React.createClass({
 	render: function() {
 		return (
 			<div id="mapUI">
-				
+				<Popup updater={()=>this.getData()}/>
 				<Legend potCol="4CAF50" primCol="F44336" />
 				<div id="map"></div>
 			</div>
@@ -166,5 +152,5 @@ const Map = React.createClass({
 
 });
 
-//<Popup updater={ ()=>this.getData() } />
+
 export default Map;

@@ -31120,7 +31120,7 @@ var Map = _react2.default.createClass({
 			tileLayer: null,
 			geojsonLayer: null,
 			geojson: null,
-			popState: false
+			lastAdd: null
 		};
 	},
 
@@ -31129,41 +31129,26 @@ var Map = _react2.default.createClass({
 	componentDidMount: function componentDidMount() {
 
 		this.getData();
+
 		if (!this.map) this.init(this.getID());
 	},
+
+	componentDidUpdate: function componentDidUpdate() {},
 
 	componentWillUnmount: function componentWillUnmount() {
 		this.map.remove();
 	},
 
-	componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-		if (nextProps.close === true) {
-			console.log('got a true');
-			this.setState({ popState: true });
-		} else {
-			console.log('got a false');
-			this.setState({ popState: false });
-		}
-	},
-
-	componentDidUpdate: function componentDidUpdate(prevProps) {
-		console.log("didupdate: ", prevProps);
-		// this.getData();
-		if (this.state.popState !== prevProps.close) {
-			// this.getData();
-			console.log("there's a change");
-			this.getData();
-		} else {
-			console.log("props are the same");
-		}
+	updateMap: function updateMap() {
+		this.setState({ lasAdd: "hi" });
+		console.log('map update state runs');
 	},
 
 	getData: function getData() {
-		console.log("get data runs");
 		var self = this;
 		$.get('/mapData', function (data) {
 			self.addGeoJSONLayer(data);
-			console.log("data: ", data);
+			console.log("Map getData(): ", data);
 		});
 	},
 
@@ -31171,7 +31156,6 @@ var Map = _react2.default.createClass({
 
 		if (this.state.geojsonLayer && data) {
 			this.state.geojsonLayer.clearLayers();
-			console.log("clear geo layer");
 		}
 
 		this.setState({ geojson: data });
@@ -31233,9 +31217,14 @@ var Map = _react2.default.createClass({
 	},
 
 	render: function render() {
+		var _this = this;
+
 		return _react2.default.createElement(
 			'div',
 			{ id: 'mapUI' },
+			_react2.default.createElement(_Popup2.default, { updater: function updater() {
+					return _this.getData();
+				} }),
 			_react2.default.createElement(_Legend2.default, { potCol: '4CAF50', primCol: 'F44336' }),
 			_react2.default.createElement('div', { id: 'map' })
 		);
@@ -31243,7 +31232,6 @@ var Map = _react2.default.createClass({
 
 });
 
-//<Popup updater={ ()=>this.getData() } />
 exports.default = Map;
 
 },{"./Legend.jsx":183,"./Popup.jsx":185,"leaflet":35,"react":182,"react-dom":38}],185:[function(require,module,exports){
@@ -31282,37 +31270,38 @@ var Popup = _react2.default.createClass({
     getInitialState: function getInitialState() {
         return {
             type: 'info',
-            message: '',
-            closeClicked: false,
-            submitClicked: false
+            message: ''
         };
     },
 
     showModal: function showModal() {
-        //this.setState({'closeClicked': false, 'submitClicked': false})
         this.refs.modal.show();
-        console.log("popup state: ", this.state);
     },
 
     /////////////////////////
     hideModal: function hideModal() {
-        // this.setState({type:'info', message:'', closeClicked: true})
+        this.setState({ type: 'info', message: '' });
         this.refs.modal.hide();
-        console.log('hideModal runs ', this.state);
+        console.log('hideModal runs');
         return this.props.updater;
     },
 
+    updatez: function updatez() {
+
+        console.log('updater runs');
+        return this.props.updater;
+    },
     /////////////////////////
 
 
     handleSubmit: function handleSubmit(e) {
         console.log("handle submit called");
         e.preventDefault();
-        this.setState({ type: 'info', message: 'Sending..', submitClicked: true }, this.submitData);
+        this.setState({ type: 'info', message: 'Sending..' }, this.submitData);
     },
 
     submitData: function submitData() {
-        console.log("submit data runs");
+
         var formData = {
             KON: _reactDom2.default.findDOMNode(this.refs.KON).value,
             name: _reactDom2.default.findDOMNode(this.refs.name).value,
@@ -31344,7 +31333,7 @@ var Popup = _react2.default.createClass({
                         data: JSON.stringify(formData),
                         contentType: "application/json",
                         success: function success(msg) {
-                            self.setState({ type: 'success', message: 'Thanks for Submitting!', closeClicked: true });
+                            self.setState({ type: 'success', message: 'Thanks for Submitting!' });
                         },
                         error: function error(err) {
                             self.setState({ type: 'danger', message: 'Something went wrong - please double check Information' });
@@ -31517,19 +31506,15 @@ var Popup = _react2.default.createClass({
                 ),
                 _react2.default.createElement(
                     'a',
-<<<<<<< HEAD
-                    { className: "btn btn-danger btn-secondary", id: "cancelBtn", onClick: this.hideModal, onMouseUp: this.props.updater },
-=======
-                    { className: "btn btn-danger btn-secondary", id: "cancelBtn", onClick: this.hideModal },
->>>>>>> d544bfe6cf33b7c44ed5c89f1998c9f95b391df9
+                    { className: "btn btn-danger btn-secondary", id: "cancelBtn", onMouseUp: this.hideModal, onClick: this.props.updater },
                     'Close'
                 )
-            ),
-            _react2.default.createElement(_Map2.default, { close: this.state.closeClicked, submit: this.state.submitClicked })
+            )
         );
     }
 });
 
+//<i className={"fa fa-trash-o fa-lg"}></i>
 exports.default = Popup;
 
 },{"./Map.jsx":184,"boron/DropModal":1,"react":182,"react-dom":38,"react-social":39}],186:[function(require,module,exports){
@@ -31541,9 +31526,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
-var _Popup = require('./Popup.jsx');
+var _Map = require('./Map.jsx');
 
-var _Popup2 = _interopRequireDefault(_Popup);
+var _Map2 = _interopRequireDefault(_Map);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31553,16 +31538,14 @@ var App = _react2.default.createClass({
 		return _react2.default.createElement(
 			'div',
 			null,
-			_react2.default.createElement(_Popup2.default, null)
+			_react2.default.createElement(_Map2.default, null)
 		);
 	}
 });
-//import Map from './Map.jsx';
-
 
 (0, _reactDom.render)(_react2.default.createElement(App, null), document.getElementById('root'));
 
-},{"./Popup.jsx":185,"react":182,"react-dom":38}],187:[function(require,module,exports){
+},{"./Map.jsx":184,"react":182,"react-dom":38}],187:[function(require,module,exports){
 'use strict';
 
 $(window).bind("load", function () {
