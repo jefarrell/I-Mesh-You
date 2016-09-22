@@ -152,28 +152,28 @@ button:focus, a:focus {
   height: 700px;
   width: 100%; }
 
-#mapUI #addBtn, #mapUI #cancelBtn, #mapUI #saveBtn {
+#addBtn, #cancelBtn, #saveBtn {
   position: absolute;
   z-index: 100;
   margin-top: 2em; }
 
-#mapUI .btn-lg {
+#addBtn {
   right: 2em;
   background-color: #FF8500;
   color: #FFF; }
 
-#mapUI .btn-lg:hover {
+#addBtn:hover {
   background-color: #FFC107;
   -webkit-box-shadow: 0 2px 10px -4px #404040;
   -moz-box-shadow: 0 2px 10px -4px #404040;
   box-shadow: 0 2px 10px -4px #404040; }
 
-#mapUI #status i {
+#status i {
   color: #F44336;
   padding: 0.75em;
   transition: color 0.3s ease 0s; }
 
-#mapUI #status i:hover {
+#status i:hover {
   cursor: pointer;
   color: #549AE6; }
 
