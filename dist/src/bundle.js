@@ -31506,7 +31506,7 @@ var Popup = _react2.default.createClass({
                 ),
                 _react2.default.createElement(
                     'a',
-                    { className: "btn btn-danger btn-secondary", id: "cancelBtn", onClick: this.props.updater },
+                    { className: "btn btn-danger btn-secondary", id: "cancelBtn", onClick: this.hideModal, onMouseUp: this.props.updater },
                     'Close'
                 )
             )

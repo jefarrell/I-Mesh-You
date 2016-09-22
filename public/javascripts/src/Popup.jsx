@@ -200,7 +200,7 @@ const Popup = React.createClass({
                     <a className={"btn btn-warning"} id={"saveBtn"} onClick={this.handleSubmit}>
                         <i className={"fa fa-map-marker fa-lg"}></i>  Add to Map! </a>
 
-                    <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onClick={this.props.updater}>Close</a>
+                    <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onClick={this.hideModal} onMouseUp={this.props.updater}>Close</a>
                 </Modal>
             </div>
         );
