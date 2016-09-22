@@ -10,7 +10,7 @@ var config = {};
 
 
 config.params = {
-	center: [38.180546,-98.3345714],
+	center: [32.5220242,-102.2896495],
 	zoomControl: false,
 	zoom: 4,
 	maxZoom: 19,
@@ -42,12 +42,9 @@ const Map = React.createClass({
 		};
 	},
 
-
 	map: null,
 	primCol: '#66a61e',
 	potCol: '#e7298a',
-
-
 
 	componentDidMount: function() {
 		this.getData();
@@ -69,7 +66,7 @@ const Map = React.createClass({
 		console.log("next props: ", nextProps.lat, nextProps.lon, typeof(nextProps.lat));
 		config.params.center[0] = nextProps.lon;
 		config.params.center[1] = nextProps.lat;
-		this.map.setView([nextProps.lat, nextProps.lon], 9);
+		this.map.setView([nextProps.lat, nextProps.lon], 11);
 	},
 
 	getData: function() {

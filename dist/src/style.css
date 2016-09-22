@@ -136,10 +136,16 @@ button:focus, a:focus {
   text-align: center;
   font-size: 5em; }
 
+#addBtn, #searchBar, #legend {
+  margin-top: 2.3%; }
+
 #searchBar {
   z-index: 100;
   position: absolute;
   margin: 2.3% 35%; }
+  #searchBar .btn:active {
+    background-color: #549AE6;
+    color: white; }
 
 #mesh {
   height: 700px;
@@ -168,7 +174,9 @@ button:focus, a:focus {
 
 #addBtn, #cancelBtn, #saveBtn {
   position: absolute;
-  z-index: 100;
+  z-index: 100; }
+
+#cancelBtn, #saveBtn {
   margin-top: 2em; }
 
 #addBtn {

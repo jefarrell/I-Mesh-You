@@ -112056,7 +112056,7 @@ var L = require('leaflet');
 var config = {};
 
 config.params = {
-	center: [38.180546, -98.3345714],
+	center: [32.5220242, -102.2896495],
 	zoomControl: false,
 	zoom: 4,
 	maxZoom: 19,
@@ -112111,7 +112111,7 @@ var Map = _react2.default.createClass({
 		console.log("next props: ", nextProps.lat, nextProps.lon, _typeof(nextProps.lat));
 		config.params.center[0] = nextProps.lon;
 		config.params.center[1] = nextProps.lat;
-		this.map.setView([nextProps.lat, nextProps.lon], 9);
+		this.map.setView([nextProps.lat, nextProps.lon], 11);
 	},
 
 
@@ -112590,14 +112590,16 @@ var App = _react2.default.createClass({
 /*
 
 App
-	Map
-		Popup
-		Legend
+	Search
+		Map
+			Popup
+			Legend
 
-App calls Map
-	Map calls Popup
-		Popup runs callback to Map to trigger update on submission (wonky but w/e)
-	Map calls Legend, color props
+App calls Search
+	Search calls Map, passes props to zoom map around
+		Map calls Popup
+			Popup runs callback to Map to trigger update on submission (wonky but w/e)
+		Map calls Legend, color props
 	
 */
 

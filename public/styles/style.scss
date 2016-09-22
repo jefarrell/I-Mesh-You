@@ -184,10 +184,23 @@ button:focus, a:focus {
 }
 
 
+#addBtn, #searchBar, #legend {
+	margin-top: 2.3%;
+}
+
 #searchBar {
 	z-index: 100;
 	position: absolute;
 	margin: 2.3% 35%;
+
+	.btn:active {
+		background-color: $primary-blue;
+		color: white;
+	}
+
+	// input, button {
+	// 	border: 1px solid $primary-blue;
+	// }
 }
 
 
@@ -231,6 +244,9 @@ button:focus, a:focus {
 #addBtn, #cancelBtn, #saveBtn {
 	position: absolute;
 	z-index: 100;
+}
+
+#cancelBtn, #saveBtn {
 	margin-top: 2em;
 }
 
