@@ -31276,26 +31276,17 @@ var Popup = _react2.default.createClass({
 
     showModal: function showModal() {
         this.refs.modal.show();
+        $('body').append('<div id="coverFix"></div>');
     },
 
-    /////////////////////////
     hideModal: function hideModal() {
         this.setState({ type: 'info', message: '' });
         this.refs.modal.hide();
-        console.log('hideModal runs');
+        $('#coverFix').remove();
         return this.props.updater;
     },
-
-    updatez: function updatez() {
-
-        console.log('updater runs');
-        return this.props.updater;
-    },
-    /////////////////////////
-
 
     handleSubmit: function handleSubmit(e) {
-        console.log("handle submit called");
         e.preventDefault();
         this.setState({ type: 'info', message: 'Sending..' }, this.submitData);
     },
@@ -31582,6 +31573,9 @@ $(window).bind("load", function () {
             $img.replaceWith($svg);
         }, 'xml');
     });
+
+    // $("#mapUI").find('span').children().eq(1).mousedown(function(){ console.log('yup')});
+
 });
 
 },{}]},{},[187,186]);

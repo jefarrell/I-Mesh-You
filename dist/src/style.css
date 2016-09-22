@@ -13,6 +13,15 @@
   src: url("/fonts/FontBureau-SalvoSansLight.otf");
   font-weight: light; }
 
+#coverFix {
+  background-color: transparent;
+  z-index: 1045;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed; }
+
 body {
   overflow-x: hidden;
   background-color: #FFF;

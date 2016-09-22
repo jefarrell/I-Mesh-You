@@ -20,27 +20,20 @@ const Popup = React.createClass({
 
     showModal: function(){
         this.refs.modal.show();
+        $('body').append('<div id="coverFix"></div>');
     },
 
 
-/////////////////////////
+
     hideModal: function(){
         this.setState({type:'info', message:''})
         this.refs.modal.hide();
-        console.log('hideModal runs');
+        $('#coverFix').remove();
         return this.props.updater
     },
 
-    updatez: function() {
-
-        console.log('updater runs');
-        return this.props.updater;
-    },
-/////////////////////////
-
 
     handleSubmit: function(e) {
-        console.log("handle submit called");
         e.preventDefault();
         this.setState({type:'info', message:'Sending..'}, this.submitData);
     },
@@ -197,7 +190,7 @@ const Popup = React.createClass({
                         </div>                                                
                     </form>
                     
-                    <a className={"btn btn-warning"} id={"saveBtn"} onClick={this.handleSubmit}>
+                    <a className={"btn btn-warning"} id={"saveBtn"} onClick={this.handleSubmit} >
                         <i className={"fa fa-map-marker fa-lg"}></i>  Add to Map! </a>
 
                     <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onMouseUp={this.hideModal} onClick={this.props.updater}>Close</a>
