@@ -44,7 +44,7 @@ const Search = React.createClass({
 			    <div className={"input-group"}>
 			      <input type="text" className={"form-control"} ref="searchbar" placeholder="Zoom to..."></input>
 			      <span className={"input-group-btn"}>
-			        <button className={"btn btn-secondary"} type="button" onClick={this.handleClick}>Go!</button>
+			        <button className={"btn btn-secondary"}type="button" onClick={this.handleClick}>Go!</button>
 			      </span>
 			    </div>
 			  </div>
