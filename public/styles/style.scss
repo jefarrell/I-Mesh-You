@@ -123,9 +123,9 @@ button:focus, a:focus {
 	height: 100%;
 	background-color: #FFF;
 	background:url('/product.png');
-	background-size: cover;
+	background-size: contain;
 	background-attachment: fixed;
-	background-position: center center;
+	background-position: bottom center;
     background-repeat:no-repeat;
 	position: absolute;
 	-webkit-filter: blur(1px);
@@ -258,6 +258,7 @@ button:focus, a:focus {
 	right: 2em;
 	background-color: $primary-orange;
 	color: #FFF;
+	opacity: 0.9;
 }
 
 #addBtn:hover {
