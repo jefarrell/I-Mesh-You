@@ -7,13 +7,13 @@ const ReactDOM = require('react-dom');
 //require('leaflet.markercluster');
 
 var config = {};
-
+var marker;
 
 config.params = {
 	center: [32.5220242,-102.2896495],
 	zoomControl: false,
 	zoom: 4,
-	maxZoom: 19,
+	maxZoom: 12,
 	minZoom: 3,
 	scrollwheel: false,
 	scrollWheelZoom: false,
@@ -31,6 +31,18 @@ config.tileLayer = {
   }
 };
 
+var PrimIcon = new L.icon({
+	iconUrl: 'primary.png',
+	iconSize: [60,60],
+	iconAnchor: [30,30]
+});
+
+var PotIcon = new L.icon({
+	iconUrl: 'potential.png',
+	iconSize: [60,60],
+	iconAnchor: [30,30]
+});
+
 
 const Map = React.createClass({
 	
@@ -45,6 +57,7 @@ const Map = React.createClass({
 	map: null,
 	primCol: '#66a61e',
 	potCol: '#e7298a',
+	zoom: null,
 
 	componentDidMount: function() {
 		this.getData();
@@ -68,6 +81,7 @@ const Map = React.createClass({
 	},
 
 	getData: function() {
+		console.log('get data');
 		var self = this;
 		$.get('/mapData', function(data) {
 			self.addGeoJSONLayer(data);
@@ -80,47 +94,39 @@ const Map = React.createClass({
 		
 
 		if(this.state.geojsonLayer && data) {
+			console.log('inside clear')
 			this.state.geojsonLayer.clearLayers();
 		}
+
 		this.setState({geojson: data});
 		var geojsonLayer = L.geoJson(data, {
 			// popup here if needed later
 			pointToLayer: this.pointToLayer
 		});
-		var markers = new L.MarkerClusterGroup();
-		console.log('hiz');
-		console.log("test: ", markers);
+		var markers = new L.MarkerClusterGroup(
+			{
+				disableClusteringAtZoom: 10,
+       			maxClusterRadius: 100,
+       			spiderfyOnMaxZoom: false,
+       			showCoverageOnHover: false
+			});
+
 		markers.addLayer(geojsonLayer);
+		
 		this.map.addLayer(markers);
-
-		//geojsonLayer.addTo(this.map);
 		this.setState({geojsonLayer: geojsonLayer});
-
 	},
 
 
 
 	pointToLayer: function(feature, latlng) {
-		var primaryParams = {
-			fillColor: this.primCol,
-			weight: 0,
-			opacity: 0.8,
-			fillOpacity: 0.6
-		};
-
-		var potentialParams = {
-			fillColor: this.potCol,
-			weight: 0,
-			opacity: 0.8,
-			fillOpacity: 0.6
-		}
-
-		const halfMileMeter = 804;
 
 		if (feature.properties.name === 'Primary Location') {
-			return L.marker(latlng, primaryParams);
+			marker = L.marker(latlng, {icon: PrimIcon});
+			return marker;
+
 		} else {
-			return L.marker(latlng, potentialParams);
+			return L.marker(latlng, {icon: PotIcon});
 		}
 	},
 

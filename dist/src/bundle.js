@@ -102884,12 +102884,13 @@ var ReactDOM = require('react-dom');
 //require('leaflet.markercluster');
 
 var config = {};
+var marker;
 
 config.params = {
 	center: [32.5220242, -102.2896495],
 	zoomControl: false,
 	zoom: 4,
-	maxZoom: 19,
+	maxZoom: 12,
 	minZoom: 3,
 	scrollwheel: false,
 	scrollWheelZoom: false,
@@ -102907,6 +102908,18 @@ config.tileLayer = {
 	}
 };
 
+var PrimIcon = new L.icon({
+	iconUrl: 'primary.png',
+	iconSize: [60, 60],
+	iconAnchor: [30, 30]
+});
+
+var PotIcon = new L.icon({
+	iconUrl: 'potential.png',
+	iconSize: [60, 60],
+	iconAnchor: [30, 30]
+});
+
 var Map = _react2.default.createClass({
 	displayName: 'Map',
 
@@ -102922,6 +102935,7 @@ var Map = _react2.default.createClass({
 	map: null,
 	primCol: '#66a61e',
 	potCol: '#e7298a',
+	zoom: null,
 
 	componentDidMount: function componentDidMount() {
 		this.getData();
@@ -102944,6 +102958,7 @@ var Map = _react2.default.createClass({
 
 
 	getData: function getData() {
+		console.log('get data');
 		var self = this;
 		$.get('/mapData', function (data) {
 			self.addGeoJSONLayer(data);
@@ -102954,44 +102969,35 @@ var Map = _react2.default.createClass({
 	addGeoJSONLayer: function addGeoJSONLayer(data) {
 
 		if (this.state.geojsonLayer && data) {
+			console.log('inside clear');
 			this.state.geojsonLayer.clearLayers();
 		}
+
 		this.setState({ geojson: data });
 		var geojsonLayer = L.geoJson(data, {
 			// popup here if needed later
 			pointToLayer: this.pointToLayer
 		});
-		var markers = new L.MarkerClusterGroup();
-		console.log('hiz');
-		console.log("test: ", markers);
-		markers.addLayer(geojsonLayer);
-		this.map.addLayer(markers);
+		var markers = new L.MarkerClusterGroup({
+			disableClusteringAtZoom: 10,
+			maxClusterRadius: 100,
+			spiderfyOnMaxZoom: false,
+			showCoverageOnHover: false
+		});
 
-		//geojsonLayer.addTo(this.map);
+		markers.addLayer(geojsonLayer);
+
+		this.map.addLayer(markers);
 		this.setState({ geojsonLayer: geojsonLayer });
 	},
 
 	pointToLayer: function pointToLayer(feature, latlng) {
-		var primaryParams = {
-			fillColor: this.primCol,
-			weight: 0,
-			opacity: 0.8,
-			fillOpacity: 0.6
-		};
-
-		var potentialParams = {
-			fillColor: this.potCol,
-			weight: 0,
-			opacity: 0.8,
-			fillOpacity: 0.6
-		};
-
-		var halfMileMeter = 804;
 
 		if (feature.properties.name === 'Primary Location') {
-			return L.marker(latlng, primaryParams);
+			marker = L.marker(latlng, { icon: PrimIcon });
+			return marker;
 		} else {
-			return L.marker(latlng, potentialParams);
+			return L.marker(latlng, { icon: PotIcon });
 		}
 	},
 
@@ -103368,7 +103374,7 @@ var Search = _react2.default.createClass({
 				_react2.default.createElement(
 					'div',
 					{ className: "input-group" },
-					_react2.default.createElement('input', { type: 'text', className: "form-control", ref: 'searchbar', placeholder: 'Zoom to...' }),
+					_react2.default.createElement('input', { type: 'text', className: "form-control", ref: 'searchbar', placeholder: 'Zoom to Location...' }),
 					_react2.default.createElement(
 						'span',
 						{ className: "input-group-btn" },
