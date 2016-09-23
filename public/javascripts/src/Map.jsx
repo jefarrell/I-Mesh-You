@@ -2,9 +2,9 @@ import React from 'react';
 import Popup from './Popup.jsx'
 import Legend from './Legend.jsx'
 import Search from './Search.jsx';
-
 const ReactDOM = require('react-dom');
-const L = require('leaflet');
+//const L = require('leaflet');
+//require('leaflet.markercluster');
 
 var config = {};
 
@@ -59,11 +59,9 @@ const Map = React.createClass({
 
 	updateMap: function() {
 		this.setState({lasAdd: "hi"});
-		console.log('map update state runs');
 	},
 
 	componentWillReceiveProps(nextProps) {
-		console.log("next props: ", nextProps.lat, nextProps.lon, typeof(nextProps.lat));
 		config.params.center[0] = nextProps.lon;
 		config.params.center[1] = nextProps.lat;
 		this.map.setView([nextProps.lat, nextProps.lon], 11);
@@ -80,16 +78,22 @@ const Map = React.createClass({
 
 	addGeoJSONLayer: function(data) {
 		
+
 		if(this.state.geojsonLayer && data) {
 			this.state.geojsonLayer.clearLayers();
 		}
-
 		this.setState({geojson: data});
 		var geojsonLayer = L.geoJson(data, {
 			// popup here if needed later
 			pointToLayer: this.pointToLayer
 		});
-		geojsonLayer.addTo(this.map);
+		var markers = new L.MarkerClusterGroup();
+		console.log('hiz');
+		console.log("test: ", markers);
+		markers.addLayer(geojsonLayer);
+		this.map.addLayer(markers);
+
+		//geojsonLayer.addTo(this.map);
 		this.setState({geojsonLayer: geojsonLayer});
 
 	},
@@ -97,7 +101,6 @@ const Map = React.createClass({
 
 
 	pointToLayer: function(feature, latlng) {
-
 		var primaryParams = {
 			fillColor: this.primCol,
 			weight: 0,
@@ -115,9 +118,9 @@ const Map = React.createClass({
 		const halfMileMeter = 804;
 
 		if (feature.properties.name === 'Primary Location') {
-			return L.circle(latlng, halfMileMeter, primaryParams);
+			return L.marker(latlng, primaryParams);
 		} else {
-			return L.circle(latlng, halfMileMeter, potentialParams);
+			return L.marker(latlng, potentialParams);
 		}
 	},
 
