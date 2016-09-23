@@ -7,6 +7,8 @@ $(window).bind("load", function(){
 	    $('html, body').animate({scrollTop:target_offset - customoffset}, 500);
 	});
 	
+    // Handy SVG conversion from stackoverflow
+    // Lets us do some hover events on svg image paths
 	$('img.svg').each(function(){
         var $img = jQuery(this);
         var imgID = $img.attr('id');

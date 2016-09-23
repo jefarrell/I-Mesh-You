@@ -80,6 +80,7 @@ const Map = React.createClass({
 		this.map.setView([nextProps.lat, nextProps.lon], 11);
 	},
 
+
 	getData: function() {
 		console.log('get data');
 		var self = this;
@@ -114,7 +115,7 @@ const Map = React.createClass({
 		markers.addLayer(geojsonLayer);
 		
 		this.map.addLayer(markers);
-		this.setState({geojsonLayer: geojsonLayer});
+		this.setState({geojsonLayer: markers});
 	},
 
 

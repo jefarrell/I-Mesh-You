@@ -102988,7 +102988,7 @@ var Map = _react2.default.createClass({
 		markers.addLayer(geojsonLayer);
 
 		this.map.addLayer(markers);
-		this.setState({ geojsonLayer: geojsonLayer });
+		this.setState({ geojsonLayer: markers });
 	},
 
 	pointToLayer: function pointToLayer(feature, latlng) {
@@ -103452,6 +103452,8 @@ $(window).bind("load", function () {
         $('html, body').animate({ scrollTop: target_offset - customoffset }, 500);
     });
 
+    // Handy SVG conversion from stackoverflow
+    // Lets us do some hover events on svg image paths
     $('img.svg').each(function () {
         var $img = jQuery(this);
         var imgID = $img.attr('id');
