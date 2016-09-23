@@ -35,7 +35,6 @@ $(window).bind("load", function(){
             $img.replaceWith($svg);
 
         }, 'xml');
-
     });
 
 });

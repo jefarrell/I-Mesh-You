@@ -1,10 +1,12 @@
 var gulp = require('gulp');
+var uglify = require('gulp-uglify');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var babelify = require('babelify');
 var sass = require('gulp-sass');
 var glob = require('glob');
+var streamify = require('gulp-streamify');
 
 var path = {
 	HTML: 'views/index.html',
@@ -34,12 +36,25 @@ gulp.task('styles', function() {
         .pipe(gulp.dest(path.DEST_SRC))
 });
 
+
 gulp.task('watch', function() {
-	gulp.watch('public/javascripts/src/**/*.jsx', ['js']);
+	gulp.watch(['public/javascripts/src/**/*.jsx','./public/javascripts/src/*.js'], ['js']);
 	gulp.watch(path.SASS,['styles']);
 	console.log(" ~ Gulp updated ~ ");
-})
+});
+
+gulp.task('build', function(){
+	var js_files = glob.sync('./public/javascripts/src/*.js');
+	var file_arr = [js_files, path.ENTRY_POINT]
+
+    browserify({entries: [file_arr] })
+        .transform(babelify, {presets: ['es2015', 'react']})
+        .bundle()
+        .pipe(source(path.MINIFIED_OUT))
+        .pipe(streamify(uglify(path.MINIFIED_OUT)))
+        .pipe(gulp.dest(path.DEST_BUILD));
+});
 
 
-
+gulp.task('production', ['build']);
 gulp.task('default', ['js', 'styles', 'watch']);

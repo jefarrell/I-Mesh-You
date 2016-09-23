@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {TwitterButton, EmailButton, RedditButton} from 'react-social'
+import {TwitterButton, EmailButton, RedditButton, LinkedInButton} from 'react-social'
 
 const Modal = require('boron/DropModal');
 
@@ -78,10 +78,6 @@ const Popup = React.createClass({
         }
     },
 
-    callback: function(event) {
-        console.log(event);
-    },
-
     render: function() {
 
         if(this.state.type === 'success' && this.state.message) {
@@ -96,7 +92,7 @@ const Popup = React.createClass({
                     <TwitterButton 
                         message={msg}
                         url={url}
-                        element="a">
+                        element="a" className="">
                         <i className={"fa fa-twitter-square fa-2x"} aria-hidden="true"/>
                     </TwitterButton>
                     <EmailButton 
@@ -113,6 +109,12 @@ const Popup = React.createClass({
                         element="a" className="">
                         <i className="fa fa-reddit fa-2x" aria-hidden="true"/>
                     </RedditButton>
+                    <LinkedInButton
+                        message={msg}
+                        url={url}
+                        element="a" className="">
+                        <i className="fa fa-linkedin fa-2x" aria-hidden="true"/>
+                    </LinkedInButton>
                 </div>; 
 
         } else if (this.state.type && this.state.message) {

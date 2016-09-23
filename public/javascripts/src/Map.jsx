@@ -3,8 +3,8 @@ import Popup from './Popup.jsx'
 import Legend from './Legend.jsx'
 import Search from './Search.jsx';
 const ReactDOM = require('react-dom');
-//const L = require('leaflet');
-//require('leaflet.markercluster');
+const L = require('leaflet');
+require('leaflet.markercluster');
 
 var config = {};
 var marker;
@@ -82,11 +82,9 @@ const Map = React.createClass({
 
 
 	getData: function() {
-		console.log('get data');
 		var self = this;
 		$.get('/mapData', function(data) {
 			self.addGeoJSONLayer(data);
-			console.log("Map getData(): ", data);
 		});
 	},
 
@@ -95,7 +93,7 @@ const Map = React.createClass({
 		
 
 		if(this.state.geojsonLayer && data) {
-			console.log('inside clear')
+
 			this.state.geojsonLayer.clearLayers();
 		}
 
@@ -106,14 +104,13 @@ const Map = React.createClass({
 		});
 		var markers = new L.MarkerClusterGroup(
 			{
-				disableClusteringAtZoom: 10,
+				disableClusteringAtZoom: 12,
        			maxClusterRadius: 100,
        			spiderfyOnMaxZoom: false,
        			showCoverageOnHover: false
 			});
 
 		markers.addLayer(geojsonLayer);
-		
 		this.map.addLayer(markers);
 		this.setState({geojsonLayer: markers});
 	},
