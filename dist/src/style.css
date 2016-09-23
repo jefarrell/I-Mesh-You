@@ -175,7 +175,8 @@ button:focus, a:focus {
 
 #map {
   height: 700px;
-  width: 100%; }
+  width: 100%;
+  z-index: 10; }
 
 #addBtn, #cancelBtn, #saveBtn {
   position: absolute;
