@@ -59,11 +59,9 @@ const Map = React.createClass({
 
 	updateMap: function() {
 		this.setState({lasAdd: "hi"});
-		console.log('map update state runs');
 	},
 
 	componentWillReceiveProps(nextProps) {
-		console.log("next props: ", nextProps.lat, nextProps.lon, typeof(nextProps.lat));
 		config.params.center[0] = nextProps.lon;
 		config.params.center[1] = nextProps.lat;
 		this.map.setView([nextProps.lat, nextProps.lon], 11);
@@ -73,7 +71,6 @@ const Map = React.createClass({
 		var self = this;
 		$.get('/mapData', function(data) {
 			self.addGeoJSONLayer(data);
-			console.log("Map getData(): ", data);
 		});
 	},
 
