@@ -19,15 +19,20 @@ const Popup = React.createClass({
 
     showModal: function(){
         this.refs.modal.show();
+        this.setState({type:'info'});
         $('body').append('<div id="coverFix"></div>');
     },
 
 
 
     hideModal: function(){
-        this.setState({type:'info', message:''})
+
         this.refs.modal.hide();
         $('#coverFix').remove();
+        var target = $('#status');
+        $(target).addClass('modal-landing');
+        $('#buttonCont').addClass('buttonVis');
+        this.setState({type: '', message:''});
     },
 
 
@@ -79,24 +84,44 @@ const Popup = React.createClass({
         }
     },
 
+    modalRegister: function() {
+        this.setState({message: '', type:''})
+        var target = $('#status');
+        target.empty();
+        $(target).removeClass('modal-landing');
+        $('#buttonCont').removeClass('buttonVis');
+    },
+
     render: function() {
 
 
         if (this.state.type === 'info' && this.state.message === '') {
-            var msg = 'Welcome ot this part';
-
+            var classString = 'modal-landing alert alert-' + this.state.type;
             var status = 
-                <div id="modal-landing">
-                    <h4> We're here!!!!!! </h4>
+                <div id="status" className={classString} ref="status">
+                    <div className={"row"}>
+                        <div className={"col-md-12"}>
+                            <div className={"modalblock"}>
+                                 <h3>Already bought your goTenna Mesh?</h3>
+                                 <h4 id="sub">If so, register as a node in this first-of-its-kind mesh network here!</h4>
+                                 <button onClick={this.modalRegister} className={"btn btn-lg modalActions"} id="modalRegister">REGISTER NOW!</button>
+                             </div>
+                             <div className={"modalblock"}>
+                                <h3>Haven't bought yours yet, but want to be part of the fun?</h3>
+                                <a href="http://www.kickstarter.com" target="_blank">
+                                    <button className={"btn btn-lg modalActions"} id="modalOrder">ORDER TODAY!</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
         }
 
         if(this.state.type === 'success' && this.state.message) {
 
-            var classString = 'alert alert-' + this.state.type;
+            var classString = 'modal-landing alert alert-' + this.state.type;
             var msg = "I just started a mesh network with GoTenna! Join me: "
             var url = "https://kickstarter.com"
-            var fbid = "355164067922975"
             var status = 
                 <div id="status" className={classString} ref="status">
                     <h4>{this.state.message}</h4>
@@ -205,13 +230,15 @@ const Popup = React.createClass({
                                 className={"form-control"}
                                 placeholder={"Street address, intersection, landmark or city"}>
                             </input>
-                        </div>                                                
+                        </div> 
+                        <div className={"buttonVis"} id="buttonCont">
+                            <a className={"btn btn-warning"} id={"saveBtn"} onClick={this.handleSubmit} >
+                                <i className={"fa fa-map-marker fa-lg"}></i>  Add to Map! </a>
+                            <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onMouseUp={this.hideModal} onClick={this.props.updater}>Close</a>
+                        </div>                                               
                     </form>
                     
-                    <a className={"btn btn-warning"} id={"saveBtn"} onClick={this.handleSubmit} >
-                        <i className={"fa fa-map-marker fa-lg"}></i>  Add to Map! </a>
 
-                    <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onMouseUp={this.hideModal} onClick={this.props.updater}>Close</a>
                 </Modal>
             </div>
         );

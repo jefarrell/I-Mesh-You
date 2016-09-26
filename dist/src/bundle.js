@@ -115909,7 +115909,7 @@ config.params = {
 	zoomControl: false,
 	zoom: 4,
 	maxZoom: 12,
-	minZoom: 3,
+	minZoom: 2,
 	scrollwheel: false,
 	scrollWheelZoom: false,
 	legends: true,
@@ -116092,13 +116092,18 @@ var Popup = _react2.default.createClass({
 
     showModal: function showModal() {
         this.refs.modal.show();
+        this.setState({ type: 'info' });
         $('body').append('<div id="coverFix"></div>');
     },
 
     hideModal: function hideModal() {
-        this.setState({ type: 'info', message: '' });
+
         this.refs.modal.hide();
         $('#coverFix').remove();
+        var target = $('#status');
+        $(target).addClass('modal-landing');
+        $('#buttonCont').addClass('buttonVis');
+        this.setState({ type: '', message: '' });
     },
 
     handleSubmit: function handleSubmit(e) {
@@ -116149,28 +116154,74 @@ var Popup = _react2.default.createClass({
                 }
     },
 
+    modalRegister: function modalRegister() {
+        this.setState({ message: '', type: '' });
+        var target = $('#status');
+        target.empty();
+        $(target).removeClass('modal-landing');
+        $('#buttonCont').removeClass('buttonVis');
+    },
+
     render: function render() {
 
         if (this.state.type === 'info' && this.state.message === '') {
-            var msg = 'Welcome ot this part';
-
+            var classString = 'modal-landing alert alert-' + this.state.type;
             var status = _react2.default.createElement(
                 'div',
-                { id: 'modal-landing' },
+                { id: 'status', className: classString, ref: 'status' },
                 _react2.default.createElement(
-                    'h4',
-                    null,
-                    ' We\'re here!!!!!! '
+                    'div',
+                    { className: "row" },
+                    _react2.default.createElement(
+                        'div',
+                        { className: "col-md-12" },
+                        _react2.default.createElement(
+                            'div',
+                            { className: "modalblock" },
+                            _react2.default.createElement(
+                                'h3',
+                                null,
+                                'Already bought your goTenna Mesh?'
+                            ),
+                            _react2.default.createElement(
+                                'h4',
+                                { id: 'sub' },
+                                'If so, register as a node in this first-of-its-kind mesh network here!'
+                            ),
+                            _react2.default.createElement(
+                                'button',
+                                { onClick: this.modalRegister, className: "btn btn-lg modalActions", id: 'modalRegister' },
+                                'REGISTER NOW!'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: "modalblock" },
+                            _react2.default.createElement(
+                                'h3',
+                                null,
+                                'Haven\'t bought yours yet, but want to be part of the fun?'
+                            ),
+                            _react2.default.createElement(
+                                'a',
+                                { href: 'http://www.kickstarter.com', target: '_blank' },
+                                _react2.default.createElement(
+                                    'button',
+                                    { className: "btn btn-lg modalActions", id: 'modalOrder' },
+                                    'ORDER TODAY!'
+                                )
+                            )
+                        )
+                    )
                 )
             );
         }
 
         if (this.state.type === 'success' && this.state.message) {
 
-            var classString = 'alert alert-' + this.state.type;
+            var classString = 'modal-landing alert alert-' + this.state.type;
             var msg = "I just started a mesh network with GoTenna! Join me: ";
             var url = "https://kickstarter.com";
-            var fbid = "355164067922975";
             var status = _react2.default.createElement(
                 'div',
                 { id: 'status', className: classString, ref: 'status' },
@@ -116336,18 +116387,22 @@ var Popup = _react2.default.createClass({
                             ref: 'loc3',
                             className: "form-control",
                             placeholder: "Street address, intersection, landmark or city" })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: "buttonVis", id: 'buttonCont' },
+                        _react2.default.createElement(
+                            'a',
+                            { className: "btn btn-warning", id: "saveBtn", onClick: this.handleSubmit },
+                            _react2.default.createElement('i', { className: "fa fa-map-marker fa-lg" }),
+                            '  Add to Map! '
+                        ),
+                        _react2.default.createElement(
+                            'a',
+                            { className: "btn btn-danger btn-secondary", id: "cancelBtn", onMouseUp: this.hideModal, onClick: this.props.updater },
+                            'Close'
+                        )
                     )
-                ),
-                _react2.default.createElement(
-                    'a',
-                    { className: "btn btn-warning", id: "saveBtn", onClick: this.handleSubmit },
-                    _react2.default.createElement('i', { className: "fa fa-map-marker fa-lg" }),
-                    '  Add to Map! '
-                ),
-                _react2.default.createElement(
-                    'a',
-                    { className: "btn btn-danger btn-secondary", id: "cancelBtn", onMouseUp: this.hideModal, onClick: this.props.updater },
-                    'Close'
                 )
             )
         );

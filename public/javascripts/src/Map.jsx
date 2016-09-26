@@ -14,7 +14,7 @@ config.params = {
 	zoomControl: false,
 	zoom: 4,
 	maxZoom: 12,
-	minZoom: 3,
+	minZoom: 2,
 	scrollwheel: false,
 	scrollWheelZoom: false,
 	legends: true,
