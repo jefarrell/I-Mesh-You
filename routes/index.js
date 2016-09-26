@@ -94,14 +94,14 @@ exports.mapData = (req, res) => {
 
 	// Query database, get location data
 	// Parse it and create GeoJSON object
-
+	
 	User.find(function(err, data) {
 		for (key in data) {
 			if(data.hasOwnProperty(key)) {
+				console.log(data[key])
 				container.push(data[key]['locations'])
 			}
 		}
-		console.log(container)
 		
 		for(var i=0;i<container.length;i++){
 			var temp = container[i];
@@ -123,9 +123,8 @@ exports.mapData = (req, res) => {
 					)
 				}
 			}	
-
 		 }
-	console.log(JSON.stringify(geoData));
+
 	res.json(geoData);
 
 	});

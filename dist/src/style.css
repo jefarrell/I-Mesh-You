@@ -315,7 +315,8 @@ ul.share-buttons .sr-only {
 .modal-landing {
   width: 100%;
   height: 100%;
-  background-color: #FFF;
+  background-color: #549AE6;
+  border: 7px solid #FFF;
   position: absolute;
   z-index: 40;
   text-align: center;
@@ -324,7 +325,7 @@ ul.share-buttons .sr-only {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  color: #549AE6; }
+  color: #fff; }
   .modal-landing h3 {
     font-weight: bold; }
   .modal-landing #sub {
