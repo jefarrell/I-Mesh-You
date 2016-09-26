@@ -115853,7 +115853,7 @@ var Legend = _react2.default.createClass({
 				_react2.default.createElement(
 					'div',
 					{ className: "legText" },
-					' Primary Mesh '
+					' Primary Location '
 				)
 			),
 			_react2.default.createElement(
@@ -115863,7 +115863,7 @@ var Legend = _react2.default.createClass({
 				_react2.default.createElement(
 					'div',
 					{ className: "legText" },
-					' Potential Mesh '
+					' Potential Location '
 				)
 			)
 		);
@@ -116109,9 +116109,10 @@ var Popup = _react2.default.createClass({
     submitData: function submitData() {
 
         var formData = {
-            KON: _reactDom2.default.findDOMNode(this.refs.KON).value,
             name: _reactDom2.default.findDOMNode(this.refs.name).value,
             twitter: _reactDom2.default.findDOMNode(this.refs.twitter).value,
+            site: _reactDom2.default.findDOMNode(this.refs.site).value,
+            bio: _reactDom2.default.findDOMNode(this.refs.bio).value,
             loc1: _reactDom2.default.findDOMNode(this.refs.loc1).value,
             loc2: _reactDom2.default.findDOMNode(this.refs.loc2).value,
             loc3: _reactDom2.default.findDOMNode(this.refs.loc3).value
@@ -116120,13 +116121,13 @@ var Popup = _react2.default.createClass({
         var self = this;
 
         // Check for null
-        if (formData.KON == '' || formData.loc1 == '') {
-            this.setState({ type: 'danger', message: 'Missing Required Fields - Try again please' });
+        if (formData.loc1 == '') {
+            this.setState({ type: 'danger', message: 'Primary/Home location is required.  Please try again!' });
             $('#KON ,#loc1').removeClass('reqd').addClass('has-error');
         }
         // Validate number
-        else if (formData.KON === "hello") {
-                this.setState({ type: 'danger', message: 'Invalid Order Number!' });
+        else if (formData.bio.length > 140) {
+                this.setState({ type: 'danger', message: 'Bio is greater than 140 chars.  Please try again!' });
             }
             // All good, post
             else {
@@ -116139,7 +116140,7 @@ var Popup = _react2.default.createClass({
                         data: JSON.stringify(formData),
                         contentType: "application/json",
                         success: function success(msg) {
-                            self.setState({ type: 'success', message: 'Thanks for Submitting!' });
+                            self.setState({ type: 'success', message: 'Thanks for registering your node(s)!' });
                         },
                         error: function error(err) {
                             self.setState({ type: 'danger', message: 'Something went wrong - please double check Information' });
@@ -116166,7 +116167,7 @@ var Popup = _react2.default.createClass({
                 _react2.default.createElement(
                     'div',
                     null,
-                    ' Please share on social media!'
+                    ' Invite others to join our mesh network by sharing on social media:'
                 ),
                 _react2.default.createElement(
                     _reactSocial.TwitterButton,
@@ -116219,7 +116220,7 @@ var Popup = _react2.default.createClass({
             _react2.default.createElement(
                 'button',
                 { onClick: this.showModal, className: "btn btn-lg", id: 'addBtn' },
-                'Add Your Mesh!'
+                'Register Your Node!'
             ),
             _react2.default.createElement(
                 Modal,
@@ -116233,15 +116234,6 @@ var Popup = _react2.default.createClass({
                         { className: "row" },
                         _react2.default.createElement(
                             'div',
-                            { className: "col-md-4 reqd", id: 'KON' },
-                            _react2.default.createElement('input', {
-                                type: 'text',
-                                ref: 'KON',
-                                className: "form-control",
-                                placeholder: "KickStarter Order # (a3kf2l2FDW)", required: true })
-                        ),
-                        _react2.default.createElement(
-                            'div',
                             { className: "col-md-4" },
                             _react2.default.createElement('input', {
                                 type: 'text',
@@ -116251,18 +116243,45 @@ var Popup = _react2.default.createClass({
                         ),
                         _react2.default.createElement(
                             'div',
-                            { className: "col-md-4 input-group" },
+                            { className: "col-md-4" },
                             _react2.default.createElement(
-                                'span',
-                                { className: "input-group-addon" },
-                                _react2.default.createElement('i', { className: "fa fa-at", 'aria-hidden': 'true' })
-                            ),
+                                'div',
+                                { className: "input-group" },
+                                _react2.default.createElement(
+                                    'span',
+                                    { className: "input-group-addon" },
+                                    _react2.default.createElement('i', { className: "fa fa-at", 'aria-hidden': 'true' })
+                                ),
+                                _react2.default.createElement('input', {
+                                    type: 'text',
+                                    ref: 'twitter',
+                                    className: "form-control",
+                                    placeholder: "Twitter (JaneDoe23" })
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: "col-md-4" },
                             _react2.default.createElement('input', {
                                 type: 'text',
-                                ref: 'twitter',
+                                ref: 'site',
                                 className: "form-control",
-                                placeholder: "Twitter (JaneDoe23)" })
+                                placeholder: "Personal site" })
                         )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: "form-group" },
+                        _react2.default.createElement(
+                            'label',
+                            { type: 'text' },
+                            'Short Bio'
+                        ),
+                        _react2.default.createElement('input', {
+                            type: 'text',
+                            ref: 'bio',
+                            className: "form-control",
+                            placeholder: "140 characters" })
                     ),
                     _react2.default.createElement(
                         'div',
@@ -116270,14 +116289,14 @@ var Popup = _react2.default.createClass({
                         _react2.default.createElement(
                             'label',
                             { type: 'text' },
-                            'Primary Location of Your Mesh'
+                            'Primary/Home Location *'
                         ),
                         _react2.default.createElement('input', {
                             type: 'text',
                             ref: 'loc1',
                             id: 'loc1',
                             className: "form-control",
-                            placeholder: "ex: 81 willoughby Street, Brooklyn, NY" })
+                            placeholder: "Street address, intersection, landmark or city" })
                     ),
                     _react2.default.createElement(
                         'div',
@@ -116285,13 +116304,13 @@ var Popup = _react2.default.createClass({
                         _react2.default.createElement(
                             'label',
                             { type: 'text' },
-                            'Potential Other Location'
+                            'Other Location #1'
                         ),
                         _react2.default.createElement('input', {
                             type: 'text',
                             ref: 'loc2',
                             className: "form-control",
-                            placeholder: "ex: 29 champs elysée paris" })
+                            placeholder: "Street address, intersection, landmark or city" })
                     ),
                     _react2.default.createElement(
                         'div',
@@ -116299,13 +116318,13 @@ var Popup = _react2.default.createClass({
                         _react2.default.createElement(
                             'label',
                             { type: 'text' },
-                            'Potential Other Location'
+                            'Other Location #2'
                         ),
                         _react2.default.createElement('input', {
                             type: 'text',
                             ref: 'loc3',
                             className: "form-control",
-                            placeholder: "ex: Hay St & Barrack St, Perth WA 6000, Australia" })
+                            placeholder: "Street address, intersection, landmark or city" })
                     )
                 ),
                 _react2.default.createElement(

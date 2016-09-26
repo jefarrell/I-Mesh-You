@@ -39,9 +39,10 @@ const Popup = React.createClass({
     submitData: function() {
         
         const formData = {
-            KON: ReactDOM.findDOMNode(this.refs.KON).value,
             name: ReactDOM.findDOMNode(this.refs.name).value,
             twitter: ReactDOM.findDOMNode(this.refs.twitter).value,
+            site: ReactDOM.findDOMNode(this.refs.site).value,
+            bio: ReactDOM.findDOMNode(this.refs.bio).value,
             loc1: ReactDOM.findDOMNode(this.refs.loc1).value,
             loc2: ReactDOM.findDOMNode(this.refs.loc2).value,
             loc3: ReactDOM.findDOMNode(this.refs.loc3).value
@@ -50,13 +51,13 @@ const Popup = React.createClass({
        var self = this;
 
        // Check for null
-        if (formData.KON == '' || formData.loc1 == '' ) {
-            this.setState({type: 'danger', message: 'Missing Required Fields - Try again please'});
+        if (formData.loc1 == '' ) {
+            this.setState({type: 'danger', message: 'Primary/Home location is required.  Please try again!'});
             $('#KON ,#loc1').removeClass('reqd').addClass('has-error');
        } 
        // Validate number
-       else if (formData.KON === "hello") {
-           this.setState({type: 'danger', message: 'Invalid Order Number!'})
+       else if (formData.bio.length > 140) {
+           this.setState({type: 'danger', message: 'Bio is greater than 140 chars.  Please try again!'})
        } 
        // All good, post
        else {
@@ -69,7 +70,7 @@ const Popup = React.createClass({
                 data: JSON.stringify(formData),
                 contentType: "application/json",
                 success: function(msg) {
-                    self.setState({type:'success', message:'Thanks for Submitting!'})
+                    self.setState({type:'success', message:'Thanks for registering your node(s)!'})
                 },
                 error: function(err) {
                     self.setState({type: 'danger', message: 'Something went wrong - please double check Information'})
@@ -88,7 +89,7 @@ const Popup = React.createClass({
             var status = 
                 <div id="status" className={classString} ref="status">
                     <h4>{this.state.message}</h4>
-                    <div> Please share on social media!</div>
+                    <div> Invite others to join our mesh network by sharing on social media:</div>
                     <TwitterButton 
                         message={msg}
                         url={url}
@@ -128,19 +129,11 @@ const Popup = React.createClass({
 
         return (
             <div>
-                <button onClick={this.showModal} className={"btn btn-lg"} id="addBtn">Add Your Mesh!</button>
+                <button onClick={this.showModal} className={"btn btn-lg"} id="addBtn">Register Your Node!</button>
                 <Modal ref="modal" modalStyle={modalStyle}>
                     {status}
                     <form id={"modalForm"}>
                         <div className={"row"}>
-                            <div className={"col-md-4 reqd"} id="KON">
-                                <input
-                                    type="text"
-                                    ref="KON"
-                                    className={"form-control"}
-                                    placeholder={"KickStarter Order # (a3kf2l2FDW)"} required>
-                                </input>
-                            </div>
                             <div className={"col-md-4"}>
                                 <input
                                     type="text"
@@ -149,43 +142,61 @@ const Popup = React.createClass({
                                     placeholder={"Name (Jane Doe)"}>
                                 </input>
                             </div>
-                            <div className={"col-md-4 input-group"}>
-                                <span className={"input-group-addon"}><i className={"fa fa-at"} aria-hidden="true"></i></span>
+                            <div className={"col-md-4"}>
+                                <div className={"input-group"}>
+                                    <span className={"input-group-addon"}><i className={"fa fa-at"} aria-hidden="true"></i></span>
+                                    <input
+                                        type="text"
+                                        ref="twitter"
+                                        className={"form-control"}
+                                        placeholder={"Twitter (JaneDoe23"}>
+                                    </input>
+                                </div>
+                            </div>
+                            <div className={"col-md-4"}>
                                 <input
                                     type="text"
-                                    ref="twitter"
+                                    ref="site"
                                     className={"form-control"}
-                                    placeholder={"Twitter (JaneDoe23)"}>
+                                    placeholder={"Personal site"}>
                                 </input>                           
                             </div>
                         </div> 
-
+                         <div className={"form-group"}>
+                            <label type="text">Short Bio</label>
+                            <input 
+                                type="text"
+                                ref="bio"
+                                className={"form-control"}
+                                placeholder={"140 characters"}>
+                            </input>
+                        </div>                       
                         <div className={"form-group reqd"} id="loc1">
-                            <label type="text">Primary Location of Your Mesh</label>
+                            <label type="text">Primary/Home Location *</label>
                             <input 
                                 type="text"
                                 ref="loc1"
                                 id="loc1"
                                 className={"form-control"}
-                                placeholder={"ex: 81 willoughby Street, Brooklyn, NY"}>
+                                placeholder={"Street address, intersection, landmark or city"}>
                             </input>
                         </div>
                         <div className={"form-group"}>
-                            <label type="text">Potential Other Location</label>
+                            <label type="text">Other Location #1</label>
                             <input 
                                 type="text"
                                 ref="loc2"
                                 className={"form-control"}
-                                placeholder={"ex: 29 champs elysée paris"}>
+                                placeholder={"Street address, intersection, landmark or city"}>
                             </input>
                         </div>
                         <div className={"form-group"}>
-                            <label type="text">Potential Other Location</label>
+                            <label type="text">Other Location #2</label>
                             <input 
                                 type="text"
                                 ref="loc3"
                                 className={"form-control"}
-                                placeholder={"ex: Hay St & Barrack St, Perth WA 6000, Australia"}>
+                                placeholder={"Street address, intersection, landmark or city"}>
                             </input>
                         </div>                                                
                     </form>

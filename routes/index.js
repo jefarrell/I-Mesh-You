@@ -24,9 +24,10 @@ exports.test = (req, res) => {
 exports.addData = (req, res) => {
 
 	const usr = new User ({
-		KON: req.body.KON,
 		name: req.body.name,
 		twitter: req.body.twitter,
+		site: req.body.site,
+		bio: req.body.bio,
 		locations: {
 			primaryLoc: {
 				lon: null,
