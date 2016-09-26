@@ -102,6 +102,15 @@ button:focus, a:focus {
 	font-weight: bold;
 	font-size: 2em;
 	color: $primary-blue;
+	transition: color 0.3s ease 0s;
+}
+
+#navlink {
+	text-decoration: none;
+}
+
+#navLogo:hover {
+	color: $primary-orange
 }
 
 #about {
@@ -180,7 +189,7 @@ button:focus, a:focus {
 		font-size: 5em;
 		font-weight: bold;
 		text-align: center;
-		padding: 0 0 1em 0;
+		padding: 0 0 0.5em 0;
 	}
 
 	a {
@@ -195,6 +204,18 @@ button:focus, a:focus {
 	h4 {
 		font-size: 1.4em;
 	}
+}
+
+#ksButton {
+	background-color: #2BDE73;
+	color: #FFF;
+	transition: background-color 0.3s ease 0s;	
+	
+}
+
+#ksButton:hover {
+	background-color: $primary-green;
+	color: #FFF;
 }
 
 #socialRow {
@@ -296,6 +317,38 @@ ul.share-buttons .sr-only {
 	z-index: 10;
 }
 
+.popupKey {
+	padding: 0;
+	font-weight: bold;
+	font-size: 1.25em;
+}
+
+.popupVal {
+	padding: 0;
+	font-weight: light;
+	font-size: 1em;
+}
+
+.custom-popup .leaflet-popup-content-wrapper {
+	background:#FFF;
+	color:#FFF;
+	text-align:center;
+
+}
+.custom-popup .leaflet-popup-content-wrapper a {
+	color:#000;
+}
+
+.custom-popup .leaflet-popup-tip {
+	border-left:15px solid transparent;
+	border-right:15px solid transparent;
+	background: #FFF;
+}
+
+.leaflet-left .leaflet-control {
+    margin-left: 2.7em;
+    margin-bottom: 35em;
+}
 
 #addBtn, #cancelBtn, #saveBtn {
 	position: absolute;
@@ -319,14 +372,14 @@ ul.share-buttons .sr-only {
 }
 
 #status i {
-	color: #AF4C76;
+	color: $primary-orange;
 	padding: 0.75em;
 	transition: color 0.3s ease 0s;
 }
 
 #status i:hover {
 	cursor: pointer;
-	color: $primary-blue;
+	color: $secondary-orange;
 }
 
 
@@ -336,6 +389,9 @@ ul.share-buttons .sr-only {
 	text-align: center;
 	h4 {
 		font-weight: bold;
+	}
+	div {
+		font-size: 1.2em;
 	}
 }
 
@@ -420,8 +476,8 @@ ul.share-buttons .sr-only {
 .modal-landing {
 	width: 100%;
 	height: 100%;
-	background-color: $primary-blue;
-	border: 7px solid #FFF;
+	background-color: #FFF;
+	border: 7px solid $primary-blue;
 	position: absolute;
 	z-index: 40;
 	text-align: center;
@@ -430,7 +486,7 @@ ul.share-buttons .sr-only {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;	
-	color: #fff;
+	color: $primary-blue;
 	h3 {
 		font-weight: bold;
 	}
@@ -459,19 +515,30 @@ ul.share-buttons .sr-only {
 	width: 100%;
 	height: 100%;
 	position: absolute;
+	border: 7px solid $primary-blue;
 	z-index: 40;
 	-webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    background-color: #FFF;
+    color: $primary-blue;
+
+    h4 {
+    	font-size: 2em;
+    	padding-top: 2em;
+    }
+
 }
+
+
 .modal-remove {
 	width: auto;
 	height: auto;
 }
 
 .modalblock {
-	margin: 5em;
+	margin: 2.5em;
 }
 
 
@@ -559,6 +626,7 @@ ul.share-buttons .sr-only {
 
 #social {
 	margin-top: 1em;
+	margin-bottom: 4em;
 }
 
 #copy {

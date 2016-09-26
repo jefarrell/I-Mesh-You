@@ -24,7 +24,7 @@ exports.test = (req, res) => {
 exports.addData = (req, res) => {
 
 	const usr = new User ({
-		name: req.body.name,
+		username: req.body.username,
 		twitter: req.body.twitter,
 		site: req.body.site,
 		bio: req.body.bio,
@@ -94,40 +94,62 @@ exports.mapData = (req, res) => {
 
 	// Query database, get location data
 	// Parse it and create GeoJSON object
-	
-	User.find(function(err, data) {
-		for (key in data) {
-			if(data.hasOwnProperty(key)) {
-				console.log(data[key])
-				container.push(data[key]['locations'])
-			}
-		}
-		
-		for(var i=0;i<container.length;i++){
-			var temp = container[i];
-			for (var x = 0; x < checker.length; x++){
-				var name = temp[checker[x]]["name"];
-				var lat = temp[checker[x]]["lat"];
-				var lng = temp[checker[x]]["lon"];
+	User.find(function(err,data) {
 
-				if (lat === null || lng === null) {} 
-				else {
-					geoData['features'].push( 
-						{
-							"type": "Feature",
-							"geometry": {"type": "Point", "coordinates": [ lng, lat]},
-							"properties": {
-							"name": name
-							}
-						}
-					)
+		for (var i=0;i<data.length;i++) {
+			
+			geoData['features'].push( 
+				{
+					"type": "Feature",
+					"geometry": {"type": "Point", "coordinates": [ data[i].locations.primaryLoc.lon, data[i].locations.primaryLoc.lat]},
+					"properties": {
+						"name": "Primary Location",
+						"username": data[i].username,
+						"twitter": data[i].twitter,
+						"site": data[i].site,
+						"bio": data[i].bio
+					}
 				}
-			}	
-		 }
+			)
 
-	res.json(geoData);
+			if(data[i].locations.secondLoc.lon && data[i].locations.primaryLoc.lat) {
+				geoData['features'].push( 
+					{
+						"type": "Feature",
+						"geometry": {"type": "Point", "coordinates": [ data[i].locations.secondLoc.lon, data[i].locations.secondLoc.lat]},
+						"properties": {
+							"name": "Potential Location",
+							"username": data[i].username,
+							"twitter": data[i].twitter,
+							"site": data[i].site,
+							"bio": data[i].bio
+						}
+					}
+				)				
+			}
 
+			if(data[i].locations.thirdLoc.lon && data[i].locations.thirdLoc.lat) {
+				geoData['features'].push( 
+					{
+						"type": "Feature",
+						"geometry": {"type": "Point", "coordinates": [ data[i].locations.thirdLoc.lon, data[i].locations.thirdLoc.lat]},
+						"properties": {
+							"name": "Potential Location",
+							"username": data[i].username,
+							"twitter": data[i].twitter,
+							"site": data[i].site,
+							"bio": data[i].bio
+						}
+					}
+				)				
+			}
+
+		}
+
+		res.json(geoData);
 	});
+
+
 }
 
 

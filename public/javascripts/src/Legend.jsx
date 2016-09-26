@@ -23,7 +23,7 @@ const Legend = React.createClass({
 				</div>
 				<div className={"row legRow"} id="bottomRow">
 					<div id="pot" style={potStyle}></div>
-					<div className={"legText"}> Potential Location </div>
+					<div className={"legText"}> Secondary Locations </div>
 				</div>
 				
 			</div>

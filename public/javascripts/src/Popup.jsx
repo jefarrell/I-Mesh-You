@@ -44,7 +44,7 @@ const Popup = React.createClass({
     submitData: function() {
         
         const formData = {
-            name: ReactDOM.findDOMNode(this.refs.name).value,
+            username: ReactDOM.findDOMNode(this.refs.username).value,
             twitter: ReactDOM.findDOMNode(this.refs.twitter).value,
             site: ReactDOM.findDOMNode(this.refs.site).value,
             bio: ReactDOM.findDOMNode(this.refs.bio).value,
@@ -52,6 +52,8 @@ const Popup = React.createClass({
             loc2: ReactDOM.findDOMNode(this.refs.loc2).value,
             loc3: ReactDOM.findDOMNode(this.refs.loc3).value
        };
+
+
 
        var self = this;
 
@@ -68,12 +70,11 @@ const Popup = React.createClass({
        else {
 
             $('#KON ,#loc1').removeClass('has-error').addClass('reqd');
-
             $.ajax({
                 url: "/addData",
                 type: "POST",
                 data: JSON.stringify(formData),
-                contentType: "application/json",
+                contentType: "application/json", 
                 success: function(msg) {
                     self.setState({type:'success', message:'Thanks for registering your node(s)!'})
                 },
@@ -119,34 +120,34 @@ const Popup = React.createClass({
 
         if(this.state.type === 'success' && this.state.message) {
 
-            var classString = 'modal-landing alert alert-' + this.state.type;
+            var classString = 'modal-success alert alert-' + this.state.type;
             var msg = "I just started a mesh network with GoTenna! Join me: "
             var url = "https://kickstarter.com"
             var status = 
                 <div id="status" className={classString} ref="status">
                     <h4>{this.state.message}</h4>
                     <div> Invite others to join our mesh network by sharing on social media:</div>
-                    <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FgoTennaInc&amp;src=sdkpreparse">
-                        <i className={"fa fa-facebook fa-2x"} aria-hidden="true"></i>                    
+                    <a className={"fb-xfbml-parse-ignore modalShare"} target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FgoTennaInc&amp;src=sdkpreparse">
+                        <i className={"fa fa-facebook fa-3x"} aria-hidden="true"></i>                    
                     </a>
                     <TwitterButton 
                         message={msg}
                         url={url}
-                        element="a" className="">
-                        <i className={"fa fa-twitter-square fa-2x"} aria-hidden="true"/>
+                        element="a" className="modalShare">
+                        <i className={"fa fa-twitter-square fa-3x"} aria-hidden="true"/>
                     </TwitterButton>
                     <EmailButton 
                         title="Share via E-Mail"
                         message={msg}
                         url={url}
-                        element="a" className="">
-                        <i className={"fa fa-envelope fa-2x"} aria-hidden="true"/>
+                        element="a" className="modalShare">
+                        <i className={"fa fa-envelope fa-3x"} aria-hidden="true"/>
                     </EmailButton>
                     <LinkedInButton
                         message={msg}
                         url={url}
-                        element="a" className="">
-                        <i className="fa fa-linkedin fa-2x" aria-hidden="true"/>
+                        element="a" className="modalShare">
+                        <i className="fa fa-linkedin fa-3x" aria-hidden="true"/>
                     </LinkedInButton>
                 </div>; 
 
@@ -169,7 +170,7 @@ const Popup = React.createClass({
                             <div className={"col-md-4"}>
                                 <input
                                     type="text"
-                                    ref="name"
+                                    ref="username"
                                     className={"form-control"}
                                     placeholder={"Name (Jane Doe)"}>
                                 </input>

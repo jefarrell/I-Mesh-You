@@ -99,7 +99,7 @@ const Map = React.createClass({
 
 		this.setState({geojson: data});
 		var geojsonLayer = L.geoJson(data, {
-			// popup here if needed later
+			onEachFeature: this.onEachFeature,
 			pointToLayer: this.pointToLayer
 		});
 		var markers = new L.MarkerClusterGroup(
@@ -130,7 +130,23 @@ const Map = React.createClass({
 
 
 	onEachFeature: function(feature, layer) {
-		var popup = '<div><p>'+feature.properties.name+'</p></div>';
+		var popup = "";
+		var x = feature.properties;
+		for (var key in x) {
+			if (x[key]) {
+				if (key === 'name'){}
+					else if (key === 'site') {
+						var siteInsert = '<div class="popupDiv"><span class="popupKey">Website: </span>' + '<a href="http://' + x[key] + ' " target="_blank">' + x[key] + '</a></div>' 
+						popup += siteInsert;
+					}
+
+					else {
+					var newKey = key.charAt(0).toUpperCase() + key.slice(1);
+					var insert = '<div class="popupDiv"><span class="popupKey">'+ newKey + ': </span>' + '<span class="popupVal">'+x[key]+'</span>'
+					popup += insert;
+				}
+			}
+		}
 		layer.bindPopup(popup);
 	},
 

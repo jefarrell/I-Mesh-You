@@ -37,11 +37,27 @@ $(window).bind("load", function(){
         }, 'xml');
     });
 
+    $('#searchInput').keydown(function(event) {
+        if (event.keyCode == 13) {
+            $('#searchBtn').click();
+            return false;
+         }
+    });
 
     $('#emailSign').on('click', function() {
         var addr = $('#emailVal').val();
         $.get('/klaviyo', function(data) {
-            console.log("res: ", JSON.parse(data).id);
+            data = JSON.parse(data);
+            $.ajax({
+              type: "POST",
+              url: 'https://a.klaviyo.com/api/v1/list/rZtrXH/members',
+              data: {
+                email: addr,
+                "\x61\x70\x69\x5F\x6B\x65\x79": data.key,
+                confirm_optin: true
+              }
+            });
+
         });
     });
 

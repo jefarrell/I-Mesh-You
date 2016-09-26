@@ -115863,7 +115863,7 @@ var Legend = _react2.default.createClass({
 				_react2.default.createElement(
 					'div',
 					{ className: "legText" },
-					' Potential Location '
+					' Secondary Locations '
 				)
 			)
 		);
@@ -115991,7 +115991,7 @@ var Map = _react2.default.createClass({
 
 		this.setState({ geojson: data });
 		var geojsonLayer = L.geoJson(data, {
-			// popup here if needed later
+			onEachFeature: this.onEachFeature,
 			pointToLayer: this.pointToLayer
 		});
 		var markers = new L.MarkerClusterGroup({
@@ -116017,7 +116017,20 @@ var Map = _react2.default.createClass({
 	},
 
 	onEachFeature: function onEachFeature(feature, layer) {
-		var popup = '<div><p>' + feature.properties.name + '</p></div>';
+		var popup = "";
+		var x = feature.properties;
+		for (var key in x) {
+			if (x[key]) {
+				if (key === 'name') {} else if (key === 'site') {
+					var siteInsert = '<div class="popupDiv"><span class="popupKey">Website: </span>' + '<a href="http://' + x[key] + ' " target="_blank">' + x[key] + '</a></div>';
+					popup += siteInsert;
+				} else {
+					var newKey = key.charAt(0).toUpperCase() + key.slice(1);
+					var insert = '<div class="popupDiv"><span class="popupKey">' + newKey + ': </span>' + '<span class="popupVal">' + x[key] + '</span>';
+					popup += insert;
+				}
+			}
+		}
 		layer.bindPopup(popup);
 	},
 
@@ -116114,7 +116127,7 @@ var Popup = _react2.default.createClass({
     submitData: function submitData() {
 
         var formData = {
-            name: _reactDom2.default.findDOMNode(this.refs.name).value,
+            username: _reactDom2.default.findDOMNode(this.refs.username).value,
             twitter: _reactDom2.default.findDOMNode(this.refs.twitter).value,
             site: _reactDom2.default.findDOMNode(this.refs.site).value,
             bio: _reactDom2.default.findDOMNode(this.refs.bio).value,
@@ -116138,7 +116151,6 @@ var Popup = _react2.default.createClass({
             else {
 
                     $('#KON ,#loc1').removeClass('has-error').addClass('reqd');
-
                     $.ajax({
                         url: "/addData",
                         type: "POST",
@@ -116219,7 +116231,7 @@ var Popup = _react2.default.createClass({
 
         if (this.state.type === 'success' && this.state.message) {
 
-            var classString = 'modal-landing alert alert-' + this.state.type;
+            var classString = 'modal-success alert alert-' + this.state.type;
             var msg = "I just started a mesh network with GoTenna! Join me: ";
             var url = "https://kickstarter.com";
             var status = _react2.default.createElement(
@@ -116237,16 +116249,16 @@ var Popup = _react2.default.createClass({
                 ),
                 _react2.default.createElement(
                     'a',
-                    { 'class': 'fb-xfbml-parse-ignore', target: '_blank', href: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FgoTennaInc&src=sdkpreparse' },
-                    _react2.default.createElement('i', { className: "fa fa-facebook fa-2x", 'aria-hidden': 'true' })
+                    { className: "fb-xfbml-parse-ignore modalShare", target: '_blank', href: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FgoTennaInc&src=sdkpreparse' },
+                    _react2.default.createElement('i', { className: "fa fa-facebook fa-3x", 'aria-hidden': 'true' })
                 ),
                 _react2.default.createElement(
                     _reactSocial.TwitterButton,
                     {
                         message: msg,
                         url: url,
-                        element: 'a', className: '' },
-                    _react2.default.createElement('i', { className: "fa fa-twitter-square fa-2x", 'aria-hidden': 'true' })
+                        element: 'a', className: 'modalShare' },
+                    _react2.default.createElement('i', { className: "fa fa-twitter-square fa-3x", 'aria-hidden': 'true' })
                 ),
                 _react2.default.createElement(
                     _reactSocial.EmailButton,
@@ -116254,16 +116266,16 @@ var Popup = _react2.default.createClass({
                         title: 'Share via E-Mail',
                         message: msg,
                         url: url,
-                        element: 'a', className: '' },
-                    _react2.default.createElement('i', { className: "fa fa-envelope fa-2x", 'aria-hidden': 'true' })
+                        element: 'a', className: 'modalShare' },
+                    _react2.default.createElement('i', { className: "fa fa-envelope fa-3x", 'aria-hidden': 'true' })
                 ),
                 _react2.default.createElement(
                     _reactSocial.LinkedInButton,
                     {
                         message: msg,
                         url: url,
-                        element: 'a', className: '' },
-                    _react2.default.createElement('i', { className: 'fa fa-linkedin fa-2x', 'aria-hidden': 'true' })
+                        element: 'a', className: 'modalShare' },
+                    _react2.default.createElement('i', { className: 'fa fa-linkedin fa-3x', 'aria-hidden': 'true' })
                 )
             );
         } else if (this.state.type && this.state.message) {
@@ -116299,7 +116311,7 @@ var Popup = _react2.default.createClass({
                             { className: "col-md-4" },
                             _react2.default.createElement('input', {
                                 type: 'text',
-                                ref: 'name',
+                                ref: 'username',
                                 className: "form-control",
                                 placeholder: "Name (Jane Doe)" })
                         ),
@@ -116478,13 +116490,13 @@ var Search = _react2.default.createClass({
 				_react2.default.createElement(
 					'div',
 					{ className: "input-group" },
-					_react2.default.createElement('input', { type: 'text', className: "form-control", ref: 'searchbar', placeholder: 'Zoom to Location...' }),
+					_react2.default.createElement('input', { type: 'text', className: "form-control", id: 'searchInput', ref: 'searchbar', placeholder: 'Zoom to Location...' }),
 					_react2.default.createElement(
 						'span',
 						{ className: "input-group-btn" },
 						_react2.default.createElement(
 							'button',
-							{ className: "btn btn-secondary", type: 'button', onClick: this.handleClick },
+							{ className: "btn btn-secondary", id: 'searchBtn', type: 'button', onClick: this.handleClick },
 							'Go!'
 						)
 					)
@@ -116585,10 +116597,26 @@ $(window).bind("load", function () {
         }, 'xml');
     });
 
+    $('#searchInput').keydown(function (event) {
+        if (event.keyCode == 13) {
+            $('#searchBtn').click();
+            return false;
+        }
+    });
+
     $('#emailSign').on('click', function () {
         var addr = $('#emailVal').val();
         $.get('/klaviyo', function (data) {
-            console.log("res: ", JSON.parse(data).id);
+            data = JSON.parse(data);
+            $.ajax({
+                type: "POST",
+                url: 'https://a.klaviyo.com/api/v1/list/rZtrXH/members',
+                data: {
+                    email: addr,
+                    "\x61\x70\x69\x5F\x6B\x65\x79": data.key,
+                    confirm_optin: true
+                }
+            });
         });
     });
 });

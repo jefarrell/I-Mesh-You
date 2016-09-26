@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 
 const userSchema = new Schema ({
-	name: String,
+	username: String,
 	twitter: String,
-	website: String,
+	site: String,
 	bio: { type: String, maxlength: 140 },
 	locations: {
 		primaryLoc: {
