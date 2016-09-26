@@ -10,7 +10,7 @@ $secondary-red: #D50000;
 $primary-green: #4CAF50;
 $secondary-green: #2E7D32;
 
-$map-height: 700px;
+$map-height: 600px;
 
 @font-face {
 	font-family: SalvoSans;
@@ -114,13 +114,18 @@ button:focus, a:focus {
 	}
 
 	p {
-		text-align: center;
+		text-align: left;
 		padding: 0.35em 0;
 		font-size: 1.5em;
-		font-weight: 400;
+		font-weight: normal;
 		line-height: 2.25em;
 	}
+
+	.boldp {
+		font-weight: bold;
+	}
 }
+
 
 #box {
 	position: relative;
@@ -160,20 +165,22 @@ button:focus, a:focus {
 
 #kickstarter{
 	color: #FFF;
-	height: 500px;
-	h2, h3 {
+	height: 625px;
+	h3, h4 {
 		text-align: center;
 		padding: 1em;
 	}
 	
-	h2 {
+	h3 {
 		margin-top: 2em;
 		font-size: 3em;
 	}
 
-	h3 {
+	h2 {
 		font-size: 5em;
 		font-weight: bold;
+		text-align: center;
+		padding: 0 0 1em 0;
 	}
 
 	a {
@@ -184,13 +191,38 @@ button:focus, a:focus {
 	a:hover {
 		color: #2BDE73;
 	}
-	// svg path {
-	// 	transition: fill 0.3s ease 0s;	
-	// }
 
-	// svg:hover path {
-	//     fill: #2BDE73;
-	// }
+	h4 {
+		font-size: 1.4em;
+	}
+}
+
+#socialRow {
+	text-align: center;
+
+	a:hover {
+		color: $primary-orange;
+	}
+}
+ul.share-buttons{
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li{
+  display: inline;
+  padding: 1em 1em 2em 1em;
+}
+
+ul.share-buttons .sr-only {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
 }
 
 #ksLogo {
@@ -385,6 +417,15 @@ button:focus, a:focus {
 	outline: none !important;
 }
 
+#modal-landing {
+	width: 100%;
+	height: 100%;
+	background-color: #FFF;
+	position: absolute;
+	z-index: 40;
+}
+
+
 #modalForm {
 	padding: 2em;
 
@@ -432,7 +473,7 @@ button:focus, a:focus {
 #contact {
 	background-color: $primary-blue;
 	color: #FFF;
-	max-height: 250px;
+	max-height: 450px;
 
 	hr {
 		border: none;
@@ -472,4 +513,26 @@ button:focus, a:focus {
 
 #copy {
 	padding-top: 3em;
+}
+
+.emailGroup {
+	padding: 1em;
+	text-align: center;
+
+	.input-group {
+		padding-top: 0.5em;
+	}
+
+	.btn {
+		border: 1px solid #ccc;
+		background-color: #FFF;
+		color: $primary-blue;
+		transition: background-color 0.3s ease 0s;
+	}
+
+	.btn:hover {
+		color: #FFF;
+		background-color: #ccc;
+
+	}
 }

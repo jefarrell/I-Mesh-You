@@ -116151,11 +116151,26 @@ var Popup = _react2.default.createClass({
 
     render: function render() {
 
+        if (this.state.type === 'info' && this.state.message === '') {
+            var msg = 'Welcome ot this part';
+
+            var status = _react2.default.createElement(
+                'div',
+                { id: 'modal-landing' },
+                _react2.default.createElement(
+                    'h4',
+                    null,
+                    ' We\'re here!!!!!! '
+                )
+            );
+        }
+
         if (this.state.type === 'success' && this.state.message) {
 
             var classString = 'alert alert-' + this.state.type;
             var msg = "I just started a mesh network with GoTenna! Join me: ";
             var url = "https://kickstarter.com";
+            var fbid = "355164067922975";
             var status = _react2.default.createElement(
                 'div',
                 { id: 'status', className: classString, ref: 'status' },
@@ -116168,6 +116183,11 @@ var Popup = _react2.default.createClass({
                     'div',
                     null,
                     ' Invite others to join our mesh network by sharing on social media:'
+                ),
+                _react2.default.createElement(
+                    'a',
+                    { 'class': 'fb-xfbml-parse-ignore', target: '_blank', href: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FgoTennaInc&src=sdkpreparse' },
+                    _react2.default.createElement('i', { className: "fa fa-facebook fa-2x", 'aria-hidden': 'true' })
                 ),
                 _react2.default.createElement(
                     _reactSocial.TwitterButton,
@@ -116185,15 +116205,6 @@ var Popup = _react2.default.createClass({
                         url: url,
                         element: 'a', className: '' },
                     _react2.default.createElement('i', { className: "fa fa-envelope fa-2x", 'aria-hidden': 'true' })
-                ),
-                _react2.default.createElement(
-                    _reactSocial.RedditButton,
-                    {
-                        title: 'Share via Reddit',
-                        message: msg,
-                        url: url,
-                        element: 'a', className: '' },
-                    _react2.default.createElement('i', { className: 'fa fa-reddit fa-2x', 'aria-hidden': 'true' })
                 ),
                 _react2.default.createElement(
                     _reactSocial.LinkedInButton,
@@ -116517,6 +116528,13 @@ $(window).bind("load", function () {
             // Replace image with new SVG
             $img.replaceWith($svg);
         }, 'xml');
+    });
+
+    $('#emailSign').on('click', function () {
+        var addr = $('#emailVal').val();
+        $.get('/klaviyo', function (data) {
+            console.log("res: ", JSON.parse(data).id);
+        });
     });
 });
 

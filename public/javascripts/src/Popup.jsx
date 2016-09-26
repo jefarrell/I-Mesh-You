@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {TwitterButton, EmailButton, RedditButton, LinkedInButton} from 'react-social'
+import {TwitterButton, EmailButton, RedditButton, LinkedInButton, FacebookButton} from 'react-social'
 
 const Modal = require('boron/DropModal');
 
@@ -81,15 +81,29 @@ const Popup = React.createClass({
 
     render: function() {
 
+
+        if (this.state.type === 'info' && this.state.message === '') {
+            var msg = 'Welcome ot this part';
+
+            var status = 
+                <div id="modal-landing">
+                    <h4> We're here!!!!!! </h4>
+                </div>
+        }
+
         if(this.state.type === 'success' && this.state.message) {
 
             var classString = 'alert alert-' + this.state.type;
             var msg = "I just started a mesh network with GoTenna! Join me: "
             var url = "https://kickstarter.com"
+            var fbid = "355164067922975"
             var status = 
                 <div id="status" className={classString} ref="status">
                     <h4>{this.state.message}</h4>
                     <div> Invite others to join our mesh network by sharing on social media:</div>
+                    <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FgoTennaInc&amp;src=sdkpreparse">
+                        <i className={"fa fa-facebook fa-2x"} aria-hidden="true"></i>                    
+                    </a>
                     <TwitterButton 
                         message={msg}
                         url={url}
@@ -103,13 +117,6 @@ const Popup = React.createClass({
                         element="a" className="">
                         <i className={"fa fa-envelope fa-2x"} aria-hidden="true"/>
                     </EmailButton>
-                    <RedditButton 
-                        title="Share via Reddit"
-                        message={msg}
-                        url={url}
-                        element="a" className="">
-                        <i className="fa fa-reddit fa-2x" aria-hidden="true"/>
-                    </RedditButton>
                     <LinkedInButton
                         message={msg}
                         url={url}

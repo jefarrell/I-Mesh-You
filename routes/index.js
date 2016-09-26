@@ -63,18 +63,13 @@ exports.addData = (req, res) => {
 			usr.locations.thirdLoc.lat = res[2].value[0].latitude;
 		}
 
-		// Check 
-		var toUpdate = {};
-		toUpdate = Object.assign(toUpdate, usr._doc);
-		delete toUpdate._id;
-
-		User.findOneAndUpdate({ KON: toUpdate.KON }, toUpdate, {upsert: true, new: true}, function(err, doc) {
+		usr.save(function(err, doc) {
 			if (err) { 
 				console.log("User find&update Error! - ", err);
 				return;
 			}
 			else {
-				console.log("NEW THANG ", doc);
+				console.log("database updated");
 			}
 		})
 	});
@@ -153,3 +148,14 @@ exports.inputgeo = (req,res) => {
 	})
 }
 
+exports.klaviyo = (req,res) => {
+	const key = 'pk_738493bf8c23b4a3d12ffdfcb63069f6b3';
+	const listID = 'cG9t3T';
+
+	const apiRes = {
+		key: key,
+		id: listID
+		}
+
+	res.send((JSON.stringify(apiRes)));
+}

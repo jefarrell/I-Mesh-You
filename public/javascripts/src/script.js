@@ -37,4 +37,12 @@ $(window).bind("load", function(){
         }, 'xml');
     });
 
+
+    $('#emailSign').on('click', function() {
+        var addr = $('#emailVal').val();
+        $.get('/klaviyo', function(data) {
+            console.log("res: ", JSON.parse(data).id);
+        });
+    });
+
 });

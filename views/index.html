@@ -30,7 +30,14 @@
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50"">
-
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 	<!-- Main Navigation Bar -->
     <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container">
@@ -88,13 +95,13 @@
     			<p>
     			     goTenna Mesh is the future of people-powered connectivity and the first-of-its-kind: a 100% off-grid, mobile, long-range, consumer-ready mesh network.
                 </p>
-                <p>
+                <p class="boldp">
                     Please register your goTenna Mesh "node" on the map at imeshyou.com. You can register as anonymously as you'd like, and place a pin for your main location as well as other places you plan to use goTenna Mesh.
                 </p>
                 <p>
                     Search for other mesh founders, and use the hashtag #imeshyou on social media to engage in ongoing conversation. 
                 </p>
-                <p>
+                <p class="boldp">
                     Invite friends to join goTenna Mesh! More people = more possibility, for both off-grid and on-grid uses!
     			</p>
 	    </div>
@@ -106,15 +113,38 @@
     	<div id="box">
     	    <div id="imgCont"></div>
 			<div id="overlay"></div>
-	    	<div class="container-fluid content">
-	    		<div class="col-md-1"></div>
-	    		<div class="col-md-10">
-	    			<h2> Don't have yours yet? </h2> 
-	    			<h3> <a href="http://www.kickstarter.com" target="_blank">JOIN US. </a></h3>
-	    			
-	    		</div>
-	    		<div class="col-md-1"></div>
-    		</div>
+            <div class="row">
+    	    	<div class="container-fluid content">
+    	    		<div class="col-md-1"></div>
+    	    		<div class="col-md-10">
+    	    			<h3> Don't have yours yet? </h3> 
+    	    			<h2> <a href="http://www.kickstarter.com" target="_blank">JOIN US. </a></h2>                    
+    	    		</div>
+    	    		<div class="col-md-1"></div>
+        		</div>
+                hi
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <h4>Invite others to join our mesh network by sharing on social media:</h4>
+
+                        <div id="socialRow">
+                            <ul class="share-buttons">
+                              <li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.kickstarter.com&t=%22I%20just%20started%20a%20mesh%20network%20with%20GoTenna!%20Join%20me%22" target="_blank" title="Share on Facebook"><i class="fa fa-facebook fa-3x" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a></li>
+                              <li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.kickstarter.com&text=%22I%20just%20started%20a%20mesh%20network%20with%20GoTenna!%20Join%20me%22:%20http%3A%2F%2Fwww.kickstarter.com" target="_blank" title="Tweet"><i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i><span class="sr-only">Tweet</span></a></li>
+                              <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.kickstarter.com&title=%22I%20just%20started%20a%20mesh%20network%20with%20GoTenna!%20Join%20me%22&summary=Here's%20where%20the%20description%20shows%20up&source=http%3A%2F%2Fwww.kickstarter.com" target="_blank" title="Share on LinkedIn"><i class="fa fa-linkedin-square fa-3x" aria-hidden="true"></i><span class="sr-only">Share on LinkedIn</span></a></li>
+                              <li><a href="mailto:?subject=%22I%20just%20started%20a%20mesh%20network%20with%20GoTenna!%20Join%20me%22&body=Here's%20where%20the%20description%20shows%20up:%20http%3A%2F%2Fwww.kickstarter.com" target="_blank" title="Send email"><i class="fa fa-envelope-square fa-3x" aria-hidden="true"></i><span class="sr-only">Send email</span></a></li>
+                            </ul>
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-md-1"></div>
+
+                
+
+
+            </div>
     	</div>
 
 
@@ -150,6 +180,19 @@
 		    </div>
 		    <div class="col-md-1"></div>
     	</div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 emailGroup">
+                <h4>Sign up for the goTenna newsletter</h4>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="emailVal" placeholder="Enter your email address" aria-describedby="basic-addon2">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" id="emailSign" type="button">Sign Up!</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
     	<div class="row" id="copy">
 		    <div class="col-md-12">
 
