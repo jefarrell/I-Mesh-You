@@ -102,6 +102,18 @@ button:focus, a:focus {
   font-weight: bold;
   font-style: italic; }
 
+.bgw {
+  background-color: #FFF;
+  color: #549AE6;
+  font-weight: bold;
+  padding: 5px; }
+
+.bgbl {
+  background-color: #549AE6;
+  color: #FFF;
+  font-weight: bold;
+  padding: 5px; }
+
 .gridL {
   text-align: right; }
 

@@ -147,6 +147,20 @@ button:focus, a:focus {
 	font-style: italic;
 }
 
+.bgw {
+	background-color: #FFF;
+	color: $primary-blue;
+	font-weight: bold;
+	padding: 5px;
+}
+
+.bgbl {
+	background-color: $primary-blue;
+	color: #FFF;
+	font-weight: bold;
+	padding: 5px;
+}
+
 .gridL {
 	text-align: right;
 }

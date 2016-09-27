@@ -116617,6 +116617,10 @@ $(window).bind("load", function () {
 
     $('#emailSign').on('click', function () {
         var addr = $('#emailVal').val();
+        if (addr !== "") {
+            $('.emailSect').empty();
+            $('.emailGroup').append('<p> Thanks for signing up! </p>');
+        }
         $.get('/klaviyo', function (data) {
             data = JSON.parse(data);
             $.ajax({
