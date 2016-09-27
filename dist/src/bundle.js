@@ -116615,6 +116615,11 @@ $(window).bind("load", function () {
         window.open("http://www.kickstarter.com");
     });
 
+    $('#hash').on('click', function (e) {
+        e.preventDefault();
+        window.open("https://twitter.com/search?q=imeshyou&src=typd");
+    });
+
     $('#emailSign').on('click', function () {
         var addr = $('#emailVal').val();
         if (addr !== "") {

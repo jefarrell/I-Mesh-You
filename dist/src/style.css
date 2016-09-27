@@ -85,7 +85,7 @@ button:focus, a:focus {
     padding-top: 0.35em;
     padding-bottom: 0.35em; }
   #about p {
-    padding: 0.35em 0;
+    padding: 1em;
     font-size: 1.5em;
     font-weight: normal;
     line-height: 2.25em; }
@@ -114,14 +114,18 @@ button:focus, a:focus {
   font-weight: bold;
   padding: 5px; }
 
+#hash {
+  transition: background-color 0.3s ease 0s; }
+
+#hash:hover {
+  background-color: #FFC107;
+  cursor: pointer; }
+
 .gridL {
   text-align: right; }
 
 .gridR {
   text-align: left; }
-
-#textGrid div {
-  padding: 1.5em; }
 
 .gridHi {
   background-color: #FFF;
