@@ -174,7 +174,7 @@ button:focus, a:focus {
     text-align: center;
     padding: 1em; }
   #kickstarter h3 {
-    margin-top: 2em;
+    margin-top: 1em;
     font-size: 3em; }
   #kickstarter h2 {
     font-size: 5em;
@@ -190,16 +190,10 @@ button:focus, a:focus {
     font-size: 1.4em; }
 
 #ksButton {
-  width: 15em;
-  font-size: 2em;
-  background-color: #2BDE73;
-  font-weight: bold;
-  color: #FFF;
-  transition: background-color 0.3s ease 0s; }
+  width: 400px; }
 
-#ksButton:hover {
-  background-color: #2E7D32;
-  color: #FFF; }
+#ksButton:focus {
+  outline: none !important; }
 
 #socialRow {
   text-align: center; }

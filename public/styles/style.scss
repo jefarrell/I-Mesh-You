@@ -231,7 +231,7 @@ button:focus, a:focus {
 	}
 	
 	h3 {
-		margin-top: 2em;
+		margin-top: 1em;
 		font-size: 3em;
 	}
 
@@ -257,18 +257,12 @@ button:focus, a:focus {
 }
 
 #ksButton {
-	width: 15em;
-	font-size: 2em;
-	background-color: #2BDE73;
-	font-weight: bold;
-	color: #FFF;
-	transition: background-color 0.3s ease 0s;	
-	
+	width: 400px;
 }
 
-#ksButton:hover {
-	background-color: $secondary-green;
-	color: #FFF;
+
+#ksButton:focus {
+		outline: none !important;
 }
 
 #socialRow {

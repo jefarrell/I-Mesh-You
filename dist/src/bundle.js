@@ -116236,7 +116236,7 @@ var Popup = _react2.default.createClass({
         }
 
         if (this.state.type === 'success' && this.state.message) {
-
+            $('#saveBtn').addClass('buttonVis');
             var classString = 'modal-success alert alert-' + this.state.type;
             var msg = "I just started a mesh network with GoTenna! Join me: ";
             var url = "https://kickstarter.com";
