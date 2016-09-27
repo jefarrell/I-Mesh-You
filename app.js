@@ -36,3 +36,5 @@ app.get('/test', routes.test);
 app.post('/addData', routes.addData);
 app.get('/mapData', routes.mapData);
 app.post('/inputgeo', routes.inputgeo);
+app.get('/klaviyo', routes.klaviyo);
+app.get('/latest', routes.latest);

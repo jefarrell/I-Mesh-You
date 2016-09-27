@@ -62,19 +62,62 @@ button:focus, a:focus {
   background-color: #FF8500;
   color: #FFF; }
 
+#mainNav .container {
+  padding: 0; }
+
+#navLogo {
+  font-weight: bold;
+  font-size: 2em;
+  color: #549AE6;
+  transition: color 0.3s ease 0s; }
+
+#navlink {
+  text-decoration: none; }
+
+#navLogo:hover {
+  color: #FF8500; }
+
 #about {
   font-weight: light;
-  height: 600px;
+  height: 800px;
   color: #549AE6; }
   #about h1 {
     padding-top: 0.35em;
-    padding-bottom: 1em; }
+    padding-bottom: 0.35em; }
   #about p {
-    text-align: center;
-    padding: 0.35em 0.35em 2em 0.35em;
+    padding: 0.35em 0;
     font-size: 1.5em;
-    font-weight: 400;
+    font-weight: normal;
     line-height: 2.25em; }
+  #about .boldp {
+    font-weight: bold; }
+
+.ita {
+  font-style: italic; }
+
+.bld {
+  font-weight: bold; }
+
+.bldita {
+  font-weight: bold;
+  font-style: italic; }
+
+.gridL {
+  text-align: right; }
+
+.gridR {
+  text-align: left; }
+
+#textGrid div {
+  padding: 1.5em; }
+
+.gridHi {
+  background-color: #FFF;
+  color: #549AE6; }
+
+.gridLo {
+  background-color: #549AE6;
+  color: #FFF; }
 
 #box {
   position: relative;
@@ -110,20 +153,60 @@ button:focus, a:focus {
 
 #kickstarter {
   color: #FFF;
-  height: 600px; }
-  #kickstarter h2 {
+  height: 625px; }
+  #kickstarter h3, #kickstarter h4 {
     text-align: center;
     padding: 1em; }
-  #kickstarter p {
+  #kickstarter h3 {
+    margin-top: 2em;
+    font-size: 3em; }
+  #kickstarter h2 {
+    font-size: 5em;
+    font-weight: bold;
     text-align: center;
-    padding: 0.35em 0.35em 2em 0.35em;
-    font-size: 1.5em;
-    font-weight: 400;
-    line-height: 2.25em; }
-  #kickstarter svg path {
-    transition: fill 0.3s ease 0s; }
-  #kickstarter svg:hover path {
-    fill: #2BDE73; }
+    padding: 0 0 0.5em 0; }
+  #kickstarter a {
+    color: #FFF;
+    transition: color 0.3s ease 0s; }
+  #kickstarter a:hover {
+    color: #2BDE73; }
+  #kickstarter h4 {
+    font-size: 1.4em; }
+
+#ksButton {
+  width: 15em;
+  font-size: 2em;
+  background-color: #2BDE73;
+  font-weight: bold;
+  color: #FFF;
+  transition: background-color 0.3s ease 0s; }
+
+#ksButton:hover {
+  background-color: #2E7D32;
+  color: #FFF; }
+
+#socialRow {
+  text-align: center; }
+  #socialRow a:hover {
+    color: #FF8500; }
+
+ul.share-buttons {
+  list-style: none;
+  padding: 0; }
+
+ul.share-buttons li {
+  display: inline;
+  padding: 1em 1em 2em 1em; }
+
+ul.share-buttons .sr-only {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden; }
 
 #ksLogo {
   display: block;
@@ -153,7 +236,7 @@ button:focus, a:focus {
     box-shadow: 0 2px 10px -4px #404040; }
 
 #mesh {
-  height: 700px;
+  height: 600px;
   padding: 0; }
   #mesh #meshCont {
     padding: 0; }
@@ -174,16 +257,52 @@ button:focus, a:focus {
     vertical-align: middle; }
 
 #map {
+<<<<<<< HEAD
   height: 700px;
   width: 100%;
   z-index: 10; }
+=======
+  height: 600px;
+  width: 100%;
+  z-index: 10; }
+
+.leaflet-popup-content-wrapper {
+  min-height: 40px; }
+
+.popupKey {
+  padding: 0;
+  font-weight: bold;
+  font-size: 1.25em; }
+
+.popupVal {
+  padding: 0;
+  font-weight: light;
+  font-size: 1em; }
+
+.custom-popup .leaflet-popup-content-wrapper {
+  background: #FFF;
+  color: #FFF;
+  text-align: center; }
+
+.custom-popup .leaflet-popup-content-wrapper a {
+  color: #000; }
+
+.custom-popup .leaflet-popup-tip {
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  background: #FFF; }
+
+.leaflet-left .leaflet-control {
+  margin-left: 2.7em;
+  margin-bottom: 35em; }
+>>>>>>> cluster
 
 #addBtn, #cancelBtn, #saveBtn {
   position: absolute;
   z-index: 100; }
 
 #cancelBtn, #saveBtn {
-  margin-top: 2em; }
+  margin-top: 3.5em; }
 
 #addBtn {
   right: 2em;
@@ -198,21 +317,27 @@ button:focus, a:focus {
   box-shadow: 0 2px 10px -4px #404040; }
 
 #status i {
+<<<<<<< HEAD
   color: #AF4C76;
+=======
+  color: #FF8500;
+>>>>>>> cluster
   padding: 0.75em;
   transition: color 0.3s ease 0s; }
 
 #status i:hover {
   cursor: pointer;
-  color: #549AE6; }
+  color: #FFC107; }
 
 #status {
   text-align: center; }
   #status h4 {
     font-weight: bold; }
+  #status div {
+    font-size: 1.2em; }
 
 #legend {
-  width: 120px;
+  width: 150px;
   height: 50px;
   background-color: #FFF;
   border: 1px solid #B7BFC0;
@@ -274,6 +399,58 @@ button:focus, a:focus {
 #saveBtn:focus, #cancelBtn:focus {
   outline: none !important; }
 
+.modal-landing {
+  width: 100%;
+  height: 100%;
+  background-color: #FFF;
+  border: 7px solid #549AE6;
+  position: absolute;
+  z-index: 40;
+  text-align: center;
+  line-height: 1em;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  color: #549AE6; }
+  .modal-landing h3 {
+    font-weight: bold; }
+  .modal-landing #sub {
+    font-weight: normal; }
+  .modal-landing .btn {
+    background-color: #FF8500;
+    color: #FFF;
+    transition: background-color 0.3s ease 0s; }
+  .modal-landing .btn:hover {
+    color: #FFF;
+    background-color: #FFC107; }
+
+.buttonVis {
+  visibility: hidden; }
+
+.modal-success {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border: 7px solid #549AE6;
+  z-index: 40;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  background-color: #FFF;
+  color: #549AE6; }
+  .modal-success h4 {
+    font-size: 2em;
+    padding-top: 2em; }
+
+.modal-remove {
+  width: auto;
+  height: auto; }
+
+.modalblock {
+  margin: 2.5em; }
+
 #modalForm {
   padding: 2em; }
   #modalForm .row {
@@ -305,7 +482,7 @@ button:focus, a:focus {
 #contact {
   background-color: #549AE6;
   color: #FFF;
-  max-height: 250px; }
+  max-height: 450px; }
   #contact hr {
     border: none;
     height: 3px;
@@ -329,7 +506,38 @@ button:focus, a:focus {
     color: #FFC107; }
 
 #social {
-  margin-top: 1em; }
+  margin-top: 1em;
+  margin-bottom: 4em; }
 
 #copy {
   padding-top: 3em; }
+
+.emailGroup {
+  padding: 1em;
+  text-align: center; }
+  .emailGroup .input-group {
+    padding-top: 0.5em; }
+  .emailGroup .btn {
+    border: 1px solid #ccc;
+    background-color: #FFF;
+    color: #549AE6;
+    transition: background-color 0.3s ease 0s; }
+  .emailGroup .btn:hover {
+    color: #FFF;
+    background-color: #ccc; }
+
+@media (max-width: 1150px) {
+  #about {
+    height: 1000px; } }
+
+@media (max-width: 700px) {
+  #about {
+    height: 1150px; } }
+
+@media (max-width: 600px) {
+  #about {
+    height: 1300px; } }
+
+@media (max-width: 450px) {
+  #about {
+    height: 1500px; } }

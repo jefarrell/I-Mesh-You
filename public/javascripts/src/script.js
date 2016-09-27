@@ -1,12 +1,14 @@
 
 $(window).bind("load", function(){
-//$(document).ready(function(){
+
 	$('body').on('click','a[href^="#"]',function(event){
 	    var target_offset = $(this.hash).offset() ? $(this.hash).offset().top : 0;     
 	    var customoffset = 45;
 	    $('html, body').animate({scrollTop:target_offset - customoffset}, 500);
 	});
 	
+    // Handy SVG conversion from stackoverflow
+    // Lets us do some hover events on svg image paths
 	$('img.svg').each(function(){
         var $img = jQuery(this);
         var imgID = $img.attr('id');
@@ -33,7 +35,35 @@ $(window).bind("load", function(){
             $img.replaceWith($svg);
 
         }, 'xml');
+    });
 
+    $('#searchInput').keydown(function(event) {
+        if (event.keyCode == 13) {
+            $('#searchBtn').click();
+            return false;
+         }
+    });
+
+    $('#ksButton').on('click', function(e){
+        e.preventDefault();
+        window.open("http://www.kickstarter.com");
+    });
+
+    $('#emailSign').on('click', function() {
+        var addr = $('#emailVal').val();
+        $.get('/klaviyo', function(data) {
+            data = JSON.parse(data);
+            $.ajax({
+              type: "POST",
+              url: 'https://a.klaviyo.com/api/v1/list/rZtrXH/members',
+              data: {
+                email: addr,
+                "\x61\x70\x69\x5F\x6B\x65\x79": data.key,
+                confirm_optin: true
+              }
+            });
+
+        });
     });
 
 });

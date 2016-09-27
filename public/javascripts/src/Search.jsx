@@ -42,9 +42,9 @@ const Search = React.createClass({
 			<div id="searchCont">
 			  <div className={"col-sm-4"} id="searchBar">
 			    <div className={"input-group"}>
-			      <input type="text" className={"form-control"} ref="searchbar" placeholder="Zoom to..."></input>
+			      <input type="text" className={"form-control"} id="searchInput" ref="searchbar" placeholder="Zoom to Location..."></input>
 			      <span className={"input-group-btn"}>
-			        <button className={"btn btn-secondary"}type="button" onClick={this.handleClick}>Go!</button>
+			        <button className={"btn btn-secondary"} id="searchBtn" type="button" onClick={this.handleClick}>Go!</button>
 			      </span>
 			    </div>
 			  </div>

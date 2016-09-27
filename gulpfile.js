@@ -57,4 +57,8 @@ gulp.task('build', function(){
 
 
 gulp.task('production', ['build']);
+<<<<<<< HEAD
 gulp.task('default', ['js', 'styles', 'watch']);
+=======
+gulp.task('default', ['js', 'styles', 'watch']);
+>>>>>>> cluster

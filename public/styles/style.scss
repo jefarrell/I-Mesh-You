@@ -10,7 +10,7 @@ $secondary-red: #D50000;
 $primary-green: #4CAF50;
 $secondary-green: #2E7D32;
 
-$map-height: 700px;
+$map-height: 600px;
 
 @font-face {
 	font-family: SalvoSans;
@@ -94,23 +94,82 @@ button:focus, a:focus {
 	background-color: $primary-orange;
 	color: #FFF;
 }
+#mainNav .container {
+	padding: 0;
+}
+
+#navLogo {
+	font-weight: bold;
+	font-size: 2em;
+	color: $primary-blue;
+	transition: color 0.3s ease 0s;
+}
+
+#navlink {
+	text-decoration: none;
+}
+
+#navLogo:hover {
+	color: $primary-orange
+}
 
 #about {
 	font-weight: light;
-	height: 600px;
+	height: 800px;
 	color: $primary-blue;
 	h1 {
 		padding-top: 0.35em;
-		padding-bottom: 1em;
+		padding-bottom: 0.35em;
 	}
 
 	p {
-		text-align: center;
-		padding: 0.35em 0.35em 2em 0.35em;
+		padding: 0.35em 0;
 		font-size: 1.5em;
-		font-weight: 400;
+		font-weight: normal;
 		line-height: 2.25em;
 	}
+
+	.boldp {
+		font-weight: bold;
+	}
+}
+
+.ita{
+	font-style: italic;
+}
+
+.bld{
+	font-weight: bold;
+}
+
+.bldita{
+	font-weight: bold;
+	font-style: italic;
+}
+
+.gridL {
+	text-align: right;
+}
+
+.gridR {
+	text-align: left;
+}
+
+#textGrid {
+	div {
+		
+		padding: 1.5em;
+	}
+}
+
+.gridHi {
+	background-color: #FFF;
+	color: $primary-blue;
+}
+
+.gridLo {
+	background-color: $primary-blue;
+	color: #FFF;
 }
 
 #box {
@@ -151,27 +210,79 @@ button:focus, a:focus {
 
 #kickstarter{
 	color: #FFF;
-	height: 600px;
-	h2 {
+	height: 625px;
+	h3, h4 {
 		text-align: center;
 		padding: 1em;
 	}
 	
-	p {
+	h3 {
+		margin-top: 2em;
+		font-size: 3em;
+	}
+
+	h2 {
+		font-size: 5em;
+		font-weight: bold;
 		text-align: center;
-		padding: 0.35em 0.35em 2em 0.35em;
-		font-size: 1.5em;
-		font-weight: 400;
-		line-height: 2.25em;
+		padding: 0 0 0.5em 0;
 	}
 
-	svg path {
-		transition: fill 0.3s ease 0s;	
+	a {
+		color: #FFF;
+		transition: color 0.3s ease 0s;	
 	}
 
-	svg:hover path {
-	    fill: #2BDE73;
+	a:hover {
+		color: #2BDE73;
 	}
+
+	h4 {
+		font-size: 1.4em;
+	}
+}
+
+#ksButton {
+	width: 15em;
+	font-size: 2em;
+	background-color: #2BDE73;
+	font-weight: bold;
+	color: #FFF;
+	transition: background-color 0.3s ease 0s;	
+	
+}
+
+#ksButton:hover {
+	background-color: $secondary-green;
+	color: #FFF;
+}
+
+#socialRow {
+	text-align: center;
+
+	a:hover {
+		color: $primary-orange;
+	}
+}
+ul.share-buttons{
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li{
+  display: inline;
+  padding: 1em 1em 2em 1em;
+}
+
+ul.share-buttons .sr-only {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
 }
 
 #ksLogo {
@@ -245,6 +356,42 @@ button:focus, a:focus {
 	z-index: 10;
 }
 
+.leaflet-popup-content-wrapper {
+	min-height:40px;
+}
+
+.popupKey {
+	padding: 0;
+	font-weight: bold;
+	font-size: 1.25em;
+}
+
+.popupVal {
+	padding: 0;
+	font-weight: light;
+	font-size: 1em;
+}
+
+.custom-popup .leaflet-popup-content-wrapper {
+	background:#FFF;
+	color:#FFF;
+	text-align:center;
+
+}
+.custom-popup .leaflet-popup-content-wrapper a {
+	color:#000;
+}
+
+.custom-popup .leaflet-popup-tip {
+	border-left:15px solid transparent;
+	border-right:15px solid transparent;
+	background: #FFF;
+}
+
+.leaflet-left .leaflet-control {
+    margin-left: 2.7em;
+    margin-bottom: 35em;
+}
 
 #addBtn, #cancelBtn, #saveBtn {
 	position: absolute;
@@ -252,7 +399,7 @@ button:focus, a:focus {
 }
 
 #cancelBtn, #saveBtn {
-	margin-top: 2em;
+	margin-top: 3.5em;
 }
 
 #addBtn {
@@ -268,14 +415,18 @@ button:focus, a:focus {
 }
 
 #status i {
+<<<<<<< HEAD
 	color: #AF4C76;
+=======
+	color: $primary-orange;
+>>>>>>> cluster
 	padding: 0.75em;
 	transition: color 0.3s ease 0s;
 }
 
 #status i:hover {
 	cursor: pointer;
-	color: $primary-blue;
+	color: $secondary-orange;
 }
 
 
@@ -286,12 +437,15 @@ button:focus, a:focus {
 	h4 {
 		font-weight: bold;
 	}
+	div {
+		font-size: 1.2em;
+	}
 }
 
 
 
 #legend {
-	width: 120px;
+	width: 150px;
 	height: 50px;
 	background-color: #FFF;
 	border: 1px solid #B7BFC0;
@@ -366,6 +520,76 @@ button:focus, a:focus {
 	outline: none !important;
 }
 
+.modal-landing {
+	width: 100%;
+	height: 100%;
+	background-color: #FFF;
+	border: 7px solid $primary-blue;
+	position: absolute;
+	z-index: 40;
+	text-align: center;
+	line-height: 1em;
+	-webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;	
+	color: $primary-blue;
+	h3 {
+		font-weight: bold;
+	}
+
+	#sub {
+		font-weight: normal;
+	}
+
+	.btn {
+		background-color: $primary-orange;
+		color: #FFF;
+		transition: background-color 0.3s ease 0s;
+	}
+
+	.btn:hover {
+		color: #FFF;
+		background-color: $secondary-orange;
+	}
+}
+
+.buttonVis {
+	visibility: hidden;
+}
+
+.modal-success {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	border: 7px solid $primary-blue;
+	z-index: 40;
+	-webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    background-color: #FFF;
+    color: $primary-blue;
+
+    h4 {
+    	font-size: 2em;
+    	padding-top: 2em;
+    }
+
+}
+
+
+.modal-remove {
+	width: auto;
+	height: auto;
+}
+
+.modalblock {
+	margin: 2.5em;
+}
+
+
+
 #modalForm {
 	padding: 2em;
 
@@ -413,7 +637,7 @@ button:focus, a:focus {
 #contact {
 	background-color: $primary-blue;
 	color: #FFF;
-	max-height: 250px;
+	max-height: 450px;
 
 	hr {
 		border: none;
@@ -449,8 +673,55 @@ button:focus, a:focus {
 
 #social {
 	margin-top: 1em;
+	margin-bottom: 4em;
 }
 
 #copy {
 	padding-top: 3em;
+}
+
+.emailGroup {
+	padding: 1em;
+	text-align: center;
+
+	.input-group {
+		padding-top: 0.5em;
+	}
+
+	.btn {
+		border: 1px solid #ccc;
+		background-color: #FFF;
+		color: $primary-blue;
+		transition: background-color 0.3s ease 0s;
+	}
+
+	.btn:hover {
+		color: #FFF;
+		background-color: #ccc;
+
+	}
+}
+
+@media (max-width: 1150px) {
+  #about {
+    height:1000px;
+  }
+}
+
+@media (max-width: 700px) {
+  #about {
+    height:1150px;
+  }
+}
+
+@media (max-width: 600px) {
+  #about {
+    height:1300px;
+  }
+}
+
+@media (max-width: 450px) {
+  #about {
+    height:1500px;
+  }
 }

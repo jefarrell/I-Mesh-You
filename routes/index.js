@@ -24,9 +24,10 @@ exports.test = (req, res) => {
 exports.addData = (req, res) => {
 
 	const usr = new User ({
-		KON: req.body.KON,
-		name: req.body.name,
+		username: req.body.username,
 		twitter: req.body.twitter,
+		site: req.body.site,
+		bio: req.body.bio,
 		locations: {
 			primaryLoc: {
 				lon: null,
@@ -62,18 +63,13 @@ exports.addData = (req, res) => {
 			usr.locations.thirdLoc.lat = res[2].value[0].latitude;
 		}
 
-		// Check 
-		var toUpdate = {};
-		toUpdate = Object.assign(toUpdate, usr._doc);
-		delete toUpdate._id;
-
-		User.findOneAndUpdate({ KON: toUpdate.KON }, toUpdate, {upsert: true, new: true}, function(err, doc) {
+		usr.save(function(err, doc) {
 			if (err) { 
 				console.log("User find&update Error! - ", err);
 				return;
 			}
 			else {
-				console.log("NEW THANG ", doc);
+				console.log("database updated");
 			}
 		})
 	});
@@ -98,40 +94,58 @@ exports.mapData = (req, res) => {
 
 	// Query database, get location data
 	// Parse it and create GeoJSON object
+	User.find(function(err,data) {
 
-	User.find(function(err, data) {
-		for (key in data) {
-			if(data.hasOwnProperty(key)) {
-				container.push(data[key]['locations'])
-			}
-		}
-		console.log(container)
-		
-		for(var i=0;i<container.length;i++){
-			var temp = container[i];
-			for (var x = 0; x < checker.length; x++){
-				var name = temp[checker[x]]["name"];
-				var lat = temp[checker[x]]["lat"];
-				var lng = temp[checker[x]]["lon"];
-
-				if (lat === null || lng === null) {} 
-				else {
-					geoData['features'].push( 
-						{
-							"type": "Feature",
-							"geometry": {"type": "Point", "coordinates": [ lng, lat]},
-							"properties": {
-							"name": name
-							}
-						}
-					)
+		for (var i=0;i<data.length;i++) {
+			
+			geoData['features'].push( 
+				{
+					"type": "Feature",
+					"geometry": {"type": "Point", "coordinates": [ data[i].locations.primaryLoc.lon, data[i].locations.primaryLoc.lat]},
+					"properties": {
+						"name": "Primary Location",
+						"username": data[i].username,
+						"twitter": data[i].twitter,
+						"site": data[i].site,
+						"bio": data[i].bio
+					}
 				}
-			}	
+			)
 
-		 }
-	console.log(JSON.stringify(geoData));
-	res.json(geoData);
+			if(data[i].locations.secondLoc.lon && data[i].locations.primaryLoc.lat) {
+				geoData['features'].push( 
+					{
+						"type": "Feature",
+						"geometry": {"type": "Point", "coordinates": [ data[i].locations.secondLoc.lon, data[i].locations.secondLoc.lat]},
+						"properties": {
+							"name": "Potential Location",
+							"username": data[i].username,
+							"twitter": data[i].twitter,
+							"site": data[i].site,
+							"bio": data[i].bio
+						}
+					}
+				)				
+			}
 
+			if(data[i].locations.thirdLoc.lon && data[i].locations.thirdLoc.lat) {
+				geoData['features'].push( 
+					{
+						"type": "Feature",
+						"geometry": {"type": "Point", "coordinates": [ data[i].locations.thirdLoc.lon, data[i].locations.thirdLoc.lat]},
+						"properties": {
+							"name": "Potential Location",
+							"username": data[i].username,
+							"twitter": data[i].twitter,
+							"site": data[i].site,
+							"bio": data[i].bio
+						}
+					}
+				)				
+			}
+
+		}
+		res.json(geoData);
 	});
 }
 
@@ -151,4 +165,24 @@ exports.inputgeo = (req,res) => {
 			}
 	})
 }
+
+exports.klaviyo = (req,res) => {
+	const key = 'pk_738493bf8c23b4a3d12ffdfcb63069f6b3';
+
+	const apiRes = {
+		key: key
+		}
+
+	res.send((JSON.stringify(apiRes)));
+}
+
+
+exports.latest = (req,res) => {
+	User.find({}).sort({date: -1}).limit(1).exec(function(err, docs) { 
+		var latest = docs[0].locations.primaryLoc;
+		res.json(latest);
+	});
+}
+
+
 

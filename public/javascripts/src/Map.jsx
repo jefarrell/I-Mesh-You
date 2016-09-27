@@ -2,19 +2,19 @@ import React from 'react';
 import Popup from './Popup.jsx'
 import Legend from './Legend.jsx'
 import Search from './Search.jsx';
-
 const ReactDOM = require('react-dom');
 const L = require('leaflet');
+require('leaflet.markercluster');
 
 var config = {};
-
+var marker;
 
 config.params = {
 	center: [32.5220242,-102.2896495],
 	zoomControl: false,
 	zoom: 4,
-	maxZoom: 19,
-	minZoom: 3,
+	maxZoom: 12,
+	minZoom: 2,
 	scrollwheel: false,
 	scrollWheelZoom: false,
 	legends: true,
@@ -31,6 +31,18 @@ config.tileLayer = {
   }
 };
 
+var PrimIcon = new L.icon({
+	iconUrl: 'primary.png',
+	iconSize: [60,60],
+	iconAnchor: [30,30]
+});
+
+var PotIcon = new L.icon({
+	iconUrl: 'potential.png',
+	iconSize: [60,60],
+	iconAnchor: [30,30]
+});
+
 
 const Map = React.createClass({
 	
@@ -45,6 +57,7 @@ const Map = React.createClass({
 	map: null,
 	primCol: '#66a61e',
 	potCol: '#e7298a',
+	zoom: null,
 
 	componentDidMount: function() {
 		this.getData();
@@ -67,60 +80,82 @@ const Map = React.createClass({
 		this.map.setView([nextProps.lat, nextProps.lon], 11);
 	},
 
-	getData: function() {
+
+	getData: function(params) {
 		var self = this;
 		$.get('/mapData', function(data) {
 			self.addGeoJSONLayer(data);
+<<<<<<< HEAD
+=======
+			
+			if (params === 'now') {
+				$.get('/latest', function(data) {
+					self.map.setView([data.lat, data.lon], 11);
+				});
+			}
+>>>>>>> cluster
 		});
 	},
 
 
 	addGeoJSONLayer: function(data) {
 		
+
 		if(this.state.geojsonLayer && data) {
+
 			this.state.geojsonLayer.clearLayers();
 		}
 
 		this.setState({geojson: data});
 		var geojsonLayer = L.geoJson(data, {
-			// popup here if needed later
+			onEachFeature: this.onEachFeature,
 			pointToLayer: this.pointToLayer
 		});
-		geojsonLayer.addTo(this.map);
-		this.setState({geojsonLayer: geojsonLayer});
+		var markers = new L.MarkerClusterGroup(
+			{
+				disableClusteringAtZoom: 12,
+       			maxClusterRadius: 100,
+       			spiderfyOnMaxZoom: false,
+       			showCoverageOnHover: false
+			});
 
+		markers.addLayer(geojsonLayer);
+		this.map.addLayer(markers);
+		this.setState({geojsonLayer: markers});
 	},
 
 
 
 	pointToLayer: function(feature, latlng) {
 
-		var primaryParams = {
-			fillColor: this.primCol,
-			weight: 0,
-			opacity: 0.8,
-			fillOpacity: 0.6
-		};
-
-		var potentialParams = {
-			fillColor: this.potCol,
-			weight: 0,
-			opacity: 0.8,
-			fillOpacity: 0.6
-		}
-
-		const halfMileMeter = 804;
-
 		if (feature.properties.name === 'Primary Location') {
-			return L.circle(latlng, halfMileMeter, primaryParams);
+			marker = L.marker(latlng, {icon: PrimIcon});
+			return marker;
+
 		} else {
-			return L.circle(latlng, halfMileMeter, potentialParams);
+			return L.marker(latlng, {icon: PotIcon});
 		}
 	},
 
 
 	onEachFeature: function(feature, layer) {
-		var popup = '<div><p>'+feature.properties.name+'</p></div>';
+		var popup = "";
+		var x = feature.properties;
+		for (var key in x) {
+			if (x[key]) {
+				if (key === 'name'){}
+					else if (key === 'site') {
+						var siteInsert = '<div class="popupDiv"><span class="popupKey">Website: </span>' + '<a href="http://' + x[key] + ' " target="_blank">' + x[key] + '</a></div>' 
+						popup += siteInsert;
+					}
+
+					else {
+					var newKey = key.charAt(0).toUpperCase() + key.slice(1);
+					var insert = '<div class="popupDiv"><span class="popupKey">'+ newKey + ': </span>' + '<span class="popupVal">'+x[key]+'</span>'
+					popup += insert;
+				}
+			}
+		}
 		layer.bindPopup(popup);
 	},
 
@@ -145,7 +180,7 @@ const Map = React.createClass({
 	render: function() {
 		return (
 			<div id="mapUI">
-				<Popup updater={()=>this.getData()}/>
+				<Popup updater={()=>this.getData("now")}/>
 				<Legend potCol={this.potCol} primCol={this.primCol} />
 				<div id="map"></div>
 			</div>

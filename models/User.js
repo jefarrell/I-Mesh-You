@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Is KON a string?  Number? 
 
 const userSchema = new Schema ({
-	KON: { type: String, required: true},
-	name: String,
+	username: String,
 	twitter: String,
+	site: String,
+	bio: { type: String, maxlength: 140 },
 	locations: {
 		primaryLoc: {
 			name: { type: String, default: "Primary Location"},

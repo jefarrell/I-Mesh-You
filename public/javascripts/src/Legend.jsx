@@ -19,11 +19,11 @@ const Legend = React.createClass({
 			<div id="legend">
 				<div className={"row legRow"}>
 					<div id="prim" style={primStyle}></div>
-					<div className={"legText"}> Primary Mesh </div>
+					<div className={"legText"}> Primary Location </div>
 				</div>
 				<div className={"row legRow"} id="bottomRow">
 					<div id="pot" style={potStyle}></div>
-					<div className={"legText"}> Potential Mesh </div>
+					<div className={"legText"}> Secondary Locations </div>
 				</div>
 				
 			</div>
