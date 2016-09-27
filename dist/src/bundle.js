@@ -115905,7 +115905,7 @@ var config = {};
 var marker;
 
 config.params = {
-	center: [32.5220242, -102.2896495],
+	center: [35.8652254, -101.1470714],
 	zoomControl: false,
 	zoom: 4,
 	maxZoom: 12,
