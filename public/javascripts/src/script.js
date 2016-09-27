@@ -1,6 +1,6 @@
 
 $(window).bind("load", function(){
-//$(document).ready(function(){
+
 	$('body').on('click','a[href^="#"]',function(event){
 	    var target_offset = $(this.hash).offset() ? $(this.hash).offset().top : 0;     
 	    var customoffset = 45;
@@ -42,6 +42,11 @@ $(window).bind("load", function(){
             $('#searchBtn').click();
             return false;
          }
+    });
+
+    $('#ksButton').on('click', function(e){
+        e.preventDefault();
+        window.open("http://www.kickstarter.com");
     });
 
     $('#emailSign').on('click', function() {

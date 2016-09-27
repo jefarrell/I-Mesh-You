@@ -81,10 +81,16 @@ const Map = React.createClass({
 	},
 
 
-	getData: function() {
+	getData: function(params) {
 		var self = this;
 		$.get('/mapData', function(data) {
 			self.addGeoJSONLayer(data);
+			
+			if (params === 'now') {
+				$.get('/latest', function(data) {
+					self.map.setView([data.lat, data.lon], 11);
+				});
+			}
 		});
 	},
 
@@ -171,7 +177,7 @@ const Map = React.createClass({
 	render: function() {
 		return (
 			<div id="mapUI">
-				<Popup updater={()=>this.getData()}/>
+				<Popup updater={()=>this.getData("now")}/>
 				<Legend potCol={this.potCol} primCol={this.primCol} />
 				<div id="map"></div>
 			</div>

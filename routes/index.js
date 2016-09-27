@@ -145,11 +145,8 @@ exports.mapData = (req, res) => {
 			}
 
 		}
-
 		res.json(geoData);
 	});
-
-
 }
 
 
@@ -171,12 +168,21 @@ exports.inputgeo = (req,res) => {
 
 exports.klaviyo = (req,res) => {
 	const key = 'pk_738493bf8c23b4a3d12ffdfcb63069f6b3';
-	const listID = 'cG9t3T';
 
 	const apiRes = {
-		key: key,
-		id: listID
+		key: key
 		}
 
 	res.send((JSON.stringify(apiRes)));
 }
+
+
+exports.latest = (req,res) => {
+	User.find({}).sort({date: -1}).limit(1).exec(function(err, docs) { 
+		var latest = docs[0].locations.primaryLoc;
+		res.json(latest);
+	});
+}
+
+
+

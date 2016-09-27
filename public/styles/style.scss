@@ -115,7 +115,7 @@ button:focus, a:focus {
 
 #about {
 	font-weight: light;
-	height: 700px;
+	height: 800px;
 	color: $primary-blue;
 	h1 {
 		padding-top: 0.35em;
@@ -123,7 +123,6 @@ button:focus, a:focus {
 	}
 
 	p {
-		text-align: left;
 		padding: 0.35em 0;
 		font-size: 1.5em;
 		font-weight: normal;
@@ -135,6 +134,43 @@ button:focus, a:focus {
 	}
 }
 
+.ita{
+	font-style: italic;
+}
+
+.bld{
+	font-weight: bold;
+}
+
+.bldita{
+	font-weight: bold;
+	font-style: italic;
+}
+
+.gridL {
+	text-align: right;
+}
+
+.gridR {
+	text-align: left;
+}
+
+#textGrid {
+	div {
+		
+		padding: 1.5em;
+	}
+}
+
+.gridHi {
+	background-color: #FFF;
+	color: $primary-blue;
+}
+
+.gridLo {
+	background-color: $primary-blue;
+	color: #FFF;
+}
 
 #box {
 	position: relative;
@@ -207,14 +243,17 @@ button:focus, a:focus {
 }
 
 #ksButton {
+	width: 15em;
+	font-size: 2em;
 	background-color: #2BDE73;
+	font-weight: bold;
 	color: #FFF;
 	transition: background-color 0.3s ease 0s;	
 	
 }
 
 #ksButton:hover {
-	background-color: $primary-green;
+	background-color: $secondary-green;
 	color: #FFF;
 }
 
@@ -315,6 +354,10 @@ ul.share-buttons .sr-only {
 	height: $map-height;
 	width: 100%;
 	z-index: 10;
+}
+
+.leaflet-popup-content-wrapper {
+	min-height:40px;
 }
 
 .popupKey {
@@ -653,4 +696,28 @@ ul.share-buttons .sr-only {
 		background-color: #ccc;
 
 	}
+}
+
+@media (max-width: 1150px) {
+  #about {
+    height:1000px;
+  }
+}
+
+@media (max-width: 700px) {
+  #about {
+    height:1150px;
+  }
+}
+
+@media (max-width: 600px) {
+  #about {
+    height:1300px;
+  }
+}
+
+@media (max-width: 450px) {
+  #about {
+    height:1500px;
+  }
 }

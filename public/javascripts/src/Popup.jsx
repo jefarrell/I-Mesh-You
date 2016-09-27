@@ -31,7 +31,7 @@ const Popup = React.createClass({
         $('#coverFix').remove();
         var target = $('#status');
         $(target).addClass('modal-landing');
-        $('#buttonCont').addClass('buttonVis');
+        $('#saveBtn').addClass('buttonVis');
         this.setState({type: '', message:''});
     },
 
@@ -90,7 +90,7 @@ const Popup = React.createClass({
         var target = $('#status');
         target.empty();
         $(target).removeClass('modal-landing');
-        $('#buttonCont').removeClass('buttonVis');
+        $('#saveBtn').removeClass('buttonVis');
     },
 
     render: function() {
@@ -232,8 +232,8 @@ const Popup = React.createClass({
                                 placeholder={"Street address, intersection, landmark or city"}>
                             </input>
                         </div> 
-                        <div className={"buttonVis"} id="buttonCont">
-                            <a className={"btn btn-warning"} id={"saveBtn"} onClick={this.handleSubmit} >
+                        <div id="buttonCont">
+                            <a className={"btn btn-warning buttonVis"} id={"saveBtn"} onClick={this.handleSubmit} >
                                 <i className={"fa fa-map-marker fa-lg"}></i>  Add to Map! </a>
                             <a className={"btn btn-danger btn-secondary"} id={"cancelBtn"} onMouseUp={this.hideModal} onClick={this.props.updater}>Close</a>
                         </div>                                               

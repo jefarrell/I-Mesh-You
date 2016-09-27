@@ -115975,10 +115975,16 @@ var Map = _react2.default.createClass({
 	},
 
 
-	getData: function getData() {
+	getData: function getData(params) {
 		var self = this;
 		$.get('/mapData', function (data) {
 			self.addGeoJSONLayer(data);
+
+			if (params === 'now') {
+				$.get('/latest', function (data) {
+					self.map.setView([data.lat, data.lon], 11);
+				});
+			}
 		});
 	},
 
@@ -116056,7 +116062,7 @@ var Map = _react2.default.createClass({
 			'div',
 			{ id: 'mapUI' },
 			_react2.default.createElement(_Popup2.default, { updater: function updater() {
-					return _this.getData();
+					return _this.getData("now");
 				} }),
 			_react2.default.createElement(_Legend2.default, { potCol: this.potCol, primCol: this.primCol }),
 			_react2.default.createElement('div', { id: 'map' })
@@ -116115,7 +116121,7 @@ var Popup = _react2.default.createClass({
         $('#coverFix').remove();
         var target = $('#status');
         $(target).addClass('modal-landing');
-        $('#buttonCont').addClass('buttonVis');
+        $('#saveBtn').addClass('buttonVis');
         this.setState({ type: '', message: '' });
     },
 
@@ -116171,7 +116177,7 @@ var Popup = _react2.default.createClass({
         var target = $('#status');
         target.empty();
         $(target).removeClass('modal-landing');
-        $('#buttonCont').removeClass('buttonVis');
+        $('#saveBtn').removeClass('buttonVis');
     },
 
     render: function render() {
@@ -116402,10 +116408,10 @@ var Popup = _react2.default.createClass({
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: "buttonVis", id: 'buttonCont' },
+                        { id: 'buttonCont' },
                         _react2.default.createElement(
                             'a',
-                            { className: "btn btn-warning", id: "saveBtn", onClick: this.handleSubmit },
+                            { className: "btn btn-warning buttonVis", id: "saveBtn", onClick: this.handleSubmit },
                             _react2.default.createElement('i', { className: "fa fa-map-marker fa-lg" }),
                             '  Add to Map! '
                         ),
@@ -116561,7 +116567,7 @@ App calls Search
 'use strict';
 
 $(window).bind("load", function () {
-    //$(document).ready(function(){
+
     $('body').on('click', 'a[href^="#"]', function (event) {
         var target_offset = $(this.hash).offset() ? $(this.hash).offset().top : 0;
         var customoffset = 45;
@@ -116602,6 +116608,11 @@ $(window).bind("load", function () {
             $('#searchBtn').click();
             return false;
         }
+    });
+
+    $('#ksButton').on('click', function (e) {
+        e.preventDefault();
+        window.open("http://www.kickstarter.com");
     });
 
     $('#emailSign').on('click', function () {

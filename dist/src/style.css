@@ -79,19 +79,45 @@ button:focus, a:focus {
 
 #about {
   font-weight: light;
-  height: 700px;
+  height: 800px;
   color: #549AE6; }
   #about h1 {
     padding-top: 0.35em;
     padding-bottom: 0.35em; }
   #about p {
-    text-align: left;
     padding: 0.35em 0;
     font-size: 1.5em;
     font-weight: normal;
     line-height: 2.25em; }
   #about .boldp {
     font-weight: bold; }
+
+.ita {
+  font-style: italic; }
+
+.bld {
+  font-weight: bold; }
+
+.bldita {
+  font-weight: bold;
+  font-style: italic; }
+
+.gridL {
+  text-align: right; }
+
+.gridR {
+  text-align: left; }
+
+#textGrid div {
+  padding: 1.5em; }
+
+.gridHi {
+  background-color: #FFF;
+  color: #549AE6; }
+
+.gridLo {
+  background-color: #549AE6;
+  color: #FFF; }
 
 #box {
   position: relative;
@@ -148,12 +174,15 @@ button:focus, a:focus {
     font-size: 1.4em; }
 
 #ksButton {
+  width: 15em;
+  font-size: 2em;
   background-color: #2BDE73;
+  font-weight: bold;
   color: #FFF;
   transition: background-color 0.3s ease 0s; }
 
 #ksButton:hover {
-  background-color: #4CAF50;
+  background-color: #2E7D32;
   color: #FFF; }
 
 #socialRow {
@@ -231,6 +260,9 @@ ul.share-buttons .sr-only {
   height: 600px;
   width: 100%;
   z-index: 10; }
+
+.leaflet-popup-content-wrapper {
+  min-height: 40px; }
 
 .popupKey {
   padding: 0;
@@ -483,3 +515,19 @@ ul.share-buttons .sr-only {
   .emailGroup .btn:hover {
     color: #FFF;
     background-color: #ccc; }
+
+@media (max-width: 1150px) {
+  #about {
+    height: 1000px; } }
+
+@media (max-width: 700px) {
+  #about {
+    height: 1150px; } }
+
+@media (max-width: 600px) {
+  #about {
+    height: 1300px; } }
+
+@media (max-width: 450px) {
+  #about {
+    height: 1500px; } }
