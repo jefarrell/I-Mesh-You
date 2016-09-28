@@ -354,6 +354,13 @@ ul.share-buttons .sr-only {
     margin: 2px;
     position: relative; }
 
+#textblock {
+  padding-left: 1em; }
+  #textblock .bld, #textblock .bldita {
+    color: #FFF;
+    background-color: #000;
+    padding: 2px; }
+
 #bottomRow {
   padding-top: 5px; }
 

@@ -116376,6 +116376,27 @@ var Popup = _react2.default.createClass({
                     ),
                     _react2.default.createElement(
                         'div',
+                        { className: "row", id: 'textblock' },
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            _react2.default.createElement(
+                                'span',
+                                { className: "bld" },
+                                'Please enter your location(s) as precisely as possible.'
+                            ),
+                            'The exact address will never be shown, just the general location within a mile. ',
+                            _react2.default.createElement('br', null),
+                            'The more precisely you enter the locations, ',
+                            _react2.default.createElement(
+                                'span',
+                                { className: "bldita" },
+                                'the more accurately we can place your node(s) on the map.'
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
                         { className: "form-group reqd", id: 'loc1' },
                         _react2.default.createElement(
                             'label',

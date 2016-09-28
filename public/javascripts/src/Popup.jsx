@@ -200,7 +200,15 @@ const Popup = React.createClass({
                                 className={"form-control"}
                                 placeholder={"140 characters"}>
                             </input>
-                        </div>                       
+                        </div>
+
+                        <div className={"row"} id="textblock">
+                            <p><span className={"bld"}>Please enter your location(s) as precisely as possible.</span> 
+                            The exact address will never be shown, just the general location within a mile. <br /> 
+                            The more precisely you enter the locations, <span className={"bldita"}>the more accurately we can place your node(s) on the map.</span>
+                            </p>
+                        </div>  
+
                         <div className={"form-group reqd"} id="loc1">
                             <label type="text">Primary/Home Location *</label>
                             <input 
