@@ -184,12 +184,15 @@ const Popup = React.createClass({
                                 </div>
                             </div>
                             <div className={"col-md-4"}>
-                                <input
-                                    type="text"
-                                    ref="site"
-                                    className={"form-control"}
-                                    placeholder={"Personal site"}>
-                                </input>                           
+                                <div className={"input-group"}>
+                                    <span className={"input-group-addon"} id="basic-addon1">http://</span>
+                                    <input
+                                        type="text"
+                                        ref="site"
+                                        className={"form-control"}
+                                        placeholder={"Personal site"}>
+                                    </input>
+                                </div>                          
                             </div>
                         </div> 
                          <div className={"form-group"}>

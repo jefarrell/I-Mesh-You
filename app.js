@@ -3,10 +3,11 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cred = require('./cred.js')
 
 const app = express();
 mongoose.Promise = global.Promise;
-const url = 'mongodb://127.0.0.1:27017/MeshYou'
+const url = cred.mlab;
 
 mongoose.connect(url);
 const db = mongoose.connection;

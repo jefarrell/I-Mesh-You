@@ -1,6 +1,6 @@
 const NodeGeocoder = require('node-geocoder');
 const User = require('../models/User.js')
-
+const cred = require('../cred.js')
 const options = {
 	provider: 'google'
 };
@@ -167,7 +167,7 @@ exports.inputgeo = (req,res) => {
 }
 
 exports.klaviyo = (req,res) => {
-	const key = 'pk_738493bf8c23b4a3d12ffdfcb63069f6b3';
+	const key = cred.klaviyo;
 
 	const apiRes = {
 		key: key
