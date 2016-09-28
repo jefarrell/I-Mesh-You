@@ -109,7 +109,7 @@ const Popup = React.createClass({
                              </div>
                              <div className={"modalblock"}>
                                 <h3>Haven't bought yours yet, but want to be part of the fun?</h3>
-                                <a href="https://www.kickstarter.com/projects/gotenna/257342308" target="_blank">
+                                <a href="https://www.kickstarter.com/projects/gotenna/gotenna-mesh-off-grid-people-powered-connectivity" target="_blank">
                                     <button className={"btn btn-lg modalActions"} id="modalOrder">ORDER TODAY!</button>
                                 </a>
                             </div>
@@ -123,7 +123,7 @@ const Popup = React.createClass({
             var classString = 'modal-success alert alert-' + this.state.type;
             
 
-            var url = "https://www.kickstarter.com/projects/gotenna/257342308"
+            var url = "https://www.kickstarter.com/projects/gotenna/gotenna-mesh-off-grid-people-powered-connectivity"
             var tweet = "I registered as a node on the @goTenna Mesh map! Find it at imeshyou.com & join our mesh at is.gd/gotennamesh #imeshyou"
             var emailSubj = "Join my mesh network!"
             var status = 
