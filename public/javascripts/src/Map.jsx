@@ -14,12 +14,13 @@ config.params = {
 	zoomControl: false,
 	zoom: 4,
 	maxZoom: 12,
-	minZoom: 2,
+	minZoom: 3,
 	scrollwheel: false,
 	scrollWheelZoom: false,
 	legends: true,
 	infoControl: false,
-	attributionControl: true
+	attributionControl: true,
+	worldCopyJump: true
 }
 
 config.tileLayer = {
@@ -137,6 +138,7 @@ const Map = React.createClass({
 
 	onEachFeature: function(feature, layer) {
 		var popup = "";
+		var anonPopup = '<div class="popupDiv"><span class="popupKey">Anonymous goTenna Mesh user</span></div>';
 		var x = feature.properties;
 		for (var key in x) {
 			if (x[key]) {
@@ -153,7 +155,13 @@ const Map = React.createClass({
 				}
 			}
 		}
-		layer.bindPopup(popup);
+		if (popup === ""){
+			layer.bindPopup(anonPopup);
+			console.log("popup: ", popup);
+		} else {
+			console.log("something")
+			layer.bindPopup(popup);
+		}
 	},
 
 

@@ -46,7 +46,7 @@ $(window).bind("load", function(){
 
     $('#ksButton').on('click', function(e){
         e.preventDefault();
-        window.open("http://www.kickstarter.com");
+        window.open("https://www.kickstarter.com/projects/gotenna/257342308");
     });
 
     $('#hash').on('click', function(e){

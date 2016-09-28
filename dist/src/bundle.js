@@ -115909,12 +115909,13 @@ config.params = {
 	zoomControl: false,
 	zoom: 4,
 	maxZoom: 12,
-	minZoom: 2,
+	minZoom: 3,
 	scrollwheel: false,
 	scrollWheelZoom: false,
 	legends: true,
 	infoControl: false,
-	attributionControl: true
+	attributionControl: true,
+	worldCopyJump: true
 };
 
 config.tileLayer = {
@@ -116024,6 +116025,7 @@ var Map = _react2.default.createClass({
 
 	onEachFeature: function onEachFeature(feature, layer) {
 		var popup = "";
+		var anonPopup = '<div class="popupDiv"><span class="popupKey">Anonymous goTenna Mesh user</span></div>';
 		var x = feature.properties;
 		for (var key in x) {
 			if (x[key]) {
@@ -116037,7 +116039,13 @@ var Map = _react2.default.createClass({
 				}
 			}
 		}
-		layer.bindPopup(popup);
+		if (popup === "") {
+			layer.bindPopup(anonPopup);
+			console.log("popup: ", popup);
+		} else {
+			console.log("something");
+			layer.bindPopup(popup);
+		}
 	},
 
 	getID: function getID() {
@@ -116222,7 +116230,7 @@ var Popup = _react2.default.createClass({
                             ),
                             _react2.default.createElement(
                                 'a',
-                                { href: 'http://www.kickstarter.com', target: '_blank' },
+                                { href: 'https://www.kickstarter.com/projects/gotenna/257342308', target: '_blank' },
                                 _react2.default.createElement(
                                     'button',
                                     { className: "btn btn-lg modalActions", id: 'modalOrder' },
@@ -116238,8 +116246,10 @@ var Popup = _react2.default.createClass({
         if (this.state.type === 'success' && this.state.message) {
             $('#saveBtn').addClass('buttonVis');
             var classString = 'modal-success alert alert-' + this.state.type;
-            var msg = "I just started a mesh network with GoTenna! Join me: ";
-            var url = "https://kickstarter.com";
+
+            var url = "https://www.kickstarter.com/projects/gotenna/257342308";
+            var tweet = "I registered as a node on the @goTenna Mesh map! Find it at imeshyou.com & join our mesh at is.gd/gotennamesh #imeshyou";
+            var emailSubj = "Join my mesh network!";
             var status = _react2.default.createElement(
                 'div',
                 { id: 'status', className: classString, ref: 'status' },
@@ -116255,33 +116265,34 @@ var Popup = _react2.default.createClass({
                 ),
                 _react2.default.createElement(
                     'a',
-                    { className: "fb-xfbml-parse-ignore modalShare", target: '_blank', href: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FgoTennaInc&src=sdkpreparse' },
+                    { className: "fb-xfbml-parse-ignore modalShare", target: '_blank', href: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.kickstarter.com%2Fprojects%2Fgotenna%2F257342308&t=' },
                     _react2.default.createElement('i', { className: "fa fa-facebook fa-3x", 'aria-hidden': 'true' })
                 ),
                 _react2.default.createElement(
                     _reactSocial.TwitterButton,
                     {
-                        message: msg,
-                        url: url,
+                        message: tweet,
+                        url: '',
                         element: 'a', className: 'modalShare' },
-                    _react2.default.createElement('i', { className: "fa fa-twitter-square fa-3x", 'aria-hidden': 'true' })
-                ),
-                _react2.default.createElement(
-                    _reactSocial.EmailButton,
-                    {
-                        title: 'Share via E-Mail',
-                        message: msg,
-                        url: url,
-                        element: 'a', className: 'modalShare' },
-                    _react2.default.createElement('i', { className: "fa fa-envelope fa-3x", 'aria-hidden': 'true' })
+                    _react2.default.createElement('i', { className: "fa fa-twitter fa-3x", 'aria-hidden': 'true' })
                 ),
                 _react2.default.createElement(
                     _reactSocial.LinkedInButton,
                     {
-                        message: msg,
+                        message: emailSubj,
                         url: url,
                         element: 'a', className: 'modalShare' },
                     _react2.default.createElement('i', { className: 'fa fa-linkedin fa-3x', 'aria-hidden': 'true' })
+                ),
+                _react2.default.createElement(
+                    'a',
+                    { href: 'mailto:?subject=Join%20my%20mesh%20network!&body=I%20just%20registered%20as%20a%20node%20on%20the%20goTenna%20Mesh%20network%20map.%20Find%20it%20at%20imeshyou.com%20%26%20join%20the%20network%20by%20getting%20your%20own%20goTenna%20Mesh%20devices%20at%20is.gd%2Fgotennamesh.%0A%0AgoTenna%20Mesh%20is%20the%20first%20100%25%20off-grid%2C%20totally%20mobile%2C%20long-range%2C%20consumer-ready%20mesh%20network.%20You%20pair%20a%20goTenna%20Mesh%20device%20to%20your%20existing%20smartphone%20and%20it%20enables%20you%20to%20send%20texts%20%26%20locations%20on%20offline%20maps%20to%20other%20users%20up%20to%20several%20miles%2Fkilometers%20away%2C%20even%20if%20you%20don%E2%80%99t%20have%20service.%20%0A%0AgoTenna%20Mesh%20can%20automatically%20and%20privately%20relay%20your%20messages%20through%20other%20users%E2%80%99%20devices%20to%20reach%20recipients%20who%20are%20out%20of%20point-to-point%20range.%20This%20is%20a%20network%20that%20gets%20stronger%20the%20more%20people%20join%20it!%0A%0AThis%20is%20the%20future%20of%20people-powered%20connectivity%2C%20and%20it%E2%80%99s%20great%20for%20all%20outdoor%20adventures%2C%20crowded%20events%2C%20travel%20abroad%2C%20and%20unplanned%20emergencies.%20%0A%0AJoin%20me%20in%20creating%20this%20mesh%20network%3A%20is.gd%2Fgotennamesh', target: '_blank', title: 'Send email' },
+                    _react2.default.createElement('i', { className: "fa fa-envelope fa-3x", 'aria-hidden': 'true' }),
+                    _react2.default.createElement(
+                        'span',
+                        { className: "sr-only" },
+                        'Send email'
+                    )
                 )
             );
         } else if (this.state.type && this.state.message) {
@@ -116612,7 +116623,7 @@ $(window).bind("load", function () {
 
     $('#ksButton').on('click', function (e) {
         e.preventDefault();
-        window.open("http://www.kickstarter.com");
+        window.open("https://www.kickstarter.com/projects/gotenna/257342308");
     });
 
     $('#hash').on('click', function (e) {
