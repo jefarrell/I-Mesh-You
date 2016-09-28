@@ -157,9 +157,7 @@ const Map = React.createClass({
 		}
 		if (popup === ""){
 			layer.bindPopup(anonPopup);
-			console.log("popup: ", popup);
 		} else {
-			console.log("something")
 			layer.bindPopup(popup);
 		}
 	},

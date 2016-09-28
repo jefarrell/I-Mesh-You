@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const app = express();
-
+mongoose.Promise = global.Promise;
 const url = 'mongodb://127.0.0.1:27017/MeshYou'
 
 mongoose.connect(url);
